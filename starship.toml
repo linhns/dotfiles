@@ -1,0 +1,102 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+# Enable right prompt
+right_format = """$time"""
+
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+## Nerd font preset
+
+[aws]
+disabled = true
+symbol = "  "
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+read_only = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[python]
+symbol = " "
+
+[spack]
+symbol = "🅢 "
+
+[rust]
+symbol = " "
+
+[time]
+disabled = false
+format = '🕙[\[ $time \]](13) '
+time_format = "%T"
+utc_time_offset = "+8"
+
+[shell]
+powershell_indicator = "pwsh"
+fish_indicator = "fish"
+bash_indicator = "bash"
+disabled = false
+style = "underline 72"
