@@ -5,7 +5,7 @@
 add_newline = false
 
 # Enable right prompt
-right_format = """$time"""
+# right_format = """$time"""
 
 
 # Replace the "❯" symbol in the prompt with "➜"
@@ -89,7 +89,7 @@ symbol = "🅢 "
 symbol = " "
 
 [time]
-disabled = false
+disabled = true
 format = '🕙[\[ $time \]](13) '
 time_format = "%T"
 utc_time_offset = "+8"
