@@ -129,5 +129,5 @@ alias fzf-preview="fzf --preview 'batcat --style=numbers --color=always --line-r
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Load starship
-export STARSHIP_CONFIG=/home/linhns/.config/starship/starship.toml
+export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml
 eval "$(starship init zsh)"
