@@ -100,3 +100,10 @@ fish_indicator = "fish"
 bash_indicator = "bash"
 disabled = false
 style = "underline 72"
+
+[username]
+style_user = "#bf5700 bold"
+style_root = "white bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true
