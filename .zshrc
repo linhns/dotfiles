@@ -77,6 +77,7 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    rust	
     git
     docker
     copyfile
