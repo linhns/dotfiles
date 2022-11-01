@@ -100,6 +100,7 @@ powershell_indicator = "pwsh"
 fish_indicator = "fish"
 bash_indicator = "bash"
 disabled = false
+style = "#abc4ff"
 
 [username]
 style_user = "#bf5700 bold"
