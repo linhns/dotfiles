@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# zsh custom functions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -130,5 +133,5 @@ alias fzf-preview="fzf --preview 'batcat --style=numbers --color=always --line-r
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Load starship
-export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml
+# export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml
 eval "$(starship init zsh)"
