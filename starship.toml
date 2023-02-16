@@ -30,6 +30,7 @@ symbol = " "
 
 [c]
 symbol = " "
+commands = [["clang", "--version"]]
 
 [conda]
 symbol = " "

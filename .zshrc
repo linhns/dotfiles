@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+path+=("/home/linhns/.local/bin")
+export PATH
 
 # zsh custom functions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
@@ -44,3 +45,7 @@ export MANROFFOPT="-c"
 # Load starship
 # export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml
 eval "$(starship init zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
