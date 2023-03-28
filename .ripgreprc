@@ -1,0 +1,11 @@
+# Output maximum 150 lines and show preview
+--max-columns=150
+--max-columns-preview
+
+# Add 'web' type
+--type-add
+web:*.{html, css, js}*
+
+# Exclude folders
+--glob=!git/*
+
