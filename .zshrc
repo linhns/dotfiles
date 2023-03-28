@@ -17,6 +17,9 @@ export FZF_BASE="$(which fzf)"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_ALT_C_OPTS="--preview 'exa --tree --level 2 {}'"
 
+# rg settings
+export RIPGREP_CONFIG_PATH="/home/linhns/.ripgreprc"
+
 # Load Antigen
 source "/home/linhns/antigen.zsh"
 
@@ -63,3 +66,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
