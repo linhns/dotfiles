@@ -23,7 +23,7 @@ call plug#end()
 filetype plugin indent on
 
 " Ack
-let g:ackprg = 'rg --vimgrep'
+let g:ackprg = 'rg --vimgrep --hidden'
 let g:ack_autoclose = 1
 let g:ack_use_cword_for_empty_search = 1
 cnoreabbrev Ack Ack!
@@ -220,6 +220,9 @@ set colorcolumn=81
 " Splits
 set splitbelow
 set splitright
+
+" Tildeop
+set tildeop
 
 " Leader
 let mapleader = ","
