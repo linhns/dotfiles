@@ -4,6 +4,13 @@ export GOROOT="/usr/local/go-1.20.1"
 export GOPATH=$HOME/go
 
 path+=("/home/linhns/.local/bin" "$GOPATH/bin" "$GOROOT/bin" "/usr/lib/llvm-15/bin")
+if [[ -n $(ls /opt | grep -m 1 cmake) ]]; then
+    echo -e "\e[32mCMake exists! Adding to PATH...\e[0m"
+    path+=("/opt/$(ls /opt | grep -m 1 cmake)/bin")
+else
+    echo -e "\e[31mCMake not found.\e[0m"
+fi
+
 export PATH
 # zsh custom functions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
