@@ -41,6 +41,8 @@ antigen bundle rust
 antigen bundle fzf
 antigen bundle golang
 antigen bundle gh
+antigen bundle taskwarrior
+antigen bundle fd
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting

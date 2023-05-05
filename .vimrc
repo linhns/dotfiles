@@ -10,7 +10,8 @@ endif
 
 call plug#begin()
 Plug '~/.fzf'
-Plug 'NLKNguyen/papercolor-theme'
+" Plug 'NLKNguyen/papercolor-theme'
+Plug 'junegunn/seoul256.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -149,7 +150,9 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 set t_Co=256   
 
 set background=dark
-colorscheme PaperColor
+" colorscheme PaperColor
+let g:seoul256_background=234
+colorscheme seoul256
 
 " No backup
 set nobackup
@@ -158,7 +161,7 @@ set nowritebackup
 " Status line
 set laststatus=2
 let g:lightline = {
-            \ 'colorscheme': 'PaperColor',
+            \ 'colorscheme': 'powerline',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]

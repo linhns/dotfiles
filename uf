@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+if [[ $# -ne 2 ]]; then
+    echo "Usage: uf <command> <outfile>"
+    exit 1
+fi
+
+EXEC=$1
+OUTFILE=$2
+
+runs=0
+until [[ $? -ne 0 ]]; do 
+    runs=$(( runs + 1 ))
+    $EXEC &>$OUTFILE
+done
+
+echo "Found error after $runs runs"
+cat $OUTFILE
