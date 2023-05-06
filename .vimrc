@@ -243,8 +243,11 @@ set tildeop
 let mapleader = ","
 let maplocalleader = "\\"
 
-" Make space more useful
-nnoremap <leader><space> za
+" Use <leader><leader> to change buffers
+nnoremap <leader><leader> :e #<CR>
+
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>tn :tabnew \| :FZF<CR>
 
 " Traverse quickfix list
 nnoremap <C-n> :cnext<CR>

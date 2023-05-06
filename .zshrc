@@ -1,3 +1,5 @@
+# Use Vim keybinding
+bindkey -v
 # If you come from bash you might have to change your $PATH.
 # Export Go-related variables
 export GOROOT="/usr/local/go-1.20.1"
@@ -29,6 +31,9 @@ export RIPGREP_CONFIG_PATH="/home/linhns/.ripgreprc"
 
 # Load Antigen
 source "/home/linhns/antigen.zsh"
+
+# Set Vim to be default editor
+export EDITOR=vim
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
