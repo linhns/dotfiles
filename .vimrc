@@ -250,7 +250,7 @@ nnoremap - ddp
 nnoremap <leader>- ddkP
 
 inoremap <c-u> <esc>viwU
-nnoremap <c-u> viwU
+nnoremap <S-u> viwU
 
 " Quickly open .vimrc
 nnoremap <leader>ev :vsplit ~/dotfiles/.vimrc<cr>
