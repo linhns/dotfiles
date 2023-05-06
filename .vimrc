@@ -20,6 +20,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
+Plug 'romainl/vim-cool' "Disable highlight search when done
+
+" Syntactic
+Plug 'cespare/vim-toml', {'branch': 'main'}
+Plug 'rust-lang/rust.vim'
+Plug 'rhysd/vim-clang-format'
 call plug#end()
 
 filetype plugin indent on
@@ -305,4 +311,11 @@ augroup filetype_html
     autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
 augroup END
 
-
+" Clang settings
+let g:clang_format#detect_style_file = 1 
+augroup clang
+    autocmd!
+    autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :ClangFormat<CR>
+    autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+    autocmd FileType c,cpp,objc ClangFormatAutoEnable
+augroup END
