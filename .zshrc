@@ -49,9 +49,6 @@ antigen bundle gh
 antigen bundle taskwarrior
 antigen bundle fd
 
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-
 # Extra completions
 antigen bundle zsh-users/zsh-completions
 
@@ -64,6 +61,9 @@ antigen bundle agkozak/zsh-z
 # Load the theme.
 # antigen theme robbyrussell
 
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
 # Tell Antigen that you're done.
 antigen apply
 
@@ -72,6 +72,19 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 
 alias python=python3
+
+# Syntax highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+
+if [[ "$(tput colors)" == "256" ]]; then
+    ZSH_HIGHLIGHT_STYLES[default]='none'
+    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=162,bold'
+    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=162,bold'
+    ZSH_HIGHLIGHT_STYLES[globbing]='fg=033'
+    ZSH_HIGHLIGHT_STYLES[assign]='fg=037'
+    ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=037'
+    ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
+fi
 
 # Load starship
 # export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml
