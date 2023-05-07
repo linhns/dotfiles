@@ -71,6 +71,8 @@ antigen apply
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 
+alias python=python3
+
 # Load starship
 # export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml
 eval "$(starship init zsh)"
