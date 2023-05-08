@@ -104,7 +104,7 @@ disabled = false
 style = "#abc4ff"
 
 [username]
-style_user = "#bf5700 bold"
+style_user = "#d18e00 bold"
 style_root = "white bold"
 format = "[$user]($style) "
 disabled = false

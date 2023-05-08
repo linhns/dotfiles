@@ -1,5 +1,3 @@
-# Use Vim keybinding
-bindkey -v
 # If you come from bash you might have to change your $PATH.
 # Export Go-related variables
 export GOROOT="/usr/local/go-1.20.1"
@@ -67,24 +65,40 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Tell Antigen that you're done.
 antigen apply
 
+# Use vim style navigation keys in menu completion
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+# Initialize editing command line
+autoload -U edit-command-line && zle -N edit-command-line
+
+# Enable interactive comments (# on the command line)
+setopt interactivecomments
+
+# Use vim style line editing in zsh
+bindkey -v
+# Movement
+bindkey -a 'gg' beginning-of-buffer-or-history
+bindkey -a 'G' end-of-buffer-or-history
+# Undo
+bindkey -a 'u' undo
+bindkey -a '^R' redo
+# Edit line
+bindkey -a '^V' edit-command-line
+# Backspace
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
+
 # Use bat as pager for man
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 
 alias python=python3
 
-# Syntax highlighting
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-
-if [[ "$(tput colors)" == "256" ]]; then
-    ZSH_HIGHLIGHT_STYLES[default]='none'
-    ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=162,bold'
-    ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=162,bold'
-    ZSH_HIGHLIGHT_STYLES[globbing]='fg=033'
-    ZSH_HIGHLIGHT_STYLES[assign]='fg=037'
-    ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=037'
-    ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=white,underline'
-fi
+# External plugins (initialized after)
+source ~/.zsh/plugins_after.zsh
 
 # Load starship
 # export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml

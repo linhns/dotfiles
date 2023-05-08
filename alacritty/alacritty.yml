@@ -14,14 +14,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+# env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+  # TERM: alacritty
 
 window:
   # Window dimensions (changes require restart)
@@ -30,9 +30,9 @@ window:
   # must be non-zero for this to take effect. The number of columns must be at
   # least `2`, while using a value of `0` for columns and lines will fall back
   # to the window manager's recommended size
-  dimensions:
-    columns: 80
-    lines: 120
+  # dimensions:
+  #   columns: 80
+  #   lines: 120
 
   # Window position (changes require restart)
   #
@@ -62,7 +62,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background and no title bar buttons
-  decorations: full
+  decorations: none
 
   # Background opacity
   #
@@ -79,7 +79,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Maximized
+  startup_mode: Fullscreen
 
   # Window title
   #title: Alacritty
@@ -101,10 +101,10 @@ window:
   # the default theme variant.
   #decorations_theme_variant: None
 
-#scrolling:
+scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
-  #history: 10000
+  history: 0
 
   # Scrolling distance multiplier.
   #multiplier: 3
@@ -163,9 +163,9 @@ font:
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
-  offset:
-    x: 1
-    y: 3
+  # offset:
+    # x: 1
+    # y: 3
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -179,17 +179,17 @@ font:
   # If `true`, Alacritty will use a custom built-in font for box drawing
   # characters (Unicode points 2500 - 259f).
   #
-  builtin_box_drawing: true
+  # builtin_box_drawing: true
 
 # If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: false
+# draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
 #colors:
   # Default colors
-  #primary:
-  #  background: '#1d1f21'
-  #  foreground: '#c5c8c6'
+  primary:
+    background: '#1d2021'
+    foreground: '#d5c4a1'
 
     # Bright and dim foreground colors
     #
@@ -281,26 +281,26 @@ draw_bold_text_with_bright_colors: false
   #  background: CellForeground
 
   # Normal colors
-  #normal:
-  #  black:   '#1d1f21'
-  #  red:     '#cc6666'
-  #  green:   '#b5bd68'
-  #  yellow:  '#f0c674'
-  #  blue:    '#81a2be'
-  #  magenta: '#b294bb'
-  #  cyan:    '#8abeb7'
-  #  white:   '#c5c8c6'
+  normal:
+    black:   '#1d2021'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#d5c4a1'
 
   # Bright colors
-  #bright:
-  #  black:   '#666666'
-  #  red:     '#d54e53'
-  #  green:   '#b9ca4a'
-  #  yellow:  '#e7c547'
-  #  blue:    '#7aa6da'
-  #  magenta: '#c397d8'
-  #  cyan:    '#70c0b1'
-  #  white:   '#eaeaea'
+  bright:
+    black:   '#665c54'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d38c9b'
+    cyan:    '#8ec07c'
+    white:   '#fbf167'
 
   # Dim colors
   #
@@ -324,7 +324,13 @@ draw_bold_text_with_bright_colors: false
   # Example:
   #   `- { index: 16, color: '#ff00ff' }`
   #
-  #indexed_colors: []
+  indexed_colors: 
+    - { index: 16, color: '#fe8019' }
+    - { index: 17, color: '#d65d0e' }
+    - { index: 18, color: '#3c3836' }
+    - { index: 19, color: '#504945' }
+    - { index: 20, color: '#bdae93' }
+    - { index: 21, color: '#ebdbb2' }
 
   # Transparent cell backgrounds
   #
@@ -758,7 +764,7 @@ draw_bold_text_with_bright_colors: false
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -833,7 +839,9 @@ draw_bold_text_with_bright_colors: false
 
   # (Windows, Linux, and BSD only)
   #- { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
+  - { key: V,              mods: Alt,        action: Paste            }
   #- { key: C,              mods: Control|Shift,                   action: Copy             }
+  - { key: C,              mods: Alt,        action: Copy            }
   #- { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    }
   #- { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
   #- { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
