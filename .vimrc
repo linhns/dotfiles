@@ -26,6 +26,7 @@ Plug 'romainl/vim-cool' "Disable highlight search when done
 Plug 'cespare/vim-toml', {'branch': 'main'}
 Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
+Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 filetype plugin indent on
@@ -171,6 +172,14 @@ set nowritebackup
 
 " Status line
 set laststatus=2
+
+" Turn off mode showing in status line
+set noshowmode
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
 let g:lightline = {
             \ 'colorscheme': 'powerline',
             \ 'active': {

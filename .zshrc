@@ -43,6 +43,7 @@ antigen bundle golang
 antigen bundle gh
 antigen bundle taskwarrior
 antigen bundle fd
+antigen bundle npm
 
 # Extra completions
 antigen bundle zsh-users/zsh-completions
@@ -96,6 +97,11 @@ alias python=python3
 
 # External plugins (initialized after)
 source ~/.zsh/plugins_after.zsh
+
+# rbenv
+if [[ -d "/home/linhns/.rbenv" ]]; then
+    eval "$(/home/linhns/.rbenv/bin/rbenv init - zsh)"
+fi
 
 # Load starship
 # export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml
