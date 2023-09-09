@@ -113,5 +113,4 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
 [ -f "/home/linhns/.ghcup/env" ] && source "/home/linhns/.ghcup/env" # ghcup-env

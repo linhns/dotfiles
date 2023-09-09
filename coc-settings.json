@@ -2,6 +2,7 @@
     "[cpp]": {
         "inlayHint.enable": false
     },
+    "coc.preferences.formatOnSave": true,
     "diagnostic.messageTarget": "echo",
     "languageserver": {
         "rust": {

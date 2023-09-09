@@ -27,6 +27,8 @@ Plug 'cespare/vim-toml', {'branch': 'main'}
 Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'NoahTheDuke/vim-just'
+Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
 filetype plugin indent on
@@ -252,11 +254,16 @@ set tildeop
 let mapleader = ","
 let maplocalleader = "\\"
 
+" Tab switches
+nnoremap <leader>p :tabp<CR>
+nnoremap <leader>n :tabn<CR>
+nnoremap <leader>t :term ++close<CR><C-w>:execute "resize " . (winheight(0) * 2/3)<CR>
+
 " Use <leader><leader> to change buffers
 nnoremap <leader><leader> :e #<CR>
 
-nnoremap <leader>tc :tabclose<CR>
-nnoremap <leader>tn :tabnew \| :FZF<CR>
+nnoremap <leader>x :tabclose<CR>
+nnoremap <leader>o :tabnew \| :FZF<CR>
 
 " Traverse quickfix list
 nnoremap <C-n> :cnext<CR>
@@ -282,6 +289,11 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+nnoremap <C-W>W <C-W><C-P>
+nnoremap <C-W><C-W> <C-W><C-P>
+tnoremap <C-W>W <C-W><C-P>
+tnoremap <C-W><C-W> <C-W><C-P>
 
 " Stop using arrow keys
 nnoremap <Left> <NOP>
@@ -331,3 +343,19 @@ augroup clang
     autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
     autocmd FileType c,cpp,objc ClangFormatAutoEnable
 augroup END
+
+" Haskell settings
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+let g:haskell_classic_highlighting = 1
+
+augroup haskell
+    autocmd!
+    autocmd FileType hs setlocal tabstop=2 shiftwidth=2 expandtab
+augroup END
+
