@@ -17,6 +17,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
@@ -173,6 +174,9 @@ colorscheme seoul256
 set nobackup
 set nowritebackup
 
+" Hidden
+set hidden
+
 " Status line
 set laststatus=2
 
@@ -251,6 +255,17 @@ set splitright
 " Tildeop
 set tildeop
 
+" Persistent undo
+set undofile
+if !has('nvim')
+set undodir=~/.vim/undo
+endif
+
+augroup vimrc
+    autocmd!
+    autocmd BufWritePre /tmp/* setlocal noundofile
+augroup END
+
 " Leader
 let mapleader = ","
 let maplocalleader = "\\"
@@ -326,11 +341,6 @@ let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
 let g:netrw_localcopydircmd = 'cp -r'
 hi! link netrwMarkFile Search
-
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
 
 """ Rust settings
 autocmd BufNewFile,BufRead *.rs set filetype=rust
