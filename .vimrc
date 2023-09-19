@@ -18,6 +18,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-dispatch'
+Plug 'vim-test/vim-test'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
@@ -36,11 +38,13 @@ call plug#end()
 filetype plugin indent on
 
 " Ack
-let g:ackprg = 'rg --vimgrep --hidden'
+let g:ackprg = 'rg --vimgrep --no-heading --hidden --smart-case'
 let g:ack_autoclose = 1
 let g:ack_use_cword_for_empty_search = 1
 cnoreabbrev Ack Ack!
 nnoremap <Leader>/ :Ack!<Space>
+
+let test#strategy = "dispatch"
 
 " Shorter update time
 set updatetime=300
@@ -176,6 +180,9 @@ set nowritebackup
 
 " Hidden
 set hidden
+
+" Switch buffer behavior
+set switchbuf+=usetab,newtab
 
 " Status line
 set laststatus=2
