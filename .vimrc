@@ -205,6 +205,10 @@ let g:lightline = {
             \ },
             \ }
 
+" GitGutter
+nnoremap ]h <Plug>(GitGutterNextHunk)
+nnoremap [h <Plug>(GitGutterPrevHunk)
+
 " Tabline
 set stal=2
 
