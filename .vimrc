@@ -206,6 +206,7 @@ let g:lightline = {
             \ }
 
 " GitGutter
+let g:gitgutter_preview_win_floating = 1
 nnoremap ]h <Plug>(GitGutterNextHunk)
 nnoremap [h <Plug>(GitGutterPrevHunk)
 
