@@ -5,6 +5,9 @@
     "coc.preferences.formatOnSave": true,
     "diagnostic.messageTarget": "echo",
     "suggest.noselect": true,
+    "suggest.floatConfig": {
+        "border": true
+    },
     "languageserver": {
         "rust": {
             "command": "rust-analyzer",
