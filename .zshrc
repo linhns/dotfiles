@@ -30,8 +30,6 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-_fzf_setup_completion dir rmdir
-
 _fzf_comprun() {
   local command=$1
   shift
