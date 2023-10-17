@@ -24,3 +24,4 @@ if [[ "$(tput colors)" == "256" ]]; then
     ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=136
     ZSH_HIGHLIGHT_STYLES[assign]=fg=037
 fi
+

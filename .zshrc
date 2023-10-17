@@ -1,55 +1,24 @@
 # If you come from bash you might have to change your $PATH.
+
+source $HOME/.zsh/pathmod.zsh
 # Export Go-related variables
 export GOROOT="/usr/local/go-1.20.1"
 export GOPATH=$HOME/go
 
-path+=("/home/linhns/.local/bin" "$GOPATH/bin" "$GOROOT/bin" "/usr/lib/llvm-15/bin")
+path_append "$HOME/.local/bin"
+path_append "$GOPATH/bin"
+path_append "$GOROOT/bin"
+path_append "/usr/lib/llvm-15/bin"
+
 if [[ -n $(ls /opt | grep -m 1 cmake) ]]; then
-    path+=("/opt/$(ls /opt | grep -m 1 cmake)/bin")
+    path_append "/opt/$(ls /opt | grep -m 1 cmake)/bin"
 fi
 
 export PATH
-# zsh custom functions
-fpath+=${ZDOTDIR:-~}/.zsh_functions
-
-autoload -Uz mans lfd
-
-# fzf settings
-export FZF_BASE="$(which fzf)"
-# export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files -g "!.git/"'
-# export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse-list --no-scrollbar --border --preview-window=60%,'~3'"
-export FZF_ALT_C_OPTS="--preview 'exa --tree --level 2 {}'"
-export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :100 {}'"
-
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
-
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-
-_fzf_comprun() {
-  local command=$1
-  shift
-
-  case "$command" in
-    cd)           fzf --preview 'exa -la {} | head -100'  "$@" ;;
-    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
-  esac
-}
-
-# rg settings
-export RIPGREP_CONFIG_PATH="/home/linhns/.ripgreprc"
 
 # Load Antigen
-source "/home/linhns/antigen.zsh"
-
-# Set Vim to be default editor
-export EDITOR=vim
+[[ ! -d "$HOME/.antigen" ]] && git clone https://github.com/zsh-users/antigen.git "$HOME/.antigen"
+source "$HOME/.antigen/antigen.zsh"
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -84,54 +53,22 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Tell Antigen that you're done.
 antigen apply
 
-# Use vim style navigation keys in menu completion
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
+source ~/.zsh/settings.zsh
 
-# Initialize editing command line
-autoload -U edit-command-line && zle -N edit-command-line
+source ~/.zsh/fzf.zsh
 
-# Enable interactive comments (# on the command line)
-setopt interactivecomments
+source ~/.zsh/external.zsh
 
-# Use vim style line editing in zsh
-bindkey -v
-# Movement
-bindkey -a 'gg' beginning-of-buffer-or-history
-bindkey -a 'G' end-of-buffer-or-history
-# Undo
-bindkey -a 'u' undo
-bindkey -a '^R' redo
-# Edit line
-bindkey -a '^V' edit-command-line
-# Backspace
-bindkey '^?' backward-delete-char
-bindkey '^H' backward-delete-char
-
-# Use bat as pager for man
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export MANROFFOPT="-c"
-
-alias python=python3
+source ~/.zsh/aliases.zsh
 
 # External plugins (initialized after)
 source ~/.zsh/plugins_after.zsh
 
-# rbenv
-if [[ -d "/home/linhns/.rbenv" ]]; then
-    eval "$(/home/linhns/.rbenv/bin/rbenv init - zsh)"
-fi
+source ~/.zsh/env.zsh
+
+# zsh custom functions
+fpath=( ${ZDOTDIR:-~}/.zsh/functions ${ZDOTDIR:-~}/.zsh/completions ${fpath[@]} )
+autoload -Uz $fpath[1]/*(.:t)
 
 # Load starship
-# export STARSHIP_CONFIG=/home/linhns/dotfiles/starship.toml
 eval "$(starship init zsh)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-[ -f "/home/linhns/.ghcup/env" ] && source "/home/linhns/.ghcup/env" # ghcup-env

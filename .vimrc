@@ -246,6 +246,10 @@ set incsearch
 set ignorecase
 set smartcase
 
+" Folding
+set foldmethod=manual
+set foldcolumn=2
+
 "Turn on hybrid line numbers
 set number
 set relativenumber
