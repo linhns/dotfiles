@@ -1,5 +1,3 @@
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-
 # Use vim style navigation keys in menu completion
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
@@ -8,9 +6,6 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Initialize editing command line
 autoload -U edit-command-line && zle -N edit-command-line
-
-# Enable interactive comments (# on the command line)
-setopt interactivecomments
 
 # Use vim style line editing in zsh
 bindkey -v

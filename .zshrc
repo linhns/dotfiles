@@ -28,11 +28,8 @@ antigen bundle git
 antigen bundle docker
 antigen bundle command-not-found
 antigen bundle rust
-antigen bundle fzf
 antigen bundle golang
-antigen bundle gh
 antigen bundle taskwarrior
-antigen bundle fd
 antigen bundle npm
 
 # Extra completions
@@ -53,7 +50,11 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Tell Antigen that you're done.
 antigen apply
 
-source ~/.zsh/settings.zsh
+source ~/.zsh/options.zsh
+
+source ~/.zsh/keybindings.zsh
+
+source ~/.zsh/styles.zsh
 
 source ~/.zsh/fzf.zsh
 

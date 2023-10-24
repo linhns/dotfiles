@@ -1,0 +1,10 @@
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:descriptions' format ' %F{green}--- Completing %d ---%f '
+zstyle ':completion:*:*:*:*:corrections' format ' %F{yellow}--- %d (errors: %e) ---%f '
+zstyle ':completion:*:messages' format ' %F{purple}--- %d ---%f '
+zstyle ':completion:*:warnings' format ' %F{red}--- No matches found ---%f '
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*:approximate:*' max-errors 2 numeric
