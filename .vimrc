@@ -37,8 +37,6 @@ call plug#end()
 
 filetype plugin indent on
 
-let g:fzf_layout = { 'down': '40%' }
-
 let g:fzf_colors = 
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
