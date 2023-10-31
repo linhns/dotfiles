@@ -312,16 +312,6 @@ nnoremap <leader><leader> :e #<CR>
 nnoremap <leader>x :tabclose<CR>
 nnoremap <leader>o :tabnew \| :FZF<CR>
 
-" Move line
-map <Esc>j <A-j>
-map <Esc>k <A-k>
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
-
 " Traverse quickfix list
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-p> :cprevious<CR>
