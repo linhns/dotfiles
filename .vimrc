@@ -33,6 +33,9 @@ Plug 'rhysd/vim-clang-format'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'NoahTheDuke/vim-just'
 Plug 'neovimhaskell/haskell-vim'
+
+" AI tools
+Plug 'github/copilot.vim'
 call plug#end()
 
 filetype plugin indent on
@@ -369,7 +372,7 @@ autocmd BufNewFile,BufRead *.rs set filetype=rust
 " Run `rustfmt` on save
 let g:rustfmt_autosave = 1
 
-augroup rust_settings
+augroup rust
     autocmd!
     autocmd FileType rust set colorcolumn=
 augroup END
@@ -412,3 +415,11 @@ augroup haskell
     autocmd FileType hs setlocal tabstop=2 shiftwidth=2 expandtab
 augroup END
 
+augroup copilot
+    autocmd!
+    autocmd BufReadPre *
+                \ let f=getfsize(expand("<afile>"))
+                \ | if f > 1000000 || f == -2
+                \ | let b:copilot_enabled = v:false
+                \ | endif
+augroup END
