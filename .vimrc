@@ -11,7 +11,8 @@ endif
 call plug#begin()
 Plug '~/.fzf'
 " Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/seoul256.vim'
+" Plug 'junegunn/seoul256.vim'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -185,12 +186,18 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " Theme
-set t_Co=256   
+if (has('termguicolors'))
+    set termguicolors   
+endif
 
 set background=dark
-" colorscheme PaperColor
-let g:seoul256_background=234
-colorscheme seoul256
+" let g:seoul256_background=235
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_invert_selection=0
+colorscheme gruvbox
+
+" Cursor line
+set cursorline
 
 " No backup
 set nobackup
@@ -414,6 +421,10 @@ augroup haskell
     autocmd!
     autocmd FileType hs setlocal tabstop=2 shiftwidth=2 expandtab
 augroup END
+
+" GitHub Copilot  
+imap <silent><script><expr> <Right> copilot#Accept("")
+let g:copilot_no_tab_map = v:true
 
 augroup copilot
     autocmd!
