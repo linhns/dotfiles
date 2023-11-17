@@ -194,6 +194,8 @@ set background=dark
 " let g:seoul256_background=235
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_invert_selection=0
+let g:gruvbox_number_column='bg1'
+let g:gruvbox_sign_column='bg0'
 colorscheme gruvbox
 
 " Cursor line
