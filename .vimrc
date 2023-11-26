@@ -28,6 +28,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'romainl/vim-cool' "Disable highlight search when done
 
 " Syntactic
+Plug 'sheerun/vim-polyglot'
 Plug 'cespare/vim-toml', {'branch': 'main'}
 Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
@@ -199,7 +200,7 @@ let g:gruvbox_sign_column='bg0'
 colorscheme gruvbox
 
 " Cursor line
-set cursorline
+" set cursorline
 
 " No backup
 set nobackup
@@ -333,7 +334,7 @@ inoremap <c-u> <esc>viwU
 nnoremap <S-u> viwU
 
 " Quickly open .vimrc
-nnoremap <leader>ev :vsplit ~/dotfiles/.vimrc<cr>
+nnoremap <leader>ev :tabnew ~/dotfiles/.vimrc<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Shortcut to open FZF
@@ -375,7 +376,7 @@ let g:netrw_liststyle = 3
 let g:netrw_localcopydircmd = 'cp -r'
 hi! link netrwMarkFile Search
 
-""" Rust settings
+" Rust settings
 autocmd BufNewFile,BufRead *.rs set filetype=rust
 
 " Run `rustfmt` on save
@@ -392,7 +393,7 @@ augroup filetype_json
     autocmd FileType json syntax match Comment +\/\/.\+$+
 augroup END
 
-""" HTML nowrap
+" HTML nowrap
 autocmd BufNewFile,BufRead *.html setlocal nowrap
 
 augroup filetype_html
@@ -421,12 +422,13 @@ let g:haskell_classic_highlighting = 1
 
 augroup haskell
     autocmd!
-    autocmd FileType hs setlocal tabstop=2 shiftwidth=2 expandtab
+    autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 expandtab
 augroup END
 
 " GitHub Copilot  
 imap <silent><script><expr> <Right> copilot#Accept("")
 let g:copilot_no_tab_map = v:true
+" highlight CopilotSuggestion guifg=#00ff00 ctermfg=#00ff00
 
 augroup copilot
     autocmd!
