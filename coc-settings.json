@@ -3,7 +3,6 @@
         "inlayHint.enable": false
     },
     "coc.preferences.formatOnSave": true,
-    "diagnostic.messageTarget": "echo",
     "suggest.noselect": true,
     "suggest.floatConfig": {
         "border": true
