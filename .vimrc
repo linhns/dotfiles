@@ -58,6 +58,10 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" Leader
+let mapleader = ","
+let maplocalleader = "\\"
+
 " Ack
 let g:ackprg = 'rg --vimgrep --no-heading --hidden --smart-case'
 let g:ack_autoclose = 1
@@ -320,10 +324,6 @@ augroup vimrc
     autocmd!
     autocmd BufWritePre /tmp/* setlocal noundofile
 augroup END
-
-" Leader
-let mapleader = ","
-let maplocalleader = "\\"
 
 " Tab switches
 nnoremap <leader>p :tabp<CR>
