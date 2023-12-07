@@ -6,6 +6,28 @@
 --type-add
 web:*.{html, css, js}*
 
-# Exclude folders
---glob=!git/*
+# Search hidden files and directories.
+--hidden
+
+# Follow symbolic links.
+--follow
+
+# Don't respect ignore files (.gitignore, .ignore, etc.).
+--no-ignore
+
+# Exclude directories.
+--glob=!{.git,.svn,node_modules,tealdeer,Trash,vendor}
+
+# Exclude file types.
+--glob=!*.{lock}
+--glob=!*.{swp}
+
+# Exclude files.
+--glob=!{package-lock.json}
+
+# Searches case insensitively.
+--smart-case
+
+# Sort by file path.
+--sort=path
 
