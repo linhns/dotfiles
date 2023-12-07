@@ -2,13 +2,21 @@
 
 source $HOME/.zsh/pathmod.zsh
 # Export Go-related variables
-export GOROOT="/usr/local/go-1.20.1"
-export GOPATH=$HOME/go
+
+GOROOT="/usr/local/go-1.20.1"
+GOPATH=$HOME/go
+
+if [[ -d "$GOROOT" ]]; then
+    export GOROOT
+    path_append "$GOROOT/bin"
+fi
+
+if [[ -d "$GOPATH" ]]; then
+    export GOPATH
+    path_append "$GOPATH/bin"
+fi
 
 path_append "$HOME/.local/bin"
-path_append "$GOPATH/bin"
-path_append "$GOROOT/bin"
-path_append "/usr/lib/llvm-15/bin"
 
 if [[ -n $(ls /opt | grep -m 1 cmake) ]]; then
     path_append "/opt/$(ls /opt | grep -m 1 cmake)/bin"
@@ -52,9 +60,9 @@ antigen apply
 
 source ~/.zsh/options.zsh
 
-source ~/.zsh/keybindings.zsh
-
 source ~/.zsh/styles.zsh
+
+source ~/.zsh/keybindings.zsh
 
 source ~/.zsh/fzf.zsh
 

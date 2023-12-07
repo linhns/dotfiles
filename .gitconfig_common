@@ -1,0 +1,22 @@
+[init]
+	defaultBranch = main
+[pager]
+	log = false
+	diff = false
+	branch = false
+[merge]
+	tool = vimdiff
+[alias]
+	co = checkout
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	graph = log --all --graph --oneline --decorate
+	mt = mergetool
+[core]
+	excludesfile = /home/linhns/.gitignore_global
+[mergetool]
+	prompt = false
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+[mergetool "vimdiff"]
+	layout = LOCAL,MERGED,REMOTE

@@ -211,11 +211,14 @@ colorscheme gruvbox
 set nobackup
 set nowritebackup
 
-" Hidden
+" Manages multiple buffers effectively
 set hidden
 
 " Switch buffer behavior
 set switchbuf+=usetab,newtab
+
+" Enable spellcheck
+set spell spelllang=en_us
 
 " Status line
 set laststatus=2
@@ -295,7 +298,7 @@ set sm mat=2
 set lazyredraw
 
 " No sound on errors
-set noeb vb t_vb=
+set noerrorbells vb t_vb=[?5h$<20>[?5l
 
 " Use utf-8 encoding
 set encoding=utf8
@@ -306,6 +309,9 @@ set expandtab ts=4 sw=4 sts=4 ai si wrap
 " Line breaks
 set tw=80 lbr
 set colorcolumn=81
+
+" Mouse support
+set mouse=a
 
 " Splits
 set splitbelow
@@ -381,9 +387,9 @@ nnoremap L $
 let g:netrw_banner = 0
 let g:netrw_keepdir = 0
 let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
+let g:netrw_browse_split = 4
 " let g:netrw_altv = 1
-" let g:netrw_winsize = 25
+let g:netrw_winsize = 20
 let g:netrw_localcopydircmd = 'cp -r'
 hi! link netrwMarkFile Search
 
