@@ -39,6 +39,10 @@ antigen bundle rust
 antigen bundle golang
 antigen bundle taskwarrior
 antigen bundle npm
+antigen bundle cabal
+antigen bundle dircycle
+antigen bundle copyfile
+antigen bundle copybuffer
 
 # Extra completions
 antigen bundle zsh-users/zsh-completions

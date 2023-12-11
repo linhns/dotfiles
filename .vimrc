@@ -43,20 +43,20 @@ call plug#end()
 
 filetype plugin indent on
 
-let g:fzf_colors = 
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
 
 " Leader
 let mapleader = ","
@@ -193,7 +193,7 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 
 " Theme
 if (has('termguicolors'))
-    set termguicolors   
+    set termguicolors
 endif
 
 set background=dark
@@ -276,6 +276,9 @@ set ignorecase
 set smartcase
 
 " Folding
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
 set foldmethod=manual
 set foldcolumn=2
 
@@ -313,17 +316,16 @@ set colorcolumn=81
 " Mouse support
 set mouse=a
 
+set notildeop
+
 " Splits
 set splitbelow
 set splitright
 
-" Tildeop
-set tildeop
-
 " Persistent undo
 set undofile
 if !has('nvim')
-set undodir=~/.vim/undo
+    set undodir=~/.vim/undo
 endif
 
 augroup vimrc
@@ -346,9 +348,6 @@ nnoremap <leader>o :tabnew \| :FZF<CR>
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-p> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
-
-inoremap <c-u> <esc>viwU
-nnoremap <S-u> viwU
 
 " Quickly open .vimrc
 nnoremap <leader>ev :tabnew ~/dotfiles/.vimrc<cr>
@@ -383,6 +382,10 @@ inoremap <Down> <NOP>
 nnoremap H 0
 nnoremap L $
 
+" Show next match at center screen
+nnoremap n nzz
+nnoremap N Nzz
+
 " Netrw
 let g:netrw_banner = 0
 let g:netrw_keepdir = 0
@@ -402,13 +405,13 @@ let g:rustfmt_autosave = 1
 augroup rust
     autocmd!
     autocmd FileType rust set colorcolumn=
-augroup END
+augroup end
 
 " Correct syntax highlighting for json
 augroup filetype_json
     autocmd!
     autocmd FileType json syntax match Comment +\/\/.\+$+
-augroup END
+augroup end
 
 " HTML nowrap
 autocmd BufNewFile,BufRead *.html setlocal nowrap
@@ -416,16 +419,16 @@ autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup filetype_html
     autocmd!
     autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
-augroup END
+augroup end
 
 " Clang settings
-let g:clang_format#detect_style_file = 1 
+let g:clang_format#detect_style_file = 1
 augroup clang
     autocmd!
     autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :ClangFormat<CR>
     autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
     autocmd FileType c,cpp,objc ClangFormatAutoEnable
-augroup END
+augroup end
 
 " Haskell settings
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -440,9 +443,9 @@ let g:haskell_classic_highlighting = 1
 augroup haskell
     autocmd!
     autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 expandtab
-augroup END
+augroup end
 
-" GitHub Copilot  
+" GitHub Copilot
 imap <silent><script><expr> <Right> copilot#Accept("")
 let g:copilot_no_tab_map = v:true
 " highlight CopilotSuggestion guifg=#00ff00 ctermfg=#00ff00
@@ -454,4 +457,15 @@ augroup copilot
                 \ | if f > 1000000 || f == -2
                 \ | let b:copilot_enabled = v:false
                 \ | endif
-augroup END
+augroup end
+
+augroup auto_save_and_reload_folds
+    autocmd!
+    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.* silent loadview
+augroup end
+
+augroup auto_trim_blanks
+    autocmd!
+    autocmd BufWritePre * :%s/\s\+$//e
+augroup end
