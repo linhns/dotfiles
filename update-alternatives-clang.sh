@@ -29,7 +29,7 @@ path="/usr/bin/"
 sudo apt update
 
 # download and launch the setup script
-wget https://apt.llvm.org/llvm.sh
+wget -O llvm.sh https://apt.llvm.org/llvm.sh
 # sudo bash llvm.sh ${version}
 sudo bash llvm.sh ${version} all
 
