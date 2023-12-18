@@ -333,6 +333,18 @@ augroup vimrc
     autocmd BufWritePre /tmp/* setlocal noundofile
 augroup END
 
+function! AutoCenter()
+    if (winline() >= (winheight(0) * 2 / 3))
+        normal! zz
+    endif
+endfunction
+
+" Auto center
+augroup autocenter
+    autocmd!
+    autocmd InsertEnter * :call AutoCenter()
+augroup end
+
 " Tab switches
 nnoremap <leader>p :tabp<CR>
 nnoremap <leader>n :tabn<CR>
