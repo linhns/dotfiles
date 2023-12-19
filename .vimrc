@@ -62,6 +62,23 @@ let g:fzf_colors =
 let mapleader = ","
 let maplocalleader = "\\"
 
+" Better grep
+set grepprg=rg\ --vimgrep
+function! Grep(...)
+    return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+endfunction
+command! -nargs=+ -complete=file_in_path -bar Grep cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep cgetexpr Grep(<f-args>)
+augroup quickfix
+    autocmd!
+    autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost l*    lwindow
+augroup end
+
+cnoreabbrev <expr> grep getcmdtype() ==# ':' && getcmdline() ==# 'grep' ? 'Grep' : 'grep'
+cnoreabbrev <expr> lgrep getcmdtype() ==# ':' && getcmdline() ==# 'lgrep' ? 'LGrep' : 'lgrep'
+
 " Ack
 let g:ackprg = 'rg --vimgrep --no-heading --hidden --smart-case'
 let g:ack_autoclose = 1
