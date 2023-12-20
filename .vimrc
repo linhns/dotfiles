@@ -273,6 +273,10 @@ let g:gitgutter_preview_win_floating = 1
 nnoremap ]h <Plug>(GitGutterNextHunk)
 nnoremap [h <Plug>(GitGutterPrevHunk)
 
+if has('syntax') && has('eval')
+    packadd! matchit
+endif
+
 " Tabline
 set stal=2
 
@@ -390,6 +394,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <C-W>k :only<CR>
 
 nnoremap <C-W>W <C-W><C-P>
 nnoremap <C-W><C-W> <C-W><C-P>
