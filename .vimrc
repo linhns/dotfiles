@@ -328,7 +328,12 @@ set noerrorbells vb t_vb=[?5h$<20>[?5l
 set encoding=utf8
 
 " Set tab options
-set expandtab ts=4 sw=4 sts=4 ai si wrap
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+set smartindent
+set wrap
 
 " Line breaks
 set tw=80 lbr
@@ -476,7 +481,7 @@ let g:haskell_classic_highlighting = 1
 
 augroup haskell
     autocmd!
-    autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 expandtab
+    autocmd FileType haskell setlocal softtabstop=2 shiftwidth=2 expandtab
 augroup end
 
 " GitHub Copilot
