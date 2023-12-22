@@ -283,6 +283,10 @@ set stal=2
 " Wildmenu
 set wildmenu
 set wildignore=*.o,*.obj,*.pyc,*/.git/*,*/.svn/*
+set wildoptions=pum
+
+" Autochdir
+set autochdir
 
 " Backspace
 set backspace=eol,start,indent
