@@ -375,6 +375,13 @@ augroup autocenter
     autocmd InsertEnter * :call AutoCenter()
 augroup end
 
+" Smart cursorline
+augroup smartCursorLine
+    autocmd!
+    autocmd InsertEnter,WinEnter,TabLeave * set nocursorline
+    autocmd InsertLeave,WinLeave,TabEnter * set cursorline
+augroup end
+
 " Tab switches
 nnoremap <leader>p :tabp<CR>
 nnoremap <leader>n :tabn<CR>
@@ -489,8 +496,9 @@ augroup haskell
 augroup end
 
 " GitHub Copilot
-imap <silent><script><expr> <Right> copilot#Accept("")
+imap <silent><script><expr> <C-Right> copilot#Accept("")
 let g:copilot_no_tab_map = v:true
+imap <Right> <Plug>(copilot-accept-word)
 " highlight CopilotSuggestion guifg=#00ff00 ctermfg=#00ff00
 
 augroup copilot
