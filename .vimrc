@@ -446,6 +446,11 @@ let g:netrw_winsize = 20
 let g:netrw_localcopydircmd = 'cp -r'
 hi! link netrwMarkFile Search
 
+augroup helpfiles
+    autocmd!
+    autocmd BufEnter * if &filetype == 'help' | wincmd L | endif
+augroup end
+
 " Rust settings
 autocmd BufNewFile,BufRead *.rs set filetype=rust
 
