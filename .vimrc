@@ -8,6 +8,8 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+let g:loaded_unimpaired = 1
+
 call plug#begin()
 Plug '~/.fzf'
 " Plug 'NLKNguyen/papercolor-theme'
@@ -221,9 +223,6 @@ let g:gruvbox_number_column='bg1'
 let g:gruvbox_sign_column='bg0'
 colorscheme gruvbox
 
-" Cursor line
-" set cursorline
-
 " No backup
 set nobackup
 set nowritebackup
@@ -278,15 +277,12 @@ if has('syntax') && has('eval')
 endif
 
 " Tabline
-set stal=2
+set showtabline=2
 
 " Wildmenu
 set wildmenu
 set wildignore=*.o,*.obj,*.pyc,*/.git/*,*/.svn/*
 set wildoptions=pum
-
-" Autochdir
-set autochdir
 
 " Backspace
 set backspace=eol,start,indent
@@ -311,7 +307,7 @@ set foldcolumn=2
 set number
 set relativenumber
 
-set fo+=t
+set formatoptions+=t
 
 " Round indents
 set shiftround
@@ -320,7 +316,7 @@ set shiftround
 set autowrite
 
 " Show matching brackets
-set sm mat=2
+set showmatch matchtime=2
 
 " Lazy redraw
 set lazyredraw
@@ -340,7 +336,7 @@ set smartindent
 set wrap
 
 " Line breaks
-set tw=80 lbr
+set textwidth=80 linebreak
 set colorcolumn=81
 
 " Mouse support
