@@ -8,8 +8,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-let g:loaded_unimpaired = 1
-
 call plug#begin()
 Plug '~/.fzf'
 " Plug 'NLKNguyen/papercolor-theme'
