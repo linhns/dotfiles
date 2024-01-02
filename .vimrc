@@ -52,7 +52,7 @@ Plug 'NoahTheDuke/vim-just'
 " AI tools
 Plug 'github/copilot.vim'
 
-Plug '~/vim-autocenter'
+Plug 'linhns/vim-autocenter'
 call plug#end()
 
 let g:fzf_colors =
