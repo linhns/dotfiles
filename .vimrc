@@ -15,6 +15,11 @@ autocmd SourcePost $MYVIMRC
   \| PlugInstall --sync | PlugUpdate --sync
   \| endif
 
+let g:autocenter_options =
+            \ {
+            \    'activation_ratio': 0.5,
+            \ }
+
 call plug#begin()
 Plug '~/.fzf'
 " Plug 'NLKNguyen/papercolor-theme'
@@ -34,6 +39,7 @@ Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'romainl/vim-cool' "Disable highlight search when done
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
 " Syntactic
 Plug 'sheerun/vim-polyglot'
@@ -42,15 +48,12 @@ Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'NoahTheDuke/vim-just'
-Plug 'neovimhaskell/haskell-vim'
 
 " AI tools
 Plug 'github/copilot.vim'
 
 Plug '~/vim-autocenter'
 call plug#end()
-
-let g:autocenter_starting_ratio = 0
 
 let g:fzf_colors =
             \ { 'fg':      ['fg', 'Normal'],
