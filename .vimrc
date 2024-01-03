@@ -40,6 +40,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'romainl/vim-cool' "Disable highlight search when done
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Syntactic
 Plug 'sheerun/vim-polyglot'
