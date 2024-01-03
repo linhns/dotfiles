@@ -374,7 +374,7 @@ augroup END
 augroup smartCursorLine
     autocmd!
     autocmd InsertEnter,WinEnter,TabLeave * set nocursorline
-    autocmd InsertLeave,WinLeave,TabEnter * set cursorline
+    autocmd InsertLeave,WinLeave,TabEnter,VimEnter * set cursorline
 augroup end
 
 " Tab switches
