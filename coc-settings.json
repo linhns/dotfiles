@@ -7,6 +7,20 @@
     "suggest.floatConfig": {
         "border": true
     },
+    "lists.disabledLists": [
+        "quickfix",
+        "locationlist",
+        "registers",
+        "colors",
+        "session",
+        "words",
+        "filetypes",
+    ],
+    "list.source.files.args": [
+        // "--ignore-vcs"
+    ],
+    "list.source.mru.maxLength": 100,
+    "list.source.mru.ignoreGitIgnore": true,
     "languageserver": {
         "rust": {
             "command": "rust-analyzer",

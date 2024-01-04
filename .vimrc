@@ -108,6 +108,14 @@ set updatetime=300
 set signcolumn=yes
 
 " CoC settings
+let g:coc_global_extensions = [
+            \ 'coc-clangd',
+            \ 'coc-json',
+            \ 'coc-tsserver',
+            \ 'coc-vimlsp',
+            \ 'coc-lists'
+            \ ]
+
 inoremap <expr><S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
@@ -292,8 +300,9 @@ set showtabline=2
 
 " Wildmenu
 set wildmenu
+set wildmode=longest:full,full
 set wildignore=*.o,*.obj,*.pyc,*/.git/*,*/.svn/*
-set wildoptions=pum
+set wildoptions=pum,fuzzy
 
 " Backspace
 set backspace=eol,start,indent
