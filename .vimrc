@@ -1,5 +1,10 @@
 set nocompatible
 
+" Theme
+if (has('termguicolors'))
+    set termguicolors
+endif
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -17,14 +22,12 @@ autocmd SourcePost $MYVIMRC
 
 let g:autocenter_options =
             \ {
-            \    'activation_ratio': 0.5,
+            \    'activation_ratio': 0.8,
             \ }
 
 call plug#begin()
 Plug '~/.fzf'
-" Plug 'NLKNguyen/papercolor-theme'
-" Plug 'junegunn/seoul256.vim'
-Plug 'morhetz/gruvbox'
+Plug 'junegunn/seoul256.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -224,23 +227,13 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer
-command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
-" Theme
-if (has('termguicolors'))
-    set termguicolors
-endif
-
-set background=dark
-" let g:seoul256_background=235
-let g:gruvbox_contrast_dark='medium'
-let g:gruvbox_invert_selection=0
-let g:gruvbox_number_column='bg1'
-let g:gruvbox_sign_column='bg0'
-colorscheme gruvbox
+let g:seoul256_background=234
+colorscheme seoul256
 
 " No backup
 set nobackup
@@ -251,9 +244,6 @@ set hidden
 
 " Switch buffer behavior
 set switchbuf+=usetab,newtab
-
-" Enable spellcheck
-set spell spelllang=en_us
 
 " Status line
 set laststatus=2
@@ -270,7 +260,7 @@ function! LightlineObsession()
 endfunction
 
 let g:lightline = {
-            \ 'colorscheme': 'powerline',
+            \ 'colorscheme': 'seoul256',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
