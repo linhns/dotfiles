@@ -4,9 +4,6 @@
     },
     "coc.preferences.formatOnSave": true,
     "suggest.noselect": true,
-    "suggest.floatConfig": {
-        "border": true
-    },
     "lists.disabledLists": [
         "quickfix",
         "locationlist",
