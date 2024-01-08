@@ -24,6 +24,9 @@ let g:autocenter_options =
             \ {
             \    'activation_ratio': 0.8,
             \ }
+let g:vimspector_enable_mappings = 'HUMAN'
+nnoremap <leader>di <Plug>VimspectorBalloonEval
+vnoremap <leader>di <Plug>VimspectorBalloonEval
 
 call plug#begin()
 Plug '~/.fzf'
@@ -44,6 +47,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'romainl/vim-cool' "Disable highlight search when done
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'puremourning/vimspector'
 
 " Syntactic
 Plug 'sheerun/vim-polyglot'
