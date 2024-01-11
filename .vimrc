@@ -53,7 +53,6 @@ Plug 'puremourning/vimspector'
 Plug 'sheerun/vim-polyglot'
 Plug 'cespare/vim-toml', {'branch': 'main'}
 Plug 'rust-lang/rust.vim'
-Plug 'rhysd/vim-clang-format'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'NoahTheDuke/vim-just'
 
@@ -472,15 +471,6 @@ autocmd BufNewFile,BufRead *.html setlocal nowrap
 augroup filetype_html
     autocmd!
     autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
-augroup end
-
-" Clang settings
-let g:clang_format#detect_style_file = 1
-augroup clang
-    autocmd!
-    autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :ClangFormat<CR>
-    autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-    autocmd FileType c,cpp,objc ClangFormatAutoEnable
 augroup end
 
 " Haskell settings
