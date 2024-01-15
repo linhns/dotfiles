@@ -3,9 +3,9 @@
         "inlayHint.enable": false
     },
     "[c]": {
-        "inlayHint.enable": false
+        "inlayHint.enable": false,
+        "coc.preferences.formatOnSave": false
     },
-    "coc.preferences.formatOnSave": false,
     "suggest.noselect": true,
     "lists.disabledLists": [
         "quickfix",
