@@ -30,6 +30,7 @@ vnoremap <leader>di <Plug>VimspectorBalloonEval
 
 call plug#begin()
 Plug '~/.fzf'
+Plug 'romainl/Apprentice'
 Plug 'junegunn/seoul256.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
@@ -213,12 +214,18 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> to scroll float windows/popups
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    nnoremap <silent><nowait><expr> <C-f>
+                \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <silent><nowait><expr> <C-b>
+                \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-f>
+                \ coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b>
+                \ coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-f>
+                \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    vnoremap <silent><nowait><expr> <C-b>
+                \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges
@@ -232,11 +239,20 @@ command! -nargs=0 Format :call CocActionAsync('format')
 " Add `:Fold` command to fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
-" Add `:OR` command for organize imports of the current buffer
-command! -nargs=0 OR   :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+" Add `:OrganizeImport` command for organize imports of the current buffer
+command! -nargs=0 OrganizeImport :call CocActionAsync
+            \('runCommand', 'editor.action.organizeImport')
 
-let g:seoul256_background=234
-colorscheme seoul256
+function! ApprenticeTweaks()
+    highlight SignColumn ctermfg=250 ctermbg=235 guifg=#bcbcbc guibg=#262626
+endfunction
+
+augroup Colors
+    autocmd!
+    autocmd ColorScheme apprentice call ApprenticeTweaks()
+augroup END
+
+colorscheme apprentice
 
 " No backup
 set nobackup
@@ -263,7 +279,7 @@ function! LightlineObsession()
 endfunction
 
 let g:lightline = {
-            \ 'colorscheme': 'seoul256',
+            \ 'colorscheme': 'apprentice',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
