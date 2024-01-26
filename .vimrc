@@ -30,8 +30,12 @@ vnoremap <leader>di <Plug>VimspectorBalloonEval
 
 call plug#begin()
 Plug '~/.fzf'
+
+" Colorschemes
 Plug 'romainl/Apprentice'
-Plug 'junegunn/seoul256.vim'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
+
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -51,11 +55,11 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'puremourning/vimspector'
 
 " Syntactic
-Plug 'sheerun/vim-polyglot'
 Plug 'cespare/vim-toml', {'branch': 'main'}
 Plug 'rust-lang/rust.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'NoahTheDuke/vim-just'
+Plug 'bfrg/vim-cpp-modern'
 
 " AI tools
 Plug 'github/copilot.vim'
@@ -252,7 +256,7 @@ augroup Colors
     autocmd ColorScheme apprentice call ApprenticeTweaks()
 augroup END
 
-colorscheme apprentice
+colorscheme jellybeans
 
 " No backup
 set nobackup
@@ -279,7 +283,7 @@ function! LightlineObsession()
 endfunction
 
 let g:lightline = {
-            \ 'colorscheme': 'apprentice',
+            \ 'colorscheme': 'Tomorrow_Night_Bright',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
