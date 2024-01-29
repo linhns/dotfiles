@@ -14,6 +14,21 @@ success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
 
 
+[battery]
+full_symbol = "• "
+charging_symbol = "⇡ "
+discharging_symbol = "⇣ "
+unknown_symbol = "❓ "
+empty_symbol = "❗ "
+
+[erlang]
+symbol = "ⓔ "
+
+[nodejs]
+symbol = "[⬢](bold green) "
+
+[pulumi]
+symbol = "🧊 "
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -23,77 +38,20 @@ disabled = true
 
 [aws]
 disabled = true
-symbol = "  "
-
-[buf]
-symbol = " "
 
 [c]
-symbol = " "
 commands = [["clang", "--version"]]
 
-[conda]
-symbol = " "
-
-[dart]
-symbol = " "
-
 [directory]
-read_only = " "
 truncate_to_repo = false
 
-[docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
 [git_branch]
-symbol = " "
+# symbol = " "
 
 [git_status]
 ahead = '⇡${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
-
-[golang]
-symbol = " "
-
-[haskell]
-symbol = " "
-
-[hg_branch]
-symbol = " "
-
-[java]
-symbol = " "
-
-[julia]
-symbol = " "
-
-[memory_usage]
-symbol = " "
-
-[nim]
-symbol = " "
-
-[nix_shell]
-symbol = " "
-
-[nodejs]
-symbol = " "
-
-[python]
-symbol = " "
-
-[spack]
-symbol = "🅢 "
-
-[rust]
-symbol = " "
 
 [time]
 disabled = true

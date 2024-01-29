@@ -28,6 +28,7 @@ let g:vimspector_enable_mappings = 'HUMAN'
 nnoremap <leader>di <Plug>VimspectorBalloonEval
 vnoremap <leader>di <Plug>VimspectorBalloonEval
 
+
 call plug#begin()
 Plug '~/.fzf'
 
@@ -60,6 +61,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'NoahTheDuke/vim-just'
 Plug 'bfrg/vim-cpp-modern'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'junegunn/vim-easy-align'
 
 " AI tools
 Plug 'github/copilot.vim'
@@ -109,6 +112,10 @@ let g:ack_autoclose = 1
 let g:ack_use_cword_for_empty_search = 1
 cnoreabbrev Ack Ack!
 nnoremap <Leader>/ :Ack!<Space>
+
+" Easy align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 let test#strategy = "dispatch"
 
@@ -250,13 +257,19 @@ command! -nargs=0 OrganizeImport :call CocActionAsync
 function! ApprenticeTweaks()
     highlight SignColumn ctermfg=250 ctermbg=235 guifg=#bcbcbc guibg=#262626
 endfunction
+function! JellybeansTweaks()
+    highlight ColorColumn term=NONE cterm=NONE gui=NONE ctermbg=235 guibg=#262626
+endfunction
 
 augroup Colors
     autocmd!
     autocmd ColorScheme apprentice call ApprenticeTweaks()
+    autocmd ColorScheme jellybeans call JellybeansTweaks()
 augroup END
 
 colorscheme jellybeans
+
+set fillchars=vert:\ ,eob:\ ,lastline:@
 
 " No backup
 set nobackup
@@ -283,7 +296,7 @@ function! LightlineObsession()
 endfunction
 
 let g:lightline = {
-            \ 'colorscheme': 'Tomorrow_Night_Bright',
+            \ 'colorscheme': 'powerline',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
@@ -473,11 +486,6 @@ autocmd BufNewFile,BufRead *.rs set filetype=rust
 
 " Run `rustfmt` on save
 let g:rustfmt_autosave = 1
-
-augroup rust
-    autocmd!
-    autocmd FileType rust set colorcolumn=
-augroup end
 
 " Correct syntax highlighting for json
 augroup filetype_json
