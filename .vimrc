@@ -347,7 +347,7 @@ set foldenable
 set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=manual
-set foldcolumn=2
+set foldcolumn=1
 
 "Turn on hybrid line numbers
 set number
