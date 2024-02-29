@@ -7,12 +7,9 @@ add_newline = false
 # Enable right prompt
 # right_format = """$time"""
 
-
-# Replace the "❯" symbol in the prompt with "➜"
 [character] # The name of the module we are configuring is "character"
-success_symbol = "[➜](bold green)"
+# success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
-
 
 [battery]
 full_symbol = "• "
