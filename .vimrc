@@ -123,7 +123,7 @@ let test#strategy = "dispatch"
 set updatetime=300
 
 " Show signcolumn
-set signcolumn="yes"
+set signcolumn=yes
 
 " CoC settings
 let g:coc_global_extensions = [
