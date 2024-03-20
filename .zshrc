@@ -43,6 +43,7 @@ antigen bundle cabal
 antigen bundle dircycle
 antigen bundle copyfile
 antigen bundle copybuffer
+antigen bundle copypath
 
 # Extra completions
 antigen bundle zsh-users/zsh-completions
@@ -52,6 +53,9 @@ antigen bundle zsh-users/zsh-autosuggestions
 
 # Z for frecency-based navigation
 antigen bundle agkozak/zsh-z
+
+# timewarrior
+antigen bundle svenXY/timewarrior
 
 # Load the theme.
 # antigen theme robbyrussell

@@ -1,0 +1,5 @@
+tickle() {
+  deadline=$1
+  shift
+  task add +in +tickle wait:$deadline $@
+}

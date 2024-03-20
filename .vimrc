@@ -67,6 +67,7 @@ Plug 'junegunn/vim-easy-align'
 " AI tools
 Plug 'github/copilot.vim'
 
+" Self-built plugins
 Plug 'linhns/vim-autocenter'
 call plug#end()
 
