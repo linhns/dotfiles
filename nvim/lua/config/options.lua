@@ -3,9 +3,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Turn on termguicolors
-if not vim.o.termguicolors then
-    vim.opt.termguicolors = true
-end
+vim.opt.termguicolors = true
 
 -- Update time
 vim.opt.updatetime = 400
@@ -61,3 +59,10 @@ vim.opt.splitright = true
 
 -- Wildmenu
 vim.opt.wildignore = '*.o,*.obj,*.pyc,*.swp,*.bak,*/.git/*,*/.svn/*'
+
+-- Undo options
+vim.opt.undofile = true
+vim.opt.undodir = os.getenv('HOME') .. '/.nvim/undodir'
+
+-- Scroll options
+vim.opt.scrolloff = 8
