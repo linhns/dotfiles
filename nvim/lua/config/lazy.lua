@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
   defaults = {
-    lazy = true, -- Default to lazy loading, optional
+    -- lazy = true, -- Default to lazy loading, optional
   },
   change_detection = {
     notify = false, -- I find the config changed notification super annoying

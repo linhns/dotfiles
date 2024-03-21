@@ -1,6 +1,9 @@
 -- Copy to clipboard
 vim.keymap.set({'n', 'v'}, '<leader>y', [["+y]])
 
+-- Paste from clipboard
+vim.keymap.set({'n', 'v'}, '<leader>p', [["+p]])
+
 -- Delete without changing registers
 vim.keymap.set({'n', 'v'}, '<leader>d', [["_d]])
 vim.keymap.set({'n', 'v'}, 'x', [["_x]])
