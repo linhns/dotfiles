@@ -1,0 +1,7 @@
+require("linhns.core.leader")
+
+require("linhns.core.options")
+
+require("linhns.core.keymaps")
+
+require("linhns.core.autocmds")

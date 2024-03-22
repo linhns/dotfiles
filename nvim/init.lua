@@ -1,1 +1,2 @@
-require("config")
+require ('linhns.core')
+require ('linhns.lazy')

@@ -10,7 +10,6 @@ vim.opt.updatetime = 400
 
 -- Columns
 vim.opt.signcolumn = "yes"
-vim.opt.foldcolumn = "2"
 
 -- Lazyredraw
 vim.opt.lazyredraw = true
