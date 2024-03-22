@@ -24,7 +24,9 @@ M.config = function()
             "lua_ls",
             "neocmake",
         },
-        automatic_installation = true,
+        automatic_installation = {
+            exclude = { 'clangd' }
+        },
     })
 end
 
