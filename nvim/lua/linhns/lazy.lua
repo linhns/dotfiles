@@ -14,15 +14,19 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(
     {
         {
-            import = "linhns.plugins",
+            import = 'linhns.plugins',
+        },
+        {
+            import = 'linhns.plugins.lsp'
         }
     },
     {
         install = {
             colorscheme = { 'tokyonight' }
         },
-        defaults = {
-            -- lazy = true, -- Default to lazy loading, optional
+        checker = {
+            enabled = true,
+            notify = false
         },
         change_detection = {
             notify = false, -- I find the config changed notification super annoying
