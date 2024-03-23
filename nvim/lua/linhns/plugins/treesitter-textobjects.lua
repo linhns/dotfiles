@@ -63,7 +63,7 @@ local goto_next_end = {
     [']L'] = '@loop.outer',
 }
 
-local goto_previous_end = {
+local goto_previous_start = {
     ['[f'] = '@call.outer',
     ['[m'] = '@function.outer',
     ['[c'] = '@class.outer',

@@ -1,8 +1,8 @@
 return {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-        local ok, lualine = pcall(require, 'lualine')
+        local ok, lualine = pcall(require, "lualine")
         if not ok then
             return
         end
@@ -10,12 +10,12 @@ return {
         lualine.setup({
             options = {
                 icons_enabled = true,
-                theme = 'auto',
+                theme = "auto",
                 -- section_separators = '',
                 -- component_separators = '|'
             },
             sections = {
-                lualine_c = { 'filename', 'filesize' }
+                lualine_c = { "filename", "filesize" },
             },
             -- tabline = {
             --     lualine_a = {
@@ -37,5 +37,5 @@ return {
             --     },
             -- },
         })
-    end
+    end,
 }

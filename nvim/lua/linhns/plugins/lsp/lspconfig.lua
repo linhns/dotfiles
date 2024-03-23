@@ -92,6 +92,8 @@ M.config = function()
         }
     })
 
+    lspconfig['clangd'].setup{}
+
 end
 
 return M

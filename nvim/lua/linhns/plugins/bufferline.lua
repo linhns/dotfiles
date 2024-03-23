@@ -1,15 +1,15 @@
 local M = {
-    'akinsho/bufferline.nvim',
+    "akinsho/bufferline.nvim",
     dependencies = {
-        'nvim-tree/nvim-web-devicons',
+        "nvim-tree/nvim-web-devicons",
     },
-    version = '*',
+    version = "*",
 }
 
 M.opts = {
     options = {
-        mode = 'tabs',
-        separator_style = 'slant',
+        mode = "tabs",
+        -- separator_style = "slant",
     },
 }
 

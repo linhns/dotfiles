@@ -1,8 +1,6 @@
 local M = {
-    'numToStr/Comment.nvim',
-    opts = {
-
-    },
+    "numToStr/Comment.nvim",
+    opts = {},
     lazy = false,
 }
 

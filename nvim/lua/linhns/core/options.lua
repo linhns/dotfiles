@@ -47,21 +47,21 @@ vim.opt.wrap = true
 -- Line breaks
 vim.opt.textwidth = 80
 vim.opt.linebreak = true
-vim.opt.colorcolumn = '+1'
+vim.opt.colorcolumn = "+1"
 
 -- Mouse support
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 
 -- Splits
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Wildmenu
-vim.opt.wildignore = '*.o,*.obj,*.pyc,*.swp,*.bak,*/.git/*,*/.svn/*'
+vim.opt.wildignore = "*.o,*.obj,*.pyc,*.swp,*.bak,*/.git/*,*/.svn/*"
 
 -- Undo options
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv('HOME') .. '/.nvim/undodir'
+vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 
 -- Scroll options
 vim.opt.scrolloff = 8

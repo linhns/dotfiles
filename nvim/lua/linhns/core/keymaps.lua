@@ -1,11 +1,11 @@
 -- Copy to clipboard
-vim.keymap.set({'n', 'v'}, '<leader>y', [["+y]])
+vim.keymap.set({'n', 'v'}, ',y', [["+y]])
 
 -- Paste from clipboard
-vim.keymap.set({'n', 'v'}, '<leader>p', [["+p]])
+vim.keymap.set({'n', 'v'}, ',p', [["+p]])
 
 -- Delete without changing registers
-vim.keymap.set({'n', 'v'}, '<leader>d', [["_d]])
+vim.keymap.set({'n', 'v'}, ',d', [["_d]])
 vim.keymap.set({'n', 'v'}, 'x', [["_x]])
 
 -- No arrow keys

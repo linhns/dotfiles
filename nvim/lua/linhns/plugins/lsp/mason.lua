@@ -1,13 +1,13 @@
 local M = {
-    'williamboman/mason.nvim',
+    "williamboman/mason.nvim",
     dependencies = {
-        'williamboman/mason-lspconfig.nvim',
-    }
+        "williamboman/mason-lspconfig.nvim",
+    },
 }
 
 M.config = function()
-    local mason = require('mason')
-    local mason_lspconfig = require('mason-lspconfig')
+    local mason = require("mason")
+    local mason_lspconfig = require("mason-lspconfig")
 
     mason.setup({
         ui = {
@@ -16,12 +16,12 @@ M.config = function()
                 package_pending = "→",
                 package_uninstalled = "✗",
             },
-        }
+        },
     })
 
     mason_lspconfig.setup({
         ensure_installed = {
-            'lua_ls'
+            "lua_ls",
         },
         automatic_installation = true,
     })
