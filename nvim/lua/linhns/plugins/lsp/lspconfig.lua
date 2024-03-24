@@ -92,7 +92,15 @@ M.config = function()
         },
     })
 
-    lspconfig["clangd"].setup({})
+    lspconfig["clangd"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
+
+    lspconfig["neocmake"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
 end
 
 return M

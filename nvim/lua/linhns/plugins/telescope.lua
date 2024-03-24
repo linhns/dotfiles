@@ -11,15 +11,6 @@ local M = {
             "nvim-telescope/telescope-dap.nvim",
         },
     },
-    cmd = {
-        -- Trigger on these commands
-        "Telescope",
-        "Tel",
-    },
-    keys = {
-        -- Trigger on these keys
-        "<leader>f",
-    },
 }
 
 function M.config()

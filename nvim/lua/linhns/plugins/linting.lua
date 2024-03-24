@@ -9,6 +9,7 @@ M.config = function()
     lint.linters_by_ft = {
         c = { "clangtidy" },
         cpp = { "clangtidy" },
+        cmake = { "cmakelint" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

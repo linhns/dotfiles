@@ -22,6 +22,7 @@ M.config = function()
     mason_lspconfig.setup({
         ensure_installed = {
             "lua_ls",
+            "neocmake",
         },
         automatic_installation = true,
     })
