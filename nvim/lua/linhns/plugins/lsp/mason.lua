@@ -22,11 +22,10 @@ M.config = function()
     mason_lspconfig.setup({
         ensure_installed = {
             "lua_ls",
-            "neocmake",
-            "cmakelint"
+            -- "neocmake",
         },
         automatic_installation = {
-            exclude = { 'clangd' }
+            exclude = { "clangd" },
         },
     })
 end

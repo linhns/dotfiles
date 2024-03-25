@@ -21,6 +21,9 @@ require("lazy").setup({
     {
         import = "linhns.plugins.dap",
     },
+    {
+        import = "linhns.plugins.testing",
+    },
 }, {
     install = {
         colorscheme = { "tokyonight" },
