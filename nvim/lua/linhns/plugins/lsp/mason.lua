@@ -23,6 +23,7 @@ M.config = function()
         ensure_installed = {
             "lua_ls",
             "neocmake",
+            "cmakelint"
         },
         automatic_installation = {
             exclude = { 'clangd' }
