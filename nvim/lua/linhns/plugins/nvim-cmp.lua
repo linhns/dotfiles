@@ -2,12 +2,21 @@ local M = {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-        "hrsh7th/cmp-buffer", -- source for text in buffer
-        "hrsh7th/cmp-path", -- source for file system paths
-        "L3MON4D3/LuaSnip", -- snippet engine
-        "saadparwaiz1/cmp_luasnip", -- for autocompletion
+        "hrsh7th/cmp-buffer",           -- source for text in buffer
+        "hrsh7th/cmp-path",             -- source for file system paths
+        "L3MON4D3/LuaSnip",             -- snippet engine
+        "saadparwaiz1/cmp_luasnip",     -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
-        "onsails/lspkind.nvim", -- vs-code like pictograms
+        "onsails/lspkind.nvim",         -- vs-code like pictograms
+        {
+            "zbirenbaum/copilot-cmp",   -- Copilot completions
+            dependencies = "copilot.lua",
+            opts = {},
+            config = function(_, opts)
+                local copilot_cmp = require("copilot_cmp")
+                copilot_cmp.setup(opts)
+            end
+        }
     },
 }
 
@@ -37,6 +46,7 @@ M.config = function()
             ["<cr>"] = cmp.mapping.confirm({ select = false }),
         }),
         sources = cmp.config.sources({
+            { name = "copilot" },
             { name = "nvim_lsp" },
             { name = "luasnip" },
             { name = "buffer" },
@@ -47,6 +57,9 @@ M.config = function()
             format = lspkind.cmp_format({
                 maxwidth = 50,
                 ellipsis_char = "...",
+                symbol_map = {
+                    Copilot = ""
+                }
             }),
         },
     })
