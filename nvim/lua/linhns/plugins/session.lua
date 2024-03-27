@@ -15,7 +15,12 @@ M.config = function()
         on_autoload_no_session = nil, -- function to run when `autoload = true` but there is no session to load
         follow_cwd = true, -- change session file name to match current working directory if it changes
         allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
-        ignored_dirs = nil, -- table of dirs that are ignored when auto-saving and auto-loading
+        ignored_dirs = { -- table of dirs that are ignored when auto-saving and auto-loading
+            ".config",
+            { "~", exact = true },
+            { "/", exact = true },
+            { "/tmp", exact = true },
+        },
         ignored_branches = nil, -- table of branch patterns that are ignored for auto-saving and auto-loading
         telescope = {
             reset_prompt = true, -- Reset the Telescope prompt after an action?
