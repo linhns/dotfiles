@@ -40,12 +40,12 @@ M.config = function()
         desc = "Close NvimTree before saving session",
     })
 
-    vim.api.nvim_create_autocmd({ "User" }, {
+    api.nvim_create_autocmd({ "User" }, {
         pattern = "PersistedTelescopeLoadPre",
         group = group,
-        callback = function(session)
+        callback = function(_)
             -- Save the currently loaded session using a global variable
-            require("persisted").save({ session = vim.g.persisted_loaded_session })
+            persisted.save({ session = vim.g.persisted_loaded_session })
 
             -- Delete all of the open buffers
             vim.api.nvim_input("<ESC>:%bd!<CR>")

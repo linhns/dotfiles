@@ -41,10 +41,12 @@ function M.config()
 
     -- Keymaps
     local builtin = require("telescope.builtin")
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-    vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-    vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-    vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find file" })
+    vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find pattern" })
+    vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffer" })
+    vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help" })
+    vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find recent file" })
+    vim.keymap.set("n", "<leader>fs", "<cmd>Telescope persisted<cr>", { desc = "Find session" })
 
     telescope.load_extension("fzf")
     telescope.load_extension("dap")
