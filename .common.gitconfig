@@ -5,7 +5,8 @@
 	diff = false
 	branch = false
 [merge]
-	tool = vimdiff
+	#tool = vimdiff
+	tool = nvimdiff
 	autoStash = true
 [rebase]
 	autoStash = true
