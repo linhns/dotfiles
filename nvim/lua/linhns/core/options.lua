@@ -76,3 +76,6 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 -- vim.opt.foldlevelstart = 1
 -- vim.opt.foldnestmax = 4
+
+-- Session options
+vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize"
