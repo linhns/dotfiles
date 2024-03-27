@@ -10,6 +10,7 @@ local M = {
             "antosha417/nvim-lsp-file-operations",
             config = true,
         },
+        "SmiteshP/nvim-navic",
     },
 }
 
@@ -17,6 +18,8 @@ M.config = function()
     local lspconfig = require("lspconfig")
 
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+    local navic = require("nvim-navic")
 
     local keymap = vim.keymap
 
@@ -64,6 +67,10 @@ M.config = function()
 
         opts.desc = "Restart LSP"
         keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", opts)
+
+        if client.server_capabilities.documentSymbolProvider then
+            navic.attach(client, bufnr)
+        end
     end
 
     local capabilities = cmp_nvim_lsp.default_capabilities()
