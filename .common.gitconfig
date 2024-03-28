@@ -16,17 +16,15 @@
 	last = log -1 HEAD
 	graph = log --all --graph --oneline --decorate
 	mt = mergetool
-  list-alias = "!git config -l | grep alias | cut -c 7-"
-  dft = difftool
-  dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
+        list-alias = "!git config -l | grep alias | cut -c 7-"
+        dft = difftool
+        dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
 [core]
 	excludesfile = /home/linhns/.gitignore_global
 [mergetool]
 	prompt = false
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
-[mergetool "vimdiff"]
-	layout = LOCAL,MERGED,REMOTE
 [diff]
   tool = difftastic
 [difftool]
