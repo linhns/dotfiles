@@ -126,9 +126,6 @@ ins_left({
             fg = mode == "t" and colors.fg or colors.bg,
         }
     end,
-    fmt = function(mode)
-        return mode:sub(1, 3)
-    end,
     padding = 1,
 })
 
@@ -136,6 +133,13 @@ ins_left({
     "branch",
     icon = "",
     color = { fg = colors.violet, gui = "bold" },
+    on_click = function()
+        if conditions.check_git_workspace() then
+            -- local telescope = require("telescope")
+            local builtin = require("telescope.builtin")
+            builtin.git_branches()
+        end
+    end,
 })
 
 ins_left({
@@ -216,10 +220,19 @@ ins_right({
     "filetype",
 })
 
+ins_right({
+    "copilot",
+    cond = conditions.hide_in_width,
+    -- color = { fg = colors.green, gui = "bold" },
+})
+
 -- Now don't forget to initialize lualine
 local M = {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        "AndreM222/copilot-lualine",
+    },
     config = function()
         local lualine = require("lualine")
         lualine.setup(config)
