@@ -23,6 +23,7 @@
 	excludesfile = /home/linhns/.gitignore_global
 [mergetool]
 	prompt = false
+        keepBackup = false
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [diff]
