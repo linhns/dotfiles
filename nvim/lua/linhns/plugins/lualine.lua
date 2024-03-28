@@ -1,28 +1,3 @@
-local cfg = {
-    options = {
-        theme = "auto",
-        section_separators = "",
-        component_separators = "",
-    },
-    sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-    },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-    }
-
-}
-
 --- @param trunc_width number trunctates component when screen width is less then trunc_width
 --- @param trunc_len number truncates component to trunc_len number of chars
 --- @param hide_width number | nil hides component when window width is smaller then hide_width
@@ -32,82 +7,223 @@ local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
     return function(str)
         local win_width = vim.fn.winwidth(0)
         if hide_width and win_width < hide_width then
-            return ''
+            return ""
         elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
-            return str:sub(1, trunc_len) .. (no_ellipsis and '' or '...')
+            return str:sub(1, trunc_len) .. (no_ellipsis and "" or "...")
         end
         return str
     end
 end
 
--- Inserts a component to the front of a section, which displays on the left
-local function ins_left(section, component)
-    table.insert(cfg.sections[section], component)
-end
+-- Eviline config for lualine
+-- Author: shadmansaleh
+-- Credit: glepnir
 
--- Inserts a component to the back of a section, which displays on the right
-local function ins_right(section, component)
-    table.insert(cfg.sections[section], component)
-end
+-- Color table for highlights
+local colors = {
+    bg = "#16161e",
+    fg = "#bbc2cf",
+    yellow = "#ECBE7B",
+    cyan = "#008080",
+    darkblue = "#081633",
+    green = "#98be65",
+    orange = "#FF8800",
+    violet = "#a9a1e1",
+    magenta = "#c678dd",
+    blue = "#51afef",
+    red = "#ec5f67",
+}
 
-ins_left("lualine_a",
-    {
-        "mode",
-        fmt = function(str, _)
-            return str:sub(1, 3)
-        end
-    }
-)
-
-ins_left("lualine_b",
-    {
-        "branch",
-        fmt = trunc(100, 10, nil, true),
-    }
-)
-
-
-
-return {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-        local ok, lualine = pcall(require, "lualine")
-        if not ok then
-            return
-        end
-
-        lualine.setup(cfg)
-
-        -- lualine.setup({
-        --     options = {
-        --         icons_enabled = true,
-        --         theme = "auto",
-        --         section_separators = '',
-        --         component_separators = '|'
-        --     },
-        --     sections = {
-        --         lualine_c = { "filename", "filesize" },
-        --     },
-        --     -- tabline = {
-        --     --     lualine_a = {
-        --     --         {
-        --     --             'tabs',
-        --     --             tab_max_length = 40,
-        --     --             mode = 2,
-        --     --             show_modified_status = false,
-        --     --             fmt = function(name, context)
-        --     --                 -- Show [+] if buffer is modified in tab
-        --     --                 local buflist = vim.fn.tabpagebuflist(context.tabnr)
-        --     --                 local winnr = vim.fn.tabpagewinnr(context.tabnr)
-        --     --                 local bufnr = buflist[winnr]
-        --     --                 local mod = vim.fn.getbufvar(bufnr, '&mod')
-        --     --
-        --     --                 return name .. (mod == 1 and ' [+]' or '')
-        --     --             end
-        --     --         }
-        --     --     },
-        --     -- },
-        -- })
+local conditions = {
+    buffer_not_empty = function()
+        return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+    end,
+    hide_in_width = function()
+        return vim.fn.winwidth(0) > 80
+    end,
+    check_git_workspace = function()
+        local filepath = vim.fn.expand("%:p:h")
+        local gitdir = vim.fn.finddir(".git", filepath .. ";")
+        return gitdir and #gitdir > 0 and #gitdir < #filepath
     end,
 }
+
+-- Config
+local config = {
+    options = {
+        -- Disable sections and component separators
+        component_separators = "",
+        section_separators = "",
+        theme = {
+            -- We are going to use lualine_c an lualine_x as left and
+            -- right section. Both are highlighted by c theme .  So we
+            -- are just setting default looks o statusline
+            normal = { c = { fg = colors.fg, bg = colors.bg } },
+            inactive = { c = { fg = colors.fg, bg = colors.bg } },
+        },
+    },
+    sections = {
+        -- these are to remove the defaults
+        lualine_a = {},
+        lualine_b = {},
+        lualine_y = {},
+        lualine_z = {},
+        -- These will be filled later
+        lualine_c = {},
+        lualine_x = {},
+    },
+    inactive_sections = {
+        -- these are to remove the defaults
+        lualine_a = {},
+        lualine_b = {},
+        lualine_y = {},
+        lualine_z = {},
+        lualine_c = {},
+        lualine_x = {},
+    },
+}
+
+-- Inserts a component in lualine_c at left section
+local function ins_left(component)
+    table.insert(config.sections.lualine_c, component)
+end
+
+-- Inserts a component in lualine_x at right section
+local function ins_right(component)
+    table.insert(config.sections.lualine_x, component)
+end
+
+ins_left({
+    -- mode component
+    "mode",
+    color = function()
+        -- auto change color according to neovims mode
+        local mode_color = {
+            n = colors.blue,
+            i = colors.green,
+            v = colors.magenta,
+            ["\022"] = colors.magenta,
+            V = colors.magenta,
+            c = colors.violet,
+            no = colors.blue,
+            s = colors.orange,
+            S = colors.orange,
+            ["\019"] = colors.orange,
+            ic = colors.green,
+            R = colors.red,
+            Rv = colors.red,
+            cv = colors.red,
+            ce = colors.red,
+            r = colors.cyan,
+            rm = colors.cyan,
+            ["r?"] = colors.cyan,
+            ["!"] = colors.red,
+            t = colors.darkblue,
+        }
+        local mode = vim.fn.mode()
+        return {
+            bg = mode_color[mode],
+            fg = mode == "t" and colors.fg or colors.bg,
+        }
+    end,
+    fmt = function(mode)
+        return mode:sub(1, 3)
+    end,
+    padding = 1,
+})
+
+ins_left({
+    "branch",
+    icon = "",
+    color = { fg = colors.violet, gui = "bold" },
+})
+
+ins_left({
+    "diff",
+    -- Is it me or the symbol for modified us really weird
+    -- symbols = { added = " ", modified = "󰝤 ", removed = " " },
+    diff_color = {
+        added = { fg = colors.green },
+        modified = { fg = colors.orange },
+        removed = { fg = colors.red },
+    },
+    cond = conditions.hide_in_width,
+})
+
+ins_left({
+    -- Lsp server name .
+    function()
+        local msg = "No LSP"
+        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+        local clients = vim.lsp.get_active_clients()
+        if next(clients) == nil then
+            return msg
+        end
+        for _, client in ipairs(clients) do
+            local filetypes = client.config.filetypes
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                return client.name
+            end
+        end
+        return msg
+    end,
+    icon = "::",
+    color = { fg = colors.blue },
+})
+
+ins_left({
+    "diagnostics",
+    sources = { "nvim_diagnostic" },
+    -- symbols = { error = " ", warn = " ", info = " " },
+    diagnostics_color = {
+        color_error = { fg = colors.red },
+        color_warn = { fg = colors.yellow },
+        color_info = { fg = colors.cyan },
+    },
+    on_click = function()
+        vim.cmd("Trouble")
+    end,
+})
+
+-- Add components to right sections
+ins_right({ "progress", color = { fg = colors.fg, gui = "bold" } })
+
+ins_right({ "location" })
+
+ins_right({
+    -- filesize component
+    "filesize",
+    cond = conditions.buffer_not_empty,
+    color = { fg = colors.magenta },
+})
+
+ins_right({
+    "o:encoding", -- option component same as &encoding in viml
+    fmt = string.upper, -- I'm not sure why it's upper case either ;)
+    cond = conditions.hide_in_width,
+    color = { fg = colors.green, gui = "bold" },
+})
+
+ins_right({
+    "fileformat",
+    -- fmt = string.upper,
+    -- icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+    color = { fg = colors.green, gui = "bold" },
+    symbols = { unix = "LF", dos = "CRLF", mac = "LF" },
+})
+
+ins_right({
+    "filetype",
+})
+
+-- Now don't forget to initialize lualine
+local M = {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
+    config = function()
+        local lualine = require("lualine")
+        lualine.setup(config)
+    end,
+}
+
+return M
