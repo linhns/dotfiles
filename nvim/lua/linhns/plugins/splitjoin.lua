@@ -1,14 +1,11 @@
 local M = {
-    "echasnovski/mini.comment",
+    "echasnovski/mini.splitjoin",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = {
-        "BufNewFile",
-        "BufReadPre",
-    },
+    event = "VeryLazy",
 }
 
 M.config = function()
-    require("mini.comment").setup({})
+    require("mini.splitjoin").setup({})
 end
 
 return M

@@ -103,6 +103,9 @@ M.config = function()
         ["<leader>f"] = {
             name = "+Find",
         },
+        ["<leader>s"] = {
+            name = "+Session",
+        },
     })
 
     wk.setup(whichkey_default)

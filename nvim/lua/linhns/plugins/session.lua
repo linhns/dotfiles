@@ -1,62 +1,74 @@
 local M = {
-    "olimorris/persisted.nvim",
-    lazy = false,
+    "echasnovski/mini.sessions",
+    version = "*",
 }
 
 M.config = function()
-    require("persisted").setup({
-        save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
-        silent = false, -- silent nvim message when sourcing session file
-        use_git_branch = false, -- create session files based on the branch of a git enabled repository
-        default_branch = "main", -- the branch to load if a session file is not found for the current branch
-        autosave = true, -- automatically save session files when exiting Neovim
-        should_autosave = nil, -- function to determine if a session should be autosaved
-        autoload = true, -- automatically load the session for the cwd on Neovim startup
-        on_autoload_no_session = nil, -- function to run when `autoload = true` but there is no session to load
-        follow_cwd = true, -- change session file name to match current working directory if it changes
-        allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
-        ignored_dirs = { -- table of dirs that are ignored when auto-saving and auto-loading
-            ".config",
-            { "~", exact = true },
-            { "/", exact = true },
-            { "/tmp", exact = true },
+    local sessions = require("mini.sessions")
+    sessions.setup({
+        -- Whether to read latest session if Neovim opened without file arguments
+        autoread = true,
+
+        -- Whether to write current session before quitting Neovim
+        autowrite = true,
+
+        -- Directory where global sessions are stored (use `''` to disable)
+        directory = vim.fn.stdpath("data") .. "/sessions", --<"session" subdir of user data directory from |stdpath()|>,
+
+        -- File for local session (use `''` to disable)
+        file = "",
+
+        -- Whether to force possibly harmful actions (meaning depends on function)
+        force = { read = false, write = true, delete = true },
+
+        -- Hook functions for actions. Default `nil` means 'do nothing'.
+        hooks = {
+            -- Before successful action
+            pre = { read = nil, write = nil, delete = nil },
+            -- After successful action
+            post = { read = nil, write = nil, delete = nil },
         },
-        ignored_branches = nil, -- table of branch patterns that are ignored for auto-saving and auto-loading
-        telescope = {
-            reset_prompt = true, -- Reset the Telescope prompt after an action?
-            mappings = { -- table of mappings for the Telescope extension
-                change_branch = "<c-b>",
-                copy_session = "<c-c>",
-                delete_session = "<c-d>",
-            },
-        },
+
+        -- Whether to print session path after action
+        verbose = { read = true, write = true, delete = true },
     })
 
-    local api = vim.api
-    local group = api.nvim_create_augroup("PersistedHooks", {})
-    local persisted = require("persisted")
-
-    api.nvim_create_autocmd({ "User" }, {
-        pattern = "PersistedSavePre",
-        group = group,
-        callback = function()
-            vim.cmd("NvimTreeClose")
+    local funcs = {
+        read = function()
+            sessions.select("read")
         end,
-        desc = "Close NvimTree before saving session",
-    })
-
-    api.nvim_create_autocmd({ "User" }, {
-        pattern = "PersistedTelescopeLoadPre",
-        group = group,
-        callback = function(_)
-            -- Save the currently loaded session using a global variable
-            persisted.save({ session = vim.g.persisted_loaded_session })
-
-            -- Delete all of the open buffers
-            vim.api.nvim_input("<ESC>:%bd!<CR>")
+        write = function()
+            sessions.select("write")
         end,
-        desc = "Close all buffers before loading session via Telescope",
-    })
+        delete = function()
+            sessions.select("delete")
+        end,
+        save = function()
+            local default_session_name = string.match(vim.v.this_session, "[^/\\]+$")
+            -- stylua: ignore
+            vim.ui.input(
+                {
+                    prompt = vim.g.session_save_prompt,
+                    default = default_session_name
+                },
+                function(name)
+                    -- Try to enter empty will save a name indicating the current directory
+                    if name == "" then
+                        local separator = package.config:sub(1, 1)
+                        local cwd = vim.loop.cwd()
+                        name = string.gsub(cwd, separator, "_")
+                    end
+                    sessions.write(name)
+                end
+            )
+        end,
+    }
+
+    local keymap = vim.keymap
+    keymap.set("n", "<leader>sr", funcs.read, { desc = "Read session" })
+    keymap.set("n", "<leader>sd", funcs.delete, { desc = "Delete session" })
+    keymap.set("n", "<leader>sw", funcs.write, { desc = "Overwrite session" })
+    keymap.set("n", "<leader>ss", funcs.save, { desc = "Save session" })
 end
 
 return M

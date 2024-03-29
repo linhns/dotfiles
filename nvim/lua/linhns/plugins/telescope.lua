@@ -46,11 +46,9 @@ function M.config()
     vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffer" })
     vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help" })
     vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find recent file" })
-    vim.keymap.set("n", "<leader>fs", "<cmd>Telescope persisted<cr>", { desc = "Find session" })
 
     telescope.load_extension("fzf")
     telescope.load_extension("dap")
-    telescope.load_extension("persisted")
 end
 
 return M
