@@ -7,7 +7,7 @@ M.config = function()
     local sessions = require("mini.sessions")
     sessions.setup({
         -- Whether to read latest session if Neovim opened without file arguments
-        autoread = true,
+        autoread = false,
 
         -- Whether to write current session before quitting Neovim
         autowrite = true,
