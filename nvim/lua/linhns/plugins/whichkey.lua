@@ -106,6 +106,9 @@ M.config = function()
         ["<leader>s"] = {
             name = "+Session",
         },
+        ["<leader>"] = {
+            name = "+Trouble",
+        },
     })
 
     wk.setup(whichkey_default)

@@ -17,3 +17,12 @@ keymap.set("n", "<leader>rf", function()
     ht.repl.toggle(vim.api.nvim_buf_get_name(0))
 end, opts)
 keymap.set("n", "<leader>rq", ht.repl.quit, opts)
+
+keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+
+keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+local opt_local = vim.opt_local
+opt_local.softtabstop = 2
+opt_local.shiftwidth = 2
+opt_local.expandtab = true
