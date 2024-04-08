@@ -10,6 +10,9 @@ local M = {
         "mrcjkb/neotest-haskell",
         "vim-test/vim-test",
     },
+    event = {
+        "BufReadPost",
+    },
     config = function()
         local api = vim.api
         local neotest_ns = api.nvim_create_namespace("neotest")

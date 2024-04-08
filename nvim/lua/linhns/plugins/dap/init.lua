@@ -5,6 +5,7 @@ local M = {
         "mfussenegger/nvim-dap",
         "nvim-neotest/nvim-nio",
     },
+    ft = { "cpp" },
 }
 
 local adapters = {}

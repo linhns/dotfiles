@@ -11,6 +11,13 @@ local M = {
             "nvim-telescope/telescope-dap.nvim",
         },
     },
+    keys = {
+        "<leader>f",
+    },
+    cmd = {
+        "Telescope",
+        "Tel",
+    },
 }
 
 function M.config()

@@ -10,4 +10,8 @@ return {
         -- configurations go here
         attach_navic = false,
     },
+    event = {
+        "BufReadPre",
+        "BufNewFile",
+    },
 }

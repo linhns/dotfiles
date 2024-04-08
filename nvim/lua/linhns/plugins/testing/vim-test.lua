@@ -3,6 +3,7 @@ return {
     opts = {
         setup = {},
     },
+    lazy = true,
 
     config = function(plugin, opts)
         vim.g["test#strategy"] = "neovim"

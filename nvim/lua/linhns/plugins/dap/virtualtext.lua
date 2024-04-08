@@ -4,5 +4,6 @@ return {
         "mfussenegger/nvim-dap",
         "nvim-treesitter/nvim-treesitter",
     },
+    lazy = true,
     opts = {},
 }

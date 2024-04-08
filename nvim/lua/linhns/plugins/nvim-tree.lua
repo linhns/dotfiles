@@ -3,6 +3,9 @@ local M = {
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
+    keys = {
+        "<leader>e",
+    },
 }
 
 M.config = function()
