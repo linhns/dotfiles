@@ -1,2 +1,11 @@
 setopt noautocd
 setopt nointeractivecomments
+setopt extendedhistory
+setopt incappendhistory
+setopt sharehistory
+setopt histignoredups
+setopt histignorealldups
+setopt histignorespace
+setopt histsavenodups
+setopt histnostore
+setopt histreduceblanks
