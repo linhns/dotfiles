@@ -11,8 +11,17 @@ local M = {
             config = true,
         },
         "SmiteshP/nvim-navic",
+        "folke/neodev.nvim",
     },
 }
+
+local function setup_diagnostics_ui()
+    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
+end
 
 M.config = function()
     local lspconfig = require("lspconfig")
@@ -75,25 +84,18 @@ M.config = function()
 
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
+    -- Adjust LSP diagnostics signs
+    setup_diagnostics_ui()
 
+    -- Setup lua_ls to include vim api.
+    require("neodev").setup({})
     lspconfig["lua_ls"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
             Lua = {
-                diagnostics = {
-                    globals = { "vim" },
-                },
-                workspace = {
-                    library = {
-                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                        [vim.fn.stdpath("config") .. "/lua"] = true,
-                    },
+                completion = {
+                    callSnippet = "Replace",
                 },
             },
         },
@@ -104,7 +106,7 @@ M.config = function()
         on_attach = on_attach,
     })
 
-    lspconfig["neocmake"].setup({
+    lspconfig["cmake"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
     })
