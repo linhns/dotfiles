@@ -18,10 +18,6 @@ fi
 
 path_append "$HOME/.local/bin"
 
-if [[ -n $(ls /opt | grep -m 1 cmake) ]]; then
-    path_append "/opt/$(ls /opt | grep -m 1 cmake)/bin"
-fi
-
 export PATH
 
 # Load Antigen
