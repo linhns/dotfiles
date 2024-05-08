@@ -8,7 +8,7 @@ M.config = function()
 
     lint.linters_by_ft = {
         c = { "clangtidy" },
-        cpp = { "clangtidy" },
+        cpp = { "clangtidy", "cpplint" },
         cmake = { "cmakelint" },
     }
 
