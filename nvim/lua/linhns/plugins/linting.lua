@@ -7,8 +7,7 @@ M.config = function()
     local lint = require("lint")
 
     lint.linters_by_ft = {
-        c = { "clangtidy" },
-        cpp = { "clangtidy", "cpplint" },
+        cpp = { "cpplint" },
         cmake = { "cmakelint" },
     }
 
