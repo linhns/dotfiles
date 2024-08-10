@@ -1,5 +1,4 @@
 local M = {
-
     "nvim-neotest/neotest",
     dependencies = {
         "nvim-neotest/nvim-nio",
@@ -8,10 +7,16 @@ local M = {
         "nvim-treesitter/nvim-treesitter",
         "nvim-neotest/neotest-vim-test",
         "mrcjkb/neotest-haskell",
+        {
+            "fredrikaverpil/neotest-golang",
+            dependencies = {
+                "leoluz/nvim-dap-go",
+            },
+        },
         "vim-test/vim-test",
     },
     event = {
-        "BufReadPost",
+        "VeryLazy",
     },
     config = function()
         local api = vim.api
@@ -35,6 +40,9 @@ local M = {
                 require("neotest-haskell"),
                 require("neotest-vim-test")({
                     ignore_file_types = { "haskell", "vim" },
+                }),
+                require("neotest-golang")({
+                    dap_go_enabled = true,
                 }),
             },
         })

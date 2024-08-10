@@ -1,12 +1,7 @@
 local M = {
     "williamboman/mason.nvim",
     dependencies = {},
-}
-
-M.config = function()
-    local mason = require("mason")
-
-    mason.setup({
+    opts = {
         ui = {
             icons = {
                 package_installed = "✓",
@@ -14,7 +9,7 @@ M.config = function()
                 package_uninstalled = "✗",
             },
         },
-    })
-end
+    },
+}
 
 return M

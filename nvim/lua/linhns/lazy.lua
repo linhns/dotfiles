@@ -19,20 +19,30 @@ require("lazy").setup({
         import = "linhns.plugins.lsp",
     },
     {
-        import = "linhns.plugins.dap",
-    },
-    {
         import = "linhns.plugins.testing",
     },
 }, {
     install = {
         colorscheme = { "tokyonight" },
+        missing = false,
     },
     checker = {
-        enabled = true,
         notify = false,
     },
     change_detection = {
-        notify = false, -- I find the config changed notification super annoying
+        notify = false,
+    },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "netrwPlugin",
+                "rplugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
     },
 })

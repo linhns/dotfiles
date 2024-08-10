@@ -1,2 +1,2 @@
-require ('linhns.core')
-require ('linhns.lazy')
+require("linhns.core")
+require("linhns.lazy")

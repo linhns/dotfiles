@@ -3,16 +3,9 @@
 source $HOME/.zsh/pathmod.zsh
 # Export Go-related variables
 
-GOROOT="/usr/local/go-1.20.1"
-GOPATH=$HOME/go
-
-if [[ -d "$GOROOT" ]]; then
-    export GOROOT
-    path_append "$GOROOT/bin"
-fi
+GOPATH="/usr/local/go"
 
 if [[ -d "$GOPATH" ]]; then
-    export GOPATH
     path_append "$GOPATH/bin"
 fi
 

@@ -50,6 +50,9 @@ ahead = '⇡${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
 
+[nix_shell]
+disabled = false
+
 [time]
 disabled = true
 format = '🕙[\[ $time \]](13) '

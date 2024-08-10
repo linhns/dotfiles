@@ -2,14 +2,11 @@ local M = {
     "echasnovski/mini.indentscope",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "BufEnter",
-}
-
-M.config = function()
-    local indentscope = require("mini.indentscope")
-    -- vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#ff0000" })
-    indentscope.setup({
+    opts = {
         draw = {
-            animation = indentscope.gen_animation.none(),
+            animation = function(_, _)
+                return 0
+            end,
         },
         mappings = {
             object_scope = "",
@@ -18,7 +15,7 @@ M.config = function()
             goto_top = "",
             goto_bottom = "",
         },
-    })
-end
+    },
+}
 
 return M
