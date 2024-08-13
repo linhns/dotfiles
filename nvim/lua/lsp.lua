@@ -40,49 +40,46 @@ vim.diagnostic.handlers.virtual_text = {
     hide = hide_handler,
 }
 
-local keyutils = require("utils.functions.keymaps")
-local cmd = keyutils.cmd
+local utils = require("utils")
+local map = utils.map
+local nmap = utils.nmap
+local imap = utils.imap
+local cmd = utils.cmd
+local pumvisible = utils.pumvisible
+local feedkeys = utils.feedkeys
 
 ---@param client vim.lsp.Client
 ---@param bufnr integer
 local function on_attach(client, bufnr)
-    keyutils.nmap(
-        "<leader>lgr",
-        cmd("Pick lsp scope='references'"),
-        "Go to References"
-    )
-    keyutils.nmap(
+    nmap("<leader>lgr", cmd("Pick lsp scope='references'"), "Go to References")
+    nmap(
         "<leader>lgD",
         cmd("Pick lsp scope='declaration'"),
         "Go to Declaration"
     )
-    keyutils.nmap(
-        "<leader>lgd",
-        cmd("Pick lsp scope='definition'"),
-        "Go to Definition"
-    )
-    keyutils.nmap(
+    nmap("<leader>lgd", cmd("Pick lsp scope='definition'"), "Go to Definition")
+    nmap(
         "<leader>lgt",
         cmd("Pick lsp scope='type_definition'"),
         "Go to Type Definition"
     )
-    keyutils.nmap(
+    nmap(
         "<leader>ls",
         cmd("Pick lsp scope='document_symbol'"),
         "Document Symbol"
     )
-    keyutils.nmap(
+    nmap(
         "<leader>lw",
         cmd("Pick lsp scope='workspace_symbol'"),
         "Workspace Symbol"
     )
 
     if client.supports_method("textDocument/signatureHelp") then
-        keyutils.imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+        imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
     end
 
     if client.supports_method("textDocument/rename") then
-        keyutils.nmap("<leader>lrn", vim.lsp.buf.rename, "Rename Symbol")
+        nmap("<leader>lrn", vim.lsp.buf.rename, "Rename Symbol")
     end
 
     if client.supports_method("textDocument/inlayHint") then
@@ -138,22 +135,14 @@ local function on_attach(client, bufnr)
     end
 
     if client.supports_method("textDocument/codeAction") then
-        keyutils.nmap(
-            "<leader>lca",
-            vim.lsp.buf.code_action,
-            "Display Code Actions"
-        )
+        nmap("<leader>lca", vim.lsp.buf.code_action, "Display Code Actions")
     end
 
     if client.supports_method("textDocument/prepareHierarchy") then
-        keyutils.nmap(
-            "<leader>lch",
-            vim.lsp.buf.incoming_calls,
-            "Show Call Hierarchy"
-        )
+        nmap("<leader>lch", vim.lsp.buf.incoming_calls, "Show Call Hierarchy")
     end
 
-    if client.server_capabilities.codeLensProvider then
+    if client.supports_method("textDocument/codeLens") then
         local codelens_group =
             vim.api.nvim_create_augroup("linhns/codelens", { clear = false })
         vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
@@ -162,18 +151,71 @@ local function on_attach(client, bufnr)
             buffer = bufnr,
             callback = vim.lsp.codelens.refresh,
         })
-        keyutils.nmap("<leader>lcl", vim.lsp.codelens.run, "Run code lens")
+        nmap("<leader>lcl", vim.lsp.codelens.run, "Run code lens")
     end
 
-    keyutils.nmap(",rs", cmd("LspRestart"), "Restart LSP")
+    if client.supports_method("textDocument/completion") then
+        vim.lsp.completion.enable(
+            true,
+            client.id,
+            bufnr,
+            { autotrigger = true }
+        )
+
+        imap("<CR>", function()
+            return pumvisible() and "<C-y>" or "<CR>"
+        end, "Accept Completion", { expr = true })
+
+        imap("/", function()
+            return pumvisible() and "<C-e>" or "/"
+        end, "Dismiss Completion Menu", { expr = true })
+
+        imap("<C-n>", function()
+            if pumvisible() then
+                feedkeys("<C-n>")
+            else
+                if next(vim.lsp.get_clients({ bufnr = 0 })) then
+                    vim.lsp.completion.trigger()
+                else
+                    if vim.bo.omnifunc == "" then
+                        feedkeys("<C-x><C-n>")
+                    else
+                        feedkeys("<C-x><C-o>")
+                    end
+                end
+            end
+        end, "Trigger/select next completion")
+
+        imap("<C-u>", "<C-x><C-n>", "Buffer completions")
+
+        map({ "i", "s" }, "<Tab>", function()
+            if pumvisible() then
+                feedkeys("<C-n>")
+            elseif vim.snippet.active({ direction = 1 }) then
+                vim.snippet.jump(1)
+            else
+                feedkeys("<Tab>")
+            end
+        end, "Navigate next snippet tabstop/completion")
+
+        map({ "i", "s" }, "<S-Tab>", function()
+            if pumvisible() then
+                feedkeys("<C-p>")
+            elseif vim.snippet.active({ direction = -1 }) then
+                vim.snippet.jump(-1)
+            else
+                feedkeys("<S-Tab>")
+            end
+        end, "Navigate previous snippet tabstop/completion")
+
+        map({ "s" }, "<BS>", "<C-o>s")
+    end
+
+    nmap("<leader>lrs", cmd("LspRestart"), "Restart LSP")
 
     -- Clangd specifics
     if client.supports_method("textDocument/switchSourceHeader") then
-        keyutils.nmap(
-            ",sh",
-            cmd("ClangdSwitchSourceHeader"),
-            "Switch source/header"
-        )
+        nmap(",sh", cmd("ClangdSwitchSourceHeader"), "Switch source/header")
     end
 end
 

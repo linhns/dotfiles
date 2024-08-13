@@ -1,277 +1,199 @@
--- Copy to clipboard
-vim.keymap.set({ "n", "v" }, ",y", [["+y]])
+local utils = require("utils")
+local map = utils.map
+local nmap = utils.nmap
+local nxmap = utils.nxmap
+local nximap = utils.nximap
+local cmd = utils.cmd
 
 -- Paste from clipboard
-vim.keymap.set({ "n", "v" }, ",p", [["+p]])
+nxmap(",p", [["+p]])
 
 -- Delete without changing registers
-vim.keymap.set({ "n", "v" }, ",d", [["_d]])
-vim.keymap.set({ "n", "v" }, "x", [["_x]])
-
--- No arrow keys
-vim.keymap.set({ "n", "v", "i" }, "<up>", "<nop>")
-vim.keymap.set({ "n", "v", "i" }, "<down>", "<nop>")
-vim.keymap.set({ "n", "v", "i" }, "<left>", "<nop>")
-vim.keymap.set({ "n", "v", "i" }, "<right>", "<nop>")
-
--- Centered search movements
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
--- Centered page movements
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+nxmap(",d", [["_d]])
+nxmap("x", [["_x]])
 
 -- Terminal mode mappings
-vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
+map("t", "<C-n>", "<C-\\><C-n>")
 
-local keyutils = require("utils.functions.keymaps")
+-- Do not use arrow keys
+nximap("<Up>", "<NOP>")
+nximap("<Down>", "<NOP>")
+nximap("<Left>", "<NOP>")
+nximap("<Right>", "<NOP>")
+
+-- Centered search
+nmap("n", "nzzzv")
+nmap("N", "Nzzzv")
+
+-- Centered page movements
+nmap("<C-d>", "<C-d>zz")
+nmap("<C-u>", "<C-u>zz")
 
 -- Leader mappings
-keyutils.nmap(
-    "<leader>go",
-    keyutils.cmd("lua MiniDiff.toggle_overlay()"),
-    "Toggle diff overlay"
-)
-keyutils.nxmap(
+nmap("<leader>go", cmd("lua MiniDiff.toggle_overlay()"), "Toggle diff overlay")
+nxmap(
     "<leader>gs",
-    keyutils.cmd("lua MiniGit.show_at_cursor()"),
+    cmd("lua MiniGit.show_at_cursor()"),
     "Show Git status at cursor"
 )
-keyutils.nmap(
-    "<leader>sd",
-    keyutils.cmd("lua MiniSessions.select('delete')"),
-    "Delete session"
-)
-keyutils.nmap(
-    "<leader>sl",
-    keyutils.cmd("lua MiniSessions.select()"),
-    "Load session"
-)
-keyutils.nmap(
+nmap("<leader>sd", cmd("lua MiniSessions.select('delete')"), "Delete session")
+nmap("<leader>sl", cmd("lua MiniSessions.select()"), "Load session")
+nmap(
     "<leader>ss",
-    keyutils.cmd("lua require('plugins.mini.sessions').save()"),
+    cmd("lua require('plugins.mini.sessions').save()"),
     "Save session"
 )
-keyutils.nmap(
-    "<leader>so",
-    keyutils.cmd("lua MiniSessions.select('write')"),
-    "Overwrite session"
-)
+nmap("<leader>so", cmd("lua MiniSessions.select('write')"), "Overwrite session")
 
-keyutils.nmap(
+nmap(
     "<leader>ee",
-    keyutils.cmd("lua require('mini.files').open(vim.uv.cwd())"),
+    cmd("lua require('mini.files').open(vim.uv.cwd())"),
     "Open file explorer (cwd)"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>ef",
-    keyutils.cmd("lua MiniFiles.open(vim.api.nvim_buf_get_name(0))"),
+    cmd("lua MiniFiles.open(vim.api.nvim_buf_get_name(0))"),
     "Open file explorer (buffer)"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>bd",
-    keyutils.cmd("lua require('mini.bufremove').delete()"),
+    cmd("lua require('mini.bufremove').delete()"),
     "Delete current buffer"
 )
 
-keyutils.nmap(
-    "<leader>bD",
-    keyutils.cmd('%bdelete|edit #|normal`"'),
-    "Delete other buffers"
-)
+nmap("<leader>bD", cmd('%bdelete|edit #|normal`"'), "Delete other buffers")
 
-keyutils.nmap(
-    "<leader>dc",
-    keyutils.cmd("lua require('dap').continue()"),
-    "Continue (Start)"
-)
+nmap("<leader>dc", cmd("lua require('dap').continue()"), "Continue (Start)")
 
-keyutils.nmap(
+nmap(
     "<leader>db",
-    keyutils.cmd("lua require('dap').toggle_breakpoint()"),
+    cmd("lua require('dap').toggle_breakpoint()"),
     "Toggle Breakpoint"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>dB",
-    keyutils.cmd("lua require('dap').clear_breakpoints()"),
+    cmd("lua require('dap').clear_breakpoints()"),
     "Clear Breakpoints"
 )
 
-keyutils.nmap(
-    "<leader>dn",
-    keyutils.cmd("lua require('dap').step_over()"),
-    "Step Over"
-)
+nmap("<leader>dn", cmd("lua require('dap').step_over()"), "Step Over")
 
-keyutils.nmap(
-    "<leader>di",
-    keyutils.cmd("lua require('dap').step_into()"),
-    "Step Into"
-)
+nmap("<leader>di", cmd("lua require('dap').step_into()"), "Step Into")
 
-keyutils.nmap(
-    "<leader>do",
-    keyutils.cmd("lua require('dap').step_out()"),
-    "Step Out"
-)
+nmap("<leader>do", cmd("lua require('dap').step_out()"), "Step Out")
 
-keyutils.nmap(
-    "<leader>dt",
-    keyutils.cmd("lua require('dap').terminate()"),
-    "Stop/Kill"
-)
+nmap("<leader>dt", cmd("lua require('dap').terminate()"), "Stop/Kill")
 
-keyutils.nmap(
-    "<leader>dr",
-    keyutils.cmd("lua require('dap').run_last()"),
-    "Rerun Last Config"
-)
+nmap("<leader>dr", cmd("lua require('dap').run_last()"), "Rerun Last Config")
 
-keyutils.nmap(
-    "<leader>dR",
-    keyutils.cmd("lua require('dap').restart()"),
-    "Restart"
-)
+nmap("<leader>dR", cmd("lua require('dap').restart()"), "Restart")
 
-keyutils.nmap(
+nmap(
     "<leader>dh",
-    keyutils.cmd("lua require('dap.ui.widgets').hover()"),
+    cmd("lua require('dap.ui.widgets').hover()"),
     "Evaluate (Floating Window)"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>dp",
-    keyutils.cmd("lua require('dap.ui.widgets').preview()"),
+    cmd("lua require('dap.ui.widgets').preview()"),
     "Evaluate (Preview)"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>ds",
-    keyutils.cmd(
+    cmd(
         "lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)"
     ),
     "View Scope (Floating Window)"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>df",
-    keyutils.cmd(
+    cmd(
         "lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').frames)"
     ),
     "View Frames (Floating Window)"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>tr",
-    keyutils.cmd("lua require('neotest').run.run(vim.fn.expand('%'))"),
+    cmd("lua require('neotest').run.run(vim.fn.expand('%'))"),
     "Run File"
 )
 
-keyutils.nmap(
-    "<leader>tn",
-    keyutils.cmd("lua require('neotest').run.run()"),
-    "Run Nearest"
-)
+nmap("<leader>tn", cmd("lua require('neotest').run.run()"), "Run Nearest")
 
-keyutils.nmap(
+nmap(
     "<leader>td",
-    keyutils.cmd("lua require('neotest').run.run({strategy = 'dap'})"),
+    cmd("lua require('neotest').run.run({strategy = 'dap'})"),
     "Debug Nearest"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>to",
-    keyutils.cmd(
+    cmd(
         "lua require('neotest').output.open({ enter = true, last_run = true, auto_close = true})"
     ),
     "Open Output (Last Run)"
 )
 
-keyutils.nmap(
+nmap(
     "<leader>ts",
-    keyutils.cmd("lua require('neotest').summary.toggle()"),
+    cmd("lua require('neotest').summary.toggle()"),
     "Toggle Summary"
 )
 
 -- Find mappings
-keyutils.nmap("<leader>ff", keyutils.cmd("Pick files"), "Find files")
+nmap("<leader>ff", cmd("Pick files"), "Find files")
 
-keyutils.nmap("<leader>fb", keyutils.cmd("Pick buffers"), "Find buffers")
+nmap("<leader>fb", cmd("Pick buffers"), "Find buffers")
 
-keyutils.nmap("<leader>fh", keyutils.cmd("Pick help"), "Find help")
+nmap("<leader>fh", cmd("Pick help"), "Find help")
 
-keyutils.nmap("<leader>fH", keyutils.cmd("Pick history"), "Find history")
+nmap("<leader>fH", cmd("Pick history"), "Find history")
 
-keyutils.nmap("<leader>ff", keyutils.cmd("Pick files"), "Find files")
+nmap("<leader>ff", cmd("Pick files"), "Find files")
 
-keyutils.nmap('<leader>f"', keyutils.cmd("Pick registers"), "Find registers")
+nmap('<leader>f"', cmd("Pick registers"), "Find registers")
 
-keyutils.nmap("<leader>fc", keyutils.cmd("Pick commands"), "Find commands")
+nmap("<leader>fc", cmd("Pick commands"), "Find commands")
 
-keyutils.nmap(
-    "<leader>fg",
-    keyutils.cmd("Pick grep_live"),
-    "Find pattern (live)"
-)
+nmap("<leader>fg", cmd("Pick grep_live"), "Find pattern (live)")
 
-keyutils.nmap(
+nmap(
     "<leader>fd",
-    keyutils.cmd("Pick diagnostic scope='current'"),
+    cmd("Pick diagnostic scope='current'"),
     "Find diagnostic (buffer)"
 )
 
-keyutils.nmap(
-    "<leader>fD",
-    keyutils.cmd("Pick diagnostic"),
-    "Find diagnostic (all)"
-)
+nmap("<leader>fD", cmd("Pick diagnostic"), "Find diagnostic (all)")
 
-keyutils.nmap(
-    "<leader>fl",
-    keyutils.cmd("Pick buf_lines"),
-    "Find line (buffer)"
-)
+nmap("<leader>fl", cmd("Pick buf_lines"), "Find line (buffer)")
 
-keyutils.nmap("<leader>fR", keyutils.cmd("Pick resume"), "Resume Find")
-keyutils.nmap(
-    "<leader>ft",
-    keyutils.cmd("Pick treesitter"),
-    "Find Treesitter objects"
-)
-keyutils.nmap("<leader>fr", keyutils.cmd("Pick oldfiles"), "Find recent files")
+nmap("<leader>fR", cmd("Pick resume"), "Resume Find")
+nmap("<leader>ft", cmd("Pick treesitter"), "Find Treesitter objects")
+nmap("<leader>fr", cmd("Pick oldfiles"), "Find recent files")
 
-keyutils.nmap("<leader>fo", keyutils.cmd("Pick options"), "Find options")
+nmap("<leader>fo", cmd("Pick options"), "Find options")
 
-keyutils.nmap(
-    "z=",
-    keyutils.cmd("Pick spellsuggest"),
-    "Show spelling suggestions"
-)
+nmap("z=", cmd("Pick spellsuggest"), "Show spelling suggestions")
 
-keyutils.nmap("<leader>fm", keyutils.cmd("Pick marks"), "Find marks")
-keyutils.nmap("<leader>fk", keyutils.cmd("Pick keymaps"), "Find keymaps")
-keyutils.nmap("<leader>gff", keyutils.cmd("Pick git_files"), "Find git files")
-keyutils.nmap(
-    "<leader>gfd",
-    keyutils.cmd("Pick git_files scope='deleted'"),
-    "Find deleted files"
-)
-keyutils.nmap(
-    "<leader>gfi",
-    keyutils.cmd("Pick git_files scope='ignored'"),
-    "Find ignored files"
-)
-keyutils.nmap(
+nmap("<leader>fm", cmd("Pick marks"), "Find marks")
+nmap("<leader>fk", cmd("Pick keymaps"), "Find keymaps")
+nmap("<leader>gff", cmd("Pick git_files"), "Find git files")
+nmap("<leader>gfd", cmd("Pick git_files scope='deleted'"), "Find deleted files")
+nmap("<leader>gfi", cmd("Pick git_files scope='ignored'"), "Find ignored files")
+nmap(
     "<leader>gfu",
-    keyutils.cmd("Pick git_files scope='untracked'"),
+    cmd("Pick git_files scope='untracked'"),
     "Find untracked files"
 )
-keyutils.nmap(
+nmap(
     "<leader>gfm",
-    keyutils.cmd("Pick git_files scope='modified'"),
+    cmd("Pick git_files scope='modified'"),
     "Find modified files"
 )

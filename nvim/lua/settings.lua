@@ -51,7 +51,6 @@ vim.opt.wrap = true
 -- Line breaks
 vim.opt.textwidth = 80
 vim.opt.linebreak = true
-vim.opt.colorcolumn = "+1"
 
 -- Mouse support
 vim.opt.mouse = "a"
