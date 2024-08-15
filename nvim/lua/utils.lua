@@ -6,29 +6,36 @@ local map = function(mode, lhs, rhs, desc, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+local lmap = function(mode, lhs, rhs, desc, opts)
+    opts = opts or {}
+    opts.buffer = 0
+    map(mode, lhs, rhs, desc, opts)
+end
+
 M.map = map
+M.lmap = lmap
 
 M.cmd = function(cmd)
     return "<Cmd>" .. cmd .. "<CR>"
 end
 
-M.imap = function(...)
-    map("i", ...)
+M.imap = function(mapper, ...)
+    mapper("i", ...)
 end
-M.nmap = function(...)
-    map("n", ...)
+M.nmap = function(mapper, ...)
+    mapper("n", ...)
 end
-M.tmap = function(...)
-    map("t", ...)
+M.tmap = function(mapper, ...)
+    mapper("t", ...)
 end
-M.nimap = function(...)
-    map({ "n", "i" }, ...)
+M.nimap = function(mapper, ...)
+    mapper({ "n", "i" }, ...)
 end
-M.nxmap = function(...)
-    map({ "n", "x" }, ...)
+M.nxmap = function(mapper, ...)
+    mapper({ "n", "x" }, ...)
 end
-M.nximap = function(...)
-    map({ "n", "x", "i" }, ...)
+M.nximap = function(mapper, ...)
+    mapper({ "n", "x", "i" }, ...)
 end
 
 ---@param keys string

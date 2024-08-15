@@ -12,16 +12,3 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
     command = "set nocursorline",
     group = cursor_group,
 })
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("linhns/treesitter", { clear = true }),
-    desc = "Set up treesitter",
-    callback = function()
-        if require("nvim-treesitter.parsers").has_parser() then
-            vim.opt.foldmethod = "expr"
-            vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        else
-            vim.opt.foldmethod = "syntax"
-        end
-    end,
-})

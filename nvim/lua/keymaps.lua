@@ -1,8 +1,15 @@
 local utils = require("utils")
+local keymapper = utils.map
 local map = utils.map
-local nmap = utils.nmap
-local nxmap = utils.nxmap
-local nximap = utils.nximap
+local nmap = function(...)
+    utils.nmap(keymapper, ...)
+end
+local nxmap = function(...)
+    utils.nxmap(keymapper, ...)
+end
+local nximap = function(...)
+    utils.nximap(keymapper, ...)
+end
 local cmd = utils.cmd
 
 -- Paste from clipboard

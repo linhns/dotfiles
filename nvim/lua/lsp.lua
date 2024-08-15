@@ -41,9 +41,13 @@ vim.diagnostic.handlers.virtual_text = {
 }
 
 local utils = require("utils")
-local map = utils.map
-local nmap = utils.nmap
-local imap = utils.imap
+local lmap = utils.lmap
+local nmap = function(...)
+    utils.nmap(lmap, ...)
+end
+local imap = function(...)
+    utils.imap(lmap, ...)
+end
 local cmd = utils.cmd
 local pumvisible = utils.pumvisible
 local feedkeys = utils.feedkeys
@@ -188,7 +192,7 @@ local function on_attach(client, bufnr)
 
         imap("<C-u>", "<C-x><C-n>", "Buffer completions")
 
-        map({ "i", "s" }, "<Tab>", function()
+        lmap({ "i", "s" }, "<Tab>", function()
             if pumvisible() then
                 feedkeys("<C-n>")
             elseif vim.snippet.active({ direction = 1 }) then
@@ -198,7 +202,7 @@ local function on_attach(client, bufnr)
             end
         end, "Navigate next snippet tabstop/completion")
 
-        map({ "i", "s" }, "<S-Tab>", function()
+        lmap({ "i", "s" }, "<S-Tab>", function()
             if pumvisible() then
                 feedkeys("<C-p>")
             elseif vim.snippet.active({ direction = -1 }) then
@@ -208,7 +212,7 @@ local function on_attach(client, bufnr)
             end
         end, "Navigate previous snippet tabstop/completion")
 
-        map({ "s" }, "<BS>", "<C-o>s")
+        lmap({ "s" }, "<BS>", "<C-o>s")
     end
 
     nmap("<leader>lrs", cmd("LspRestart"), "Restart LSP")
