@@ -167,7 +167,7 @@ local function on_attach(client, bufnr)
         )
 
         imap("<CR>", function()
-            return pumvisible() and "<C-y>" or "<CR>"
+            return pumvisible() and "<C-y>" or require("mini.pairs").cr()
         end, "Accept Completion", { expr = true })
 
         imap("/", function()

@@ -46,7 +46,6 @@ end
 now(load("settings"))
 now(load("keymaps"))
 now(load("autocmds"))
-now(load("lsp"))
 
 add({ name = "mini.nvim" })
 now(
@@ -63,6 +62,9 @@ now(load("plugins.mini.icons"))
 now(load("plugins.mini.sessions"))
 now(load("mini.starter", { setup = {} }))
 
+later(load("mini.pairs", { setup = {} }))
+later(load("lsp"))
+
 later(load("mini.statusline", { setup = {} }))
 later(load("mini.tabline", { setup = {} }))
 later(load("mini.move", { setup = {} }))
@@ -70,7 +72,6 @@ later(load("mini.splitjoin", { setup = {} }))
 later(load("mini.surround", { setup = {} }))
 later(load("mini.operators", { setup = {} }))
 later(load("mini.git", { setup = {} }))
-later(load("mini.pairs", { setup = {} }))
 later(load("mini.bufremove", { setup = {} }))
 later(load("mini.extra", { setup = {} }))
 
