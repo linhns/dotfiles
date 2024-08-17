@@ -64,6 +64,8 @@ nmap(
     "Open file explorer (buffer)"
 )
 
+nmap("<leader>ba", cmd("b#"), "Alternate buffer")
+
 nmap(
     "<leader>bd",
     cmd("lua require('mini.bufremove').delete()"),
