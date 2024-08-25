@@ -1,3 +1,5 @@
+vim.highlight.priorities.semantic_tokens = 95
+
 local diagnostic_icons =
     { ERROR = " ", WARN = " ", HINT = "󰠠 ", INFO = " " }
 for type, icon in pairs(diagnostic_icons) do

@@ -26,6 +26,7 @@ antigen bundle docker
 antigen bundle command-not-found
 antigen bundle rust
 antigen bundle golang
+antigen bundle heroku
 antigen bundle taskwarrior
 antigen bundle npm
 antigen bundle cabal

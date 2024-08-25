@@ -4,6 +4,8 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 lspconfig["gopls"].setup({
     capabilities = capabilities,
+    cmd = { "gopls", "--remote=auto" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl", "gohtml" },
     settings = {
         gopls = {
             codelenses = {
@@ -14,6 +16,8 @@ lspconfig["gopls"].setup({
             },
             gofumpt = true,
             usePlaceholders = true,
+            templateExtensions = { "gotmpl", "gohtml", "tmpl" },
+            semanticTokens = true,
         },
     },
 })
