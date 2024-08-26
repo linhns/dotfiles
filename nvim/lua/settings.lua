@@ -79,3 +79,6 @@ vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize"
 
 -- Clipboard
 vim.opt.clipboard = "unnamedplus"
+
+-- Completion options
+vim.opt.completeopt = "menuone,noselect,noinsert,popup"
