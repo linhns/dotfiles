@@ -4,7 +4,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 lspconfig["gopls"].setup({
     capabilities = capabilities,
-    cmd = { "gopls", "--remote=auto" },
+    cmd = { "gopls" },
     filetypes = { "go", "gomod", "gowork", "gotmpl", "gohtml" },
     settings = {
         gopls = {
