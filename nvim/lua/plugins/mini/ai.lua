@@ -14,6 +14,10 @@ ai.setup({
             a = "@class.outer",
             i = "@class.inner",
         }),
+        s = ai.gen_spec.treesitter({
+            a = "@statement.outer",
+            i = "@scopename.inner",
+        }),
         B = extras.gen_ai_spec.buffer(),
         D = extras.gen_ai_spec.diagnostic(),
         I = extras.gen_ai_spec.indent(),
