@@ -52,4 +52,8 @@ M.pumvisible = function()
     return tonumber(vim.fn.pumvisible()) ~= 0
 end
 
+M.augroup = function(name)
+    vim.api.nvim_create_augroup(name, { clear = true })
+end
+
 return M
