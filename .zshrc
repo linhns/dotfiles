@@ -77,5 +77,7 @@ source ~/.zsh/env.zsh
 fpath=( ${ZDOTDIR:-~}/.zsh/functions ${ZDOTDIR:-~}/.zsh/completions ${fpath[@]} )
 autoload -Uz $fpath[1]/*(.:t)
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Load starship
 eval "$(starship init zsh)"
