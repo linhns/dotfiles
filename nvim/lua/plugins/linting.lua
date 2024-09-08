@@ -10,9 +10,17 @@ lint.linters_by_ft = {
 local lint_augroup =
     vim.api.nvim_create_augroup("linhns/lint", { clear = true })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     group = lint_augroup,
     callback = function()
         lint.try_lint()
     end,
 })
+
+local utils = require("utils")
+local keymapper = utils.map
+local nmap = function(...)
+    utils.nmap(keymapper, ...)
+end
+
+nmap("<leader>cl", lint.try_lint, "Lint (buffer)")

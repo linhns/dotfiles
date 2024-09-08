@@ -11,6 +11,10 @@ require("nvim-treesitter.configs").setup({
         "vimdoc",
         "markdown",
         "markdown_inline",
+        "html",
+        "javascript",
+        "typescript",
+        "css",
     },
     highlight = {
         enable = true,
@@ -34,8 +38,18 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
+vim.treesitter.language.register("html", "gohtml")
+
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "go", "lua", "cpp" },
+    pattern = {
+        "go",
+        "lua",
+        "cpp",
+        "html",
+        "javascript",
+        "typescript",
+        "gohtml",
+    },
     group = vim.api.nvim_create_augroup("linhns/treesitter", { clear = true }),
     desc = "Set up treesitter",
     callback = function()

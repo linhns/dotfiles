@@ -112,6 +112,10 @@ later(load("nvim-treesitter/nvim-treesitter-context", {
     setup = {},
 }))
 
+later(load("windwp/nvim-ts-autotag", {
+    init = "plugins.autotag",
+}))
+
 later(load("williamboman/mason.nvim", {
     init = "plugins.mason",
 }))
