@@ -5,7 +5,11 @@ lint.linters_by_ft = {
     cmake = { "cmakelint" },
     markdown = { "markdownlint" },
     go = { "golangcilint" },
+    sql = { "sqlfluff" },
 }
+
+local linters = require("lint").linters
+linters.sqlfluff.stdin = true
 
 local lint_augroup =
     vim.api.nvim_create_augroup("linhns/lint", { clear = true })

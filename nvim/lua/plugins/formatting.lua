@@ -4,7 +4,8 @@ require("conform").setup({
         c = { "clang-format" },
         cpp = { "clang-format" },
         sh = { "shfmt" },
-        go = { "gofumpt" },
+        go = { "goimports", "gofumpt" },
+        sql = { "sqlfluff" },
     },
     format_on_save = {
         timeout_ms = 500,
@@ -16,6 +17,11 @@ require("conform").setup({
     formatters = {
         shfmt = {
             prepend_args = { "-i", "2" },
+        },
+        sqlfluff = {
+            args = { "format", "--dialect=ansi", "-" },
+            cwd = require("conform.util").root_file({ ".sqlfluff" }),
+            require_cwd = false,
         },
     },
 })
