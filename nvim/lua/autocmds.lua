@@ -23,3 +23,23 @@ vim.api.nvim_create_autocmd("CursorMoved", {
         end
     end,
 })
+
+-- Highlighting priorities
+local hl_priorities_group =
+    vim.api.nvim_create_augroup("linhns/hl-priorities", { clear = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = hl_priorities_group,
+    pattern = "*.go",
+    callback = function()
+        vim.highlight.priorities.semantic_tokens = 95
+    end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = hl_priorities_group,
+    pattern = "*.gohtml",
+    callback = function()
+        vim.highlight.priorities.semantic_tokens = 125
+    end,
+})

@@ -35,6 +35,8 @@ miniclue.setup({
     clues = {
         -- Enhance this by adding descriptions for <Leader> mapping groups
         { mode = "n", keys = "<leader>b", desc = "+Buffers" },
+        { mode = "n", keys = "<leader>c", desc = "+Code" },
+        { mode = "n", keys = "<leader>cc", desc = "+Chat" },
         { mode = "n", keys = "<leader>d", desc = "+Debug" },
         { mode = "n", keys = "<leader>e", desc = "+File Explorer" },
         { mode = "n", keys = "<leader>f", desc = "+Find" },

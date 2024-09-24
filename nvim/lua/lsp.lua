@@ -62,6 +62,9 @@ local function on_attach(client, bufnr)
         "Go to Declaration"
     )
     nmap("<leader>lgd", cmd("Pick lsp scope='definition'"), "Go to Definition")
+    nmap("gD", cmd("Pick lsp scope='declaration'"), "Go to Declaration")
+    nmap("gd", cmd("Pick lsp scope='definition'"), "Go to Definition")
+
     nmap(
         "<leader>lgt",
         cmd("Pick lsp scope='type_definition'"),
