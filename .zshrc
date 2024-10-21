@@ -2,11 +2,9 @@
 
 source $HOME/.zsh/pathmod.zsh
 # Export Go-related variables
-
-GOROOT="/usr/local/go"
-
-if [[ -d "$GOROOT" ]]; then
-    path_append "$GOROOT/bin"
+path_append "/usr/local/go/bin"
+if command -v go &> /dev/null; then
+    path_append "$(go env GOPATH)/bin"
 fi
 
 path_append "$HOME/.local/bin"

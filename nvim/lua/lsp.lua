@@ -52,6 +52,19 @@ local cmd = utils.cmd
 local pumvisible = utils.pumvisible
 local feedkeys = utils.feedkeys
 
+local extras = {}
+extras["clangd"] = function(client, bufnr)
+    nmap(",sh", cmd("ClangdSwitchSourceHeader"), "Switch source/header")
+end
+
+---@param client vim.lsp.Client
+---@param bufnr integer
+local function extra_setup(client, bufnr)
+    if extras[client.name] then
+        extras[client.name](client, bufnr)
+    end
+end
+
 ---@param client vim.lsp.Client
 ---@param bufnr integer
 local function on_attach(client, bufnr)
@@ -71,12 +84,12 @@ local function on_attach(client, bufnr)
         "Go to Type Definition"
     )
     nmap(
-        "<leader>ls",
+        "<leader>lds",
         cmd("Pick lsp scope='document_symbol'"),
         "Document Symbol"
     )
     nmap(
-        "<leader>lw",
+        "<leader>lws",
         cmd("Pick lsp scope='workspace_symbol'"),
         "Workspace Symbol"
     )
@@ -220,10 +233,7 @@ local function on_attach(client, bufnr)
 
     nmap("<leader>lrs", cmd("LspRestart"), "Restart LSP")
 
-    -- Clangd specifics
-    if client.supports_method("textDocument/switchSourceHeader") then
-        nmap(",sh", cmd("ClangdSwitchSourceHeader"), "Switch source/header")
-    end
+    extra_setup(client, bufnr)
 end
 
 -- Update mappings when registering dynamic capabilities.

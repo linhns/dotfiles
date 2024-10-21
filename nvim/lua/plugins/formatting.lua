@@ -4,11 +4,12 @@ require("conform").setup({
         c = { "clang-format" },
         cpp = { "clang-format" },
         sh = { "shfmt" },
-        go = { "goimports", "gofumpt" },
+        go = { "goimports", lsp_format = "first" },
         sql = { "sqlfluff" },
+        yaml = { "yamlfmt" },
     },
     format_on_save = {
-        timeout_ms = 500,
+        timeout_ms = 1000,
     },
     default_format_opts = {
         lsp_format = "fallback",
