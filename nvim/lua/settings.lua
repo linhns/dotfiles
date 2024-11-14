@@ -70,9 +70,10 @@ vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 vim.opt.scrolloff = 8
 
 -- Treesitter folding
-vim.opt.foldenable = false
-vim.opt.foldlevelstart = 99
 vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 1
+vim.opt.foldnestmax = 4
+vim.opt.foldtext = ""
 
 -- Session options
 vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize"
