@@ -1,36 +1,30 @@
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [pager]
-	log = false
-	diff = false
-	branch = false
+    branch = false
 [merge]
-	#tool = vimdiff
-	tool = nvimdiff
-	autoStash = true
+    tool = nvimdiff
+    autoStash = true
+    conflictStyle = diff3
 [rebase]
-	autoStash = true
+    autoStash = true
 [alias]
-	co = checkout
-	unstage = reset HEAD --
-	last = log -1 HEAD
-	graph = log --graph --oneline --decorate
-	mt = mergetool
-        list-alias = "!git config -l | grep alias | cut -c 7-"
-        dft = difftool
-        dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
+    co = checkout
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    graph = log --graph --oneline --decorate
+    mt = mergetool
+    list-alias = "!git config -l | grep alias | cut -c 7-"
+    dft = difftool
 [core]
-	excludesfile = /home/linhns/.gitignore_global
+    excludesfile = /home/linhns/.gitignore_global
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    side-by-side = true
+    hyperlinks = true
 [mergetool]
-	prompt = false
-        keepBackup = false
-[mergetool "fugitive"]
-	cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
-[diff]
-  tool = difftastic
-[difftool]
-  prompt = false
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
-[pager]
-  difftool = true
+    prompt = false
+    keepBackup = false
