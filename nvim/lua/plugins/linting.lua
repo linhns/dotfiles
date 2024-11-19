@@ -14,12 +14,12 @@ linters.sqlfluff.stdin = true
 local lint_augroup =
     vim.api.nvim_create_augroup("linhns/lint", { clear = true })
 
--- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
---     group = lint_augroup,
---     callback = function()
---         lint.try_lint()
---     end,
--- })
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    group = lint_augroup,
+    callback = function()
+        lint.try_lint()
+    end,
+})
 
 local utils = require("utils")
 local keymapper = utils.map
