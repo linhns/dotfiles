@@ -1,4 +1,5 @@
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu select
 zstyle ':completion:*:descriptions' format ' %F{green}--- Completing %d ---%f '
 zstyle ':completion:*:*:*:*:corrections' format ' %F{yellow}--- %d (errors: %e) ---%f '
 zstyle ':completion:*:messages' format ' %F{purple}--- %d ---%f '

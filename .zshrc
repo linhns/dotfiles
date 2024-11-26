@@ -58,6 +58,8 @@ source ~/.zsh/options.zsh
 
 source ~/.zsh/styles.zsh
 
+zmodload zsh/complist
+
 source ~/.zsh/keybindings.zsh
 
 source ~/.zsh/fzf.zsh
@@ -74,8 +76,6 @@ source ~/.zsh/env.zsh
 # zsh custom functions
 fpath=( ${ZDOTDIR:-~}/.zsh/functions ${ZDOTDIR:-~}/.zsh/completions ${fpath[@]} )
 autoload -Uz $fpath[1]/*(.:t)
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Load starship
 eval "$(starship init zsh)"

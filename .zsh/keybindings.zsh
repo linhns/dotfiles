@@ -1,3 +1,7 @@
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)
+
 # Use vim style navigation keys in menu completion
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
