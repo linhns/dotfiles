@@ -95,6 +95,7 @@ end)
 later(load("stevearc/dressing.nvim", { init = "plugins.dressing" }))
 later(load("stevearc/conform.nvim", { init = "plugins.formatting" }))
 later(load("mfussenegger/nvim-lint", { init = "plugins.linting" }))
+later(add("b0o/schemastore.nvim"))
 
 later(load("nvim-treesitter/nvim-treesitter", {
     init = "plugins.treesitter",
