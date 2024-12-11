@@ -121,16 +121,6 @@ later(load("zbirenbaum/copilot.lua", {
     init = "plugins.copilot",
 }))
 
-later(load("CopilotC-Nvim/CopilotChat.nvim", {
-    init = "plugins.copilotchat",
-    add = {
-        depends = {
-            "nvim-lua/plenary.nvim",
-            "zbirenbaum/copilot.lua",
-        },
-    },
-}))
-
 later(load("williamboman/mason.nvim", {
     init = "plugins.mason",
 }))
