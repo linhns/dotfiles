@@ -45,6 +45,7 @@ miniclue.setup({
         { mode = "n", keys = "<leader>gf", desc = "+Git: Find" },
         { mode = "n", keys = "<leader>s", desc = "+Session" },
         { mode = "n", keys = "<leader>t", desc = "+Test" },
+        { mode = "v", keys = "<leader>v", desc = "+Visit" },
 
         miniclue.gen_clues.builtin_completion(),
         miniclue.gen_clues.g(),

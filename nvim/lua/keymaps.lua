@@ -43,6 +43,8 @@ nxmap(
     cmd("lua MiniGit.show_at_cursor()"),
     "Show Git status at cursor"
 )
+
+-- Mappings for mini.sessions
 nmap("<leader>sd", cmd("lua MiniSessions.select('delete')"), "Delete session")
 nmap("<leader>sl", cmd("lua MiniSessions.select()"), "Load session")
 nmap(
@@ -52,6 +54,7 @@ nmap(
 )
 nmap("<leader>so", cmd("lua MiniSessions.select('write')"), "Overwrite session")
 
+-- Mappings for mini.files
 nmap(
     "<leader>ee",
     cmd("lua require('mini.files').open(vim.uv.cwd())"),
@@ -72,7 +75,17 @@ nmap(
     "Delete current buffer"
 )
 
-nmap("<leader>bD", cmd('%bdelete|edit #|normal`"'), "Delete other buffers")
+nmap(
+    "<leader>bu",
+    cmd("lua require('mini.bufremove').unshow()"),
+    "Unshow current buffer"
+)
+
+nmap(
+    "<leader>bw",
+    cmd("lua require('mini.bufremove').wipeout()"),
+    "Wipeout current buffer"
+)
 
 nmap("<leader>dc", cmd("lua require('dap').continue()"), "Continue (Start)")
 
@@ -179,6 +192,9 @@ nmap(
     "Find diagnostic (buffer)"
 )
 
+nmap("<leader>fv", cmd("Pick visit_paths"), "Find visited paths")
+nmap("<leader>fV", cmd("Pick visit_labels"), "Find visited labels")
+
 nmap("<leader>fD", cmd("Pick diagnostic"), "Find diagnostic (all)")
 
 nmap("<leader>fl", cmd("Pick buf_lines"), "Find line (buffer)")
@@ -201,8 +217,13 @@ nmap(
     cmd("Pick git_files scope='untracked'"),
     "Find untracked files"
 )
+
 nmap(
     "<leader>gfm",
     cmd("Pick git_files scope='modified'"),
     "Find modified files"
 )
+
+-- Mappings for mini.visits
+nmap("<leader>vl", cmd("lua MiniVisits.add_label()"), "Add label")
+nmap("<leader>vL", cmd("lua MiniVisits.remove_label()"), "Remove label")

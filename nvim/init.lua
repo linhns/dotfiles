@@ -76,6 +76,7 @@ later(load("mini.operators", { setup = {} }))
 later(load("mini.git", { setup = {} }))
 later(load("mini.bufremove", { setup = {} }))
 later(load("mini.extra", { setup = {} }))
+later(load("mini.visits", { setup = {} }))
 
 later(load("plugins.mini.ai"))
 later(load("plugins.mini.bracketed"))
