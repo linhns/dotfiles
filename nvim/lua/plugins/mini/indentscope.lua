@@ -1,13 +1,9 @@
-local miniindentscope = require("mini.indentscope")
-miniindentscope.setup({
-	draw = {
-		animation = miniindentscope.gen_animation.none(),
-	},
-	mappings = {
-		object_scope = "",
-		object_scope_with_border = "",
-
-		goto_top = "",
-		goto_bottom = "",
-	},
+local indentscope = require("mini.indentscope")
+indentscope.setup({
+    draw = {
+        animation = indentscope.gen_animation.none(),
+    },
+    options = {
+        try_as_border = true,
+    },
 })

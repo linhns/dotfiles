@@ -48,14 +48,16 @@ now(load("keymaps"))
 now(load("autocmds"))
 
 add({ name = "mini.nvim" })
-now(
-    load(
-        "rebelot/kanagawa.nvim",
-        { add = { name = "kanagawa" }, init = "plugins.kanagawa" }
-    )
-)
--- Safely execute immediately
-now(cmd("colorscheme kanagawa"))
+now(function()
+    add({
+        source = "rockyzhang24/arctic.nvim",
+        checkout = "v2",
+        depends = {
+            "rktjmp/lush.nvim",
+        },
+    })
+end)
+now(cmd("colorscheme vscode"))
 
 now(load("plugins.mini.basics"))
 now(load("plugins.mini.icons"))

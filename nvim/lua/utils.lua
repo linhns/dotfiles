@@ -57,4 +57,9 @@ M.augroup = function(name)
     vim.api.nvim_create_augroup(name, { clear = true })
 end
 
+--- Set highlight group
+M.hi = function(name, data)
+    vim.api.nvim_set_hl(0, name, data)
+end
+
 return M
