@@ -48,16 +48,11 @@ now(load("keymaps"))
 now(load("autocmds"))
 
 add({ name = "mini.nvim" })
-now(function()
-    add({
-        source = "rockyzhang24/arctic.nvim",
-        checkout = "v2",
-        depends = {
-            "rktjmp/lush.nvim",
-        },
-    })
-end)
-now(cmd("colorscheme vscode"))
+now(load("catppuccin/nvim", {
+    add = { name = "catppuccin" },
+    init = "plugins.catppuccin",
+}))
+now(cmd("colorscheme catppuccin-mocha"))
 
 now(load("plugins.mini.basics"))
 now(load("plugins.mini.icons"))
