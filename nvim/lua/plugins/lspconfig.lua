@@ -78,8 +78,11 @@ lspconfig["lua_ls"].setup({
     },
 })
 
+lspconfig["templ"].setup({})
 lspconfig["ts_ls"].setup({})
-lspconfig["html"].setup({})
+lspconfig["html"].setup({
+    filetypes = { "html", "templ" },
+})
 lspconfig["cssls"].setup({})
 lspconfig["biome"].setup({})
 lspconfig["jsonls"].setup({

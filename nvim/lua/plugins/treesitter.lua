@@ -16,6 +16,7 @@ require("nvim-treesitter.configs").setup({
         "typescript",
         "tsx",
         "css",
+        "templ",
     },
     highlight = {
         enable = true,
