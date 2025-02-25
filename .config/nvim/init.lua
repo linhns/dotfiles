@@ -154,6 +154,7 @@ later(load("nvim-neotest/neotest", {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "fredrikaverpil/neotest-golang",
+            "marilari88/neotest-vitest",
         },
     },
 }))
