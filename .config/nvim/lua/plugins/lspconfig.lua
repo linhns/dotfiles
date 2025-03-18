@@ -84,7 +84,6 @@ lspconfig["html"].setup({
     filetypes = { "html", "templ" },
 })
 lspconfig["cssls"].setup({})
-lspconfig["biome"].setup({})
 lspconfig["jsonls"].setup({
     settings = {
         json = {

@@ -6,6 +6,10 @@ lint.linters_by_ft = {
     markdown = { "markdownlint" },
     go = { "golangcilint" },
     sql = { "sqlfluff" },
+    javascript = { "biomejs" },
+    typescript = { "biomejs" },
+    javascriptreact = { "biomejs" },
+    typescriptreact = { "biomejs" },
 }
 
 local linters = require("lint").linters

@@ -7,6 +7,10 @@ require("conform").setup({
         go = { "goimports", lsp_format = "first" },
         sql = { "sqlfluff" },
         yaml = { "yamlfmt" },
+        javascript = { "biome", "prettier", stop_after_first = true },
+        javascriptreact = { "biome", "prettier", stop_after_first = true },
+        typescript = { "biome", "prettier", stop_after_first = true },
+        typescriptreact = { "biome", "prettier", stop_after_first = true },
     },
     format_after_save = function(bufnr)
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
