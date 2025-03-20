@@ -68,21 +68,17 @@ end
 ---@param client vim.lsp.Client
 ---@param bufnr integer
 local function on_attach(client, bufnr)
-    nmap("<leader>lgr", cmd("Pick lsp scope='references'"), "Go to References")
-    nmap(
-        "<leader>lgD",
-        cmd("Pick lsp scope='declaration'"),
-        "Go to Declaration"
-    )
-    nmap("<leader>lgd", cmd("Pick lsp scope='definition'"), "Go to Definition")
+    nmap("gr", cmd("Pick lsp scope='references'"), "Go to References")
     nmap("gD", cmd("Pick lsp scope='declaration'"), "Go to Declaration")
     nmap("gd", cmd("Pick lsp scope='definition'"), "Go to Definition")
 
-    nmap(
-        "<leader>lgt",
-        cmd("Pick lsp scope='type_definition'"),
-        "Go to Type Definition"
-    )
+    if client.supports_method("textDocument/typeDefinition") then
+        nmap(
+            "<leader>lgt",
+            cmd("Pick lsp scope='type_definition'"),
+            "Go to Type Definition"
+        )
+    end
     nmap(
         "<leader>lds",
         cmd("Pick lsp scope='document_symbol'"),
@@ -93,6 +89,14 @@ local function on_attach(client, bufnr)
         cmd("Pick lsp scope='workspace_symbol'"),
         "Workspace Symbol"
     )
+
+    if client.supports_method("textDocument/implementation") then
+        nmap(
+            "gI",
+            cmd("Pick lsp scope='implementation'"),
+            "Go to Implementation"
+        )
+    end
 
     if client.supports_method("textDocument/signatureHelp") then
         imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
@@ -258,4 +262,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
         on_attach(client, bufnr)
     end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup(
+        "lsp_attach_disable_ruff_hover",
+        { clear = true }
+    ),
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client == nil then
+            return
+        end
+        if client.name == "ruff" then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+        end
+    end,
+    desc = "LSP: Disable hover capability from Ruff",
 })

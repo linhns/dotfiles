@@ -132,6 +132,7 @@ later(load("mfussenegger/nvim-dap", {
     add = {
         depends = {
             "leoluz/nvim-dap-go",
+            "mfussenegger/nvim-dap-python",
         },
     },
 }))

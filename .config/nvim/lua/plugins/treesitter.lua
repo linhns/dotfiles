@@ -4,6 +4,7 @@ require("nvim-treesitter.configs").setup({
         "gomod",
         "gowork",
         "gosum",
+        "python",
         "lua",
         "c",
         "cpp",
