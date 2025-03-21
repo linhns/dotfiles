@@ -123,6 +123,15 @@ later(load("williamboman/mason.nvim", {
     init = "plugins.mason",
 }))
 
+later(load("WhoIsSethDaniel/mason-tool-installer.nvim", {
+    init = "plugins.mason-tool-installer",
+    add = {
+        depends = {
+            "williamboman/mason.nvim",
+        },
+    },
+}))
+
 later(load("neovim/nvim-lspconfig", {
     init = "plugins.lspconfig",
 }))
