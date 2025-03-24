@@ -5,6 +5,7 @@ lint.linters_by_ft = {
     cmake = { "cmakelint" },
     markdown = { "markdownlint" },
     go = { "golangcilint" },
+    python = { "mypy" },
     sql = { "sqlfluff" },
     javascript = { "biomejs" },
     typescript = { "biomejs" },
