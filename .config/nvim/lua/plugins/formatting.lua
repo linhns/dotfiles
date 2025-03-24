@@ -5,6 +5,7 @@ require("conform").setup({
         cpp = { "clang-format" },
         sh = { "shfmt" },
         go = { "goimports", lsp_format = "first" },
+        python = { "isort", "black", lsp_format = "first" },
         sql = { "sqlfluff" },
         yaml = { "yamlfmt" },
         javascript = { "biome", "prettier", stop_after_first = true },
