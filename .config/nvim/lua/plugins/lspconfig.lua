@@ -36,7 +36,7 @@ lspconfig["clangd"].setup({
         "--fallback-style=none",
     },
 
-    on_attach = function(client, bufnr)
+    on_attach = function()
         utils.nmap(utils.lmap, "<leader>lsh", utils.cmd("ClangdSwitchSourceHeader"), "Switch Header/Source")
     end,
 })
@@ -93,7 +93,11 @@ lspconfig["pylsp"].setup({
     },
 })
 
-lspconfig["ruff"].setup({})
+lspconfig["ruff"].setup({
+    on_attach = function(client)
+        client.server_capabilities.hoverProvider = false
+    end,
+})
 
 lspconfig["templ"].setup({})
 lspconfig["ts_ls"].setup({})

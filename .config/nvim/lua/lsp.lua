@@ -56,7 +56,7 @@ local function on_attach(client, bufnr)
     nmap("grr", cmd("Pick lsp scope='references'"), "Go to References")
     nmap("gD", cmd("Pick lsp scope='declaration'"), "Go to Declaration")
     nmap("gd", cmd("Pick lsp scope='definition'"), "Go to Definition")
-    nmap("gri", cmd("Pick lsp scope='implementation'"), "Go to Implementation")
+    nmap("gri", cmd("Pick lsp scope='implementation'"), "Go to Implementations")
     nmap("grt", cmd("Pick lsp scope='type_definition'"), "Go to Type Definition")
     nmap("gO", cmd("Pick lsp scope='document_symbol'"), "Document Symbol")
     nmap("gW", cmd("Pick lsp scope='workspace_symbol'"), "Workspace Symbol")
@@ -195,19 +195,4 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
         on_attach(client, bufnr)
     end,
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client == nil then
-            return
-        end
-        if client.name == "ruff" then
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-        end
-    end,
-    desc = "LSP: Disable hover capability from Ruff",
 })
