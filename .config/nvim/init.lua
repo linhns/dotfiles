@@ -112,6 +112,10 @@ later(load("nvim-treesitter/nvim-treesitter-context", {
     setup = {},
 }))
 
+later(load("sindrets/diffview.nvim", {
+    init = "plugins.diffview",
+}))
+
 later(load("windwp/nvim-ts-autotag", {
     init = "plugins.autotag",
 }))
