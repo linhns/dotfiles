@@ -1,5 +1,7 @@
 [init]
     defaultBranch = main
+[core]
+    editor = nvim
 [column]
     ui = auto
 [branch]
