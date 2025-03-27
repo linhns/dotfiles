@@ -38,68 +38,32 @@ nmap("<C-u>", "<C-u>zz")
 
 -- Leader mappings
 nmap("<leader>go", cmd("lua MiniDiff.toggle_overlay()"), "Toggle diff overlay")
-nxmap(
-    "<leader>gs",
-    cmd("lua MiniGit.show_at_cursor()"),
-    "Show Git status at cursor"
-)
+nxmap("<leader>gs", cmd("lua MiniGit.show_at_cursor()"), "Show Git status at cursor")
 
 -- Mappings for mini.sessions
 nmap("<leader>sd", cmd("lua MiniSessions.select('delete')"), "Delete session")
 nmap("<leader>sl", cmd("lua MiniSessions.select()"), "Load session")
-nmap(
-    "<leader>ss",
-    cmd("lua require('plugins.mini.sessions').save()"),
-    "Save session"
-)
+nmap("<leader>ss", cmd("lua require('plugins.mini.sessions').save()"), "Save session")
 nmap("<leader>so", cmd("lua MiniSessions.select('write')"), "Overwrite session")
 
 -- Mappings for mini.files
-nmap(
-    "<leader>ee",
-    cmd("lua require('mini.files').open(vim.uv.cwd())"),
-    "Open file explorer (cwd)"
-)
+nmap("<leader>ee", cmd("lua require('mini.files').open(vim.uv.cwd())"), "Open file explorer (cwd)")
 
-nmap(
-    "<leader>ef",
-    cmd("lua MiniFiles.open(vim.api.nvim_buf_get_name(0))"),
-    "Open file explorer (buffer)"
-)
+nmap("<leader>ef", cmd("lua MiniFiles.open(vim.api.nvim_buf_get_name(0))"), "Open file explorer (buffer)")
 
 nmap("<leader>ba", cmd("b#"), "Alternate buffer")
 
-nmap(
-    "<leader>bd",
-    cmd("lua require('mini.bufremove').delete()"),
-    "Delete current buffer"
-)
+nmap("<leader>bd", cmd("lua require('mini.bufremove').delete()"), "Delete current buffer")
 
-nmap(
-    "<leader>bu",
-    cmd("lua require('mini.bufremove').unshow()"),
-    "Unshow current buffer"
-)
+nmap("<leader>bu", cmd("lua require('mini.bufremove').unshow()"), "Unshow current buffer")
 
-nmap(
-    "<leader>bw",
-    cmd("lua require('mini.bufremove').wipeout()"),
-    "Wipeout current buffer"
-)
+nmap("<leader>bw", cmd("lua require('mini.bufremove').wipeout()"), "Wipeout current buffer")
 
 nmap("<leader>dc", cmd("lua require('dap').continue()"), "Continue (Start)")
 
-nmap(
-    "<leader>db",
-    cmd("lua require('dap').toggle_breakpoint()"),
-    "Toggle Breakpoint"
-)
+nmap("<leader>db", cmd("lua require('dap').toggle_breakpoint()"), "Toggle Breakpoint")
 
-nmap(
-    "<leader>dB",
-    cmd("lua require('dap').clear_breakpoints()"),
-    "Clear Breakpoints"
-)
+nmap("<leader>dB", cmd("lua require('dap').clear_breakpoints()"), "Clear Breakpoints")
 
 nmap("<leader>dn", cmd("lua require('dap').step_over()"), "Step Over")
 
@@ -113,61 +77,35 @@ nmap("<leader>dr", cmd("lua require('dap').run_last()"), "Rerun Last Config")
 
 nmap("<leader>dR", cmd("lua require('dap').restart()"), "Restart")
 
-nmap(
-    "<leader>dh",
-    cmd("lua require('dap.ui.widgets').hover()"),
-    "Evaluate (Floating Window)"
-)
+nmap("<leader>dh", cmd("lua require('dap.ui.widgets').hover()"), "Evaluate (Floating Window)")
 
-nmap(
-    "<leader>dp",
-    cmd("lua require('dap.ui.widgets').preview()"),
-    "Evaluate (Preview)"
-)
+nmap("<leader>dp", cmd("lua require('dap.ui.widgets').preview()"), "Evaluate (Preview)")
 
 nmap(
     "<leader>ds",
-    cmd(
-        "lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)"
-    ),
+    cmd("lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)"),
     "View Scope (Floating Window)"
 )
 
 nmap(
     "<leader>df",
-    cmd(
-        "lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').frames)"
-    ),
+    cmd("lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').frames)"),
     "View Frames (Floating Window)"
 )
 
-nmap(
-    "<leader>tr",
-    cmd("lua require('neotest').run.run(vim.fn.expand('%'))"),
-    "Run File"
-)
+nmap("<leader>tr", cmd("lua require('neotest').run.run(vim.fn.expand('%'))"), "Run File")
 
 nmap("<leader>tn", cmd("lua require('neotest').run.run()"), "Run Nearest")
 
-nmap(
-    "<leader>td",
-    cmd("lua require('neotest').run.run({strategy = 'dap'})"),
-    "Debug Nearest"
-)
+nmap("<leader>td", cmd("lua require('neotest').run.run({strategy = 'dap'})"), "Debug Nearest")
 
 nmap(
     "<leader>to",
-    cmd(
-        "lua require('neotest').output.open({ enter = true, last_run = true, auto_close = true})"
-    ),
+    cmd("lua require('neotest').output.open({ enter = true, last_run = true, auto_close = true})"),
     "Open Output (Last Run)"
 )
 
-nmap(
-    "<leader>ts",
-    cmd("lua require('neotest').summary.toggle()"),
-    "Toggle Summary"
-)
+nmap("<leader>ts", cmd("lua require('neotest').summary.toggle()"), "Toggle Summary")
 
 -- Find mappings
 nmap("<leader>ff", cmd("Pick files"), "Find files")
@@ -186,11 +124,7 @@ nmap("<leader>fc", cmd("Pick commands"), "Find commands")
 
 nmap("<leader>fg", cmd("Pick grep_live"), "Find pattern (live)")
 
-nmap(
-    "<leader>fd",
-    cmd("Pick diagnostic scope='current'"),
-    "Find diagnostic (buffer)"
-)
+nmap("<leader>fd", cmd("Pick diagnostic scope='current'"), "Find diagnostic (buffer)")
 
 nmap("<leader>fv", cmd("Pick visit_paths"), "Find visited paths")
 nmap("<leader>fV", cmd("Pick visit_labels"), "Find visited labels")
@@ -212,17 +146,9 @@ nmap("<leader>fk", cmd("Pick keymaps"), "Find keymaps")
 nmap("<leader>gff", cmd("Pick git_files"), "Find git files")
 nmap("<leader>gfd", cmd("Pick git_files scope='deleted'"), "Find deleted files")
 nmap("<leader>gfi", cmd("Pick git_files scope='ignored'"), "Find ignored files")
-nmap(
-    "<leader>gfu",
-    cmd("Pick git_files scope='untracked'"),
-    "Find untracked files"
-)
+nmap("<leader>gfu", cmd("Pick git_files scope='untracked'"), "Find untracked files")
 
-nmap(
-    "<leader>gfm",
-    cmd("Pick git_files scope='modified'"),
-    "Find modified files"
-)
+nmap("<leader>gfm", cmd("Pick git_files scope='modified'"), "Find modified files")
 
 -- Mappings for mini.visits
 nmap("<leader>vl", cmd("lua MiniVisits.add_label()"), "Add label")

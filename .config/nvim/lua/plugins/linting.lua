@@ -16,8 +16,7 @@ lint.linters_by_ft = {
 local linters = require("lint").linters
 linters.sqlfluff.stdin = true
 
-local lint_augroup =
-    vim.api.nvim_create_augroup("linhns/lint", { clear = true })
+local lint_augroup = vim.api.nvim_create_augroup("linhns/lint", { clear = true })
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     group = lint_augroup,

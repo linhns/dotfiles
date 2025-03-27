@@ -25,8 +25,7 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 })
 
 -- Highlighting priorities
-local hl_priorities_group =
-    vim.api.nvim_create_augroup("linhns/hl-priorities", { clear = true })
+local hl_priorities_group = vim.api.nvim_create_augroup("linhns/hl-priorities", { clear = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
     group = hl_priorities_group,

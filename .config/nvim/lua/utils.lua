@@ -41,11 +41,7 @@ end
 
 ---@param keys string
 M.feedkeys = function(keys)
-    vim.api.nvim_feedkeys(
-        vim.api.nvim_replace_termcodes(keys, true, false, true),
-        "n",
-        false
-    )
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), "n", false)
 end
 
 --- Check if popup menu is open
