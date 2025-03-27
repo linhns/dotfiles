@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local utils = require("utils")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -34,40 +35,37 @@ lspconfig["clangd"].setup({
         "--function-arg-placeholders",
         "--fallback-style=none",
     },
+
+    on_attach = function(client, bufnr)
+        utils.nmap(utils.lmap, "<leader>lsh", utils.cmd("ClangdSwitchSourceHeader"), "Switch Header/Source")
+    end,
 })
 
 lspconfig["lua_ls"].setup({
     on_init = function(client)
         local path = client.workspace_folders[1].name
-        if
-            vim.loop.fs_stat(path .. "/.luarc.json")
-            or vim.loop.fs_stat(path .. "/.luarc.jsonc")
-        then
+        if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
             return
         end
 
-        client.config.settings.Lua =
-            vim.tbl_deep_extend("force", client.config.settings.Lua, {
-                runtime = {
-                    -- Tell the language server which version of Lua you're using
-                    -- (most likely LuaJIT in the case of Neovim)
-                    version = "LuaJIT",
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    -- Depending on the usage, you might want to add additional paths here.
+                    "${3rd}/luv/library",
+                    -- "${3rd}/busted/library",
                 },
-                -- Make the server aware of Neovim runtime files
-                workspace = {
-                    checkThirdParty = false,
-                    library = {
-                        vim.env.VIMRUNTIME,
-                        -- Depending on the usage, you might want to add additional paths here.
-                        "${3rd}/luv/library",
-                        -- "${3rd}/busted/library",
-                    },
-                },
-            })
-        client.notify(
-            vim.lsp.protocol.Methods.workspace_didChangeConfiguration,
-            { settings = client.config.settings }
-        )
+            },
+        })
+        client.notify(vim.lsp.protocol.Methods.workspace_didChangeConfiguration, { settings = client.config.settings })
     end,
     settings = {
         Lua = {
@@ -111,9 +109,6 @@ lspconfig["jsonls"].setup({
     },
     on_new_config = function(config)
         config.settings.json.schemas = config.settings.json.schemas or {}
-        vim.list_extend(
-            config.settings.json.schemas,
-            require("schemastore").json.schemas()
-        )
+        vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
     end,
 })

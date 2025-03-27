@@ -50,19 +50,6 @@ local cmd = utils.cmd
 local pumvisible = utils.pumvisible
 local feedkeys = utils.feedkeys
 
-local extras = {}
-extras["clangd"] = function(client, bufnr)
-    nmap(",sh", cmd("ClangdSwitchSourceHeader"), "Switch source/header")
-end
-
----@param client vim.lsp.Client
----@param bufnr integer
-local function extra_setup(client, bufnr)
-    if extras[client.name] then
-        extras[client.name](client, bufnr)
-    end
-end
-
 ---@param client vim.lsp.Client
 ---@param bufnr integer
 local function on_attach(client, bufnr)
@@ -184,8 +171,6 @@ local function on_attach(client, bufnr)
 
         lmap({ "s" }, "<BS>", "<C-o>s")
     end
-
-    extra_setup(client, bufnr)
 end
 
 -- Update mappings when registering dynamic capabilities.
