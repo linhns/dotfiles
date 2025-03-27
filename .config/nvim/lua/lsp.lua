@@ -1,5 +1,4 @@
-local diagnostic_icons =
-    { ERROR = " ", WARN = " ", HINT = "󰠠 ", INFO = " " }
+local diagnostic_icons = { ERROR = " ", WARN = " ", HINT = "󰠠 ", INFO = " " }
 for type, icon in pairs(diagnostic_icons) do
     local hl = "DiagnosticSign" .. type:sub(1, 1) .. type:sub(2):lower()
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -10,8 +9,7 @@ vim.diagnostic.config({
         prefix = "",
         spacing = 2,
         format = function(diagnostic)
-            local icon =
-                diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
+            local icon = diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
             local msg = vim.split(diagnostic.message, "\n")[1]
             return string.format("%s %s ", icon, msg)
         end,
@@ -68,53 +66,24 @@ end
 ---@param client vim.lsp.Client
 ---@param bufnr integer
 local function on_attach(client, bufnr)
-    nmap("gr", cmd("Pick lsp scope='references'"), "Go to References")
+    nmap("grr", cmd("Pick lsp scope='references'"), "Go to References")
     nmap("gD", cmd("Pick lsp scope='declaration'"), "Go to Declaration")
     nmap("gd", cmd("Pick lsp scope='definition'"), "Go to Definition")
+    nmap("gri", cmd("Pick lsp scope='implementation'"), "Go to Implementation")
+    nmap("grt", cmd("Pick lsp scope='type_definition'"), "Go to Type Definition")
+    nmap("gO", cmd("Pick lsp scope='document_symbol'"), "Document Symbol")
+    nmap("gW", cmd("Pick lsp scope='workspace_symbol'"), "Workspace Symbol")
+    imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
-    if client.supports_method("textDocument/typeDefinition") then
-        nmap(
-            "<leader>lgt",
-            cmd("Pick lsp scope='type_definition'"),
-            "Go to Type Definition"
-        )
-    end
-    nmap(
-        "<leader>lds",
-        cmd("Pick lsp scope='document_symbol'"),
-        "Document Symbol"
-    )
-    nmap(
-        "<leader>lws",
-        cmd("Pick lsp scope='workspace_symbol'"),
-        "Workspace Symbol"
-    )
-
-    if client.supports_method("textDocument/implementation") then
-        nmap(
-            "gI",
-            cmd("Pick lsp scope='implementation'"),
-            "Go to Implementation"
-        )
+    if client:supports_method("textDocument/prepareHierarchy") then
+        nmap("<leader>grh", vim.lsp.buf.incoming_calls, "Show Call Hierarchy")
     end
 
-    if client.supports_method("textDocument/signatureHelp") then
-        imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-    end
-
-    if client.supports_method("textDocument/rename") then
-        nmap("<leader>lrn", vim.lsp.buf.rename, "Rename Symbol")
-    end
-
-    if client.supports_method("textDocument/inlayHint") then
-        local inlay_hint_group =
-            vim.api.nvim_create_augroup("linhns/inlayhints", { clear = false })
+    if client:supports_method("textDocument/inlayHint") then
+        local inlay_hint_group = vim.api.nvim_create_augroup("linhns/inlayhints", { clear = false })
         vim.defer_fn(function()
             local mode = vim.api.nvim_get_mode().mode
-            vim.lsp.inlay_hint.enable(
-                mode == "n" or mode == "v",
-                { bufnr = bufnr }
-            )
+            vim.lsp.inlay_hint.enable(mode == "n" or mode == "v", { bufnr = bufnr })
         end, 500)
 
         vim.api.nvim_create_autocmd("InsertEnter", {
@@ -136,39 +105,25 @@ local function on_attach(client, bufnr)
         })
     end
 
-    if client.supports_method("textDocument/documentHighlight") then
-        local under_cursor_highlights_group = vim.api.nvim_create_augroup(
-            "linhns/cursor_highlights",
-            { clear = false }
-        )
+    if client:supports_method("textDocument/documentHighlight") then
+        local under_cursor_highlights_group = vim.api.nvim_create_augroup("linhns/cursor_highlights", { clear = false })
         vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
             group = under_cursor_highlights_group,
             desc = "Highlight references under the cursor",
             buffer = bufnr,
+
             callback = vim.lsp.buf.document_highlight,
         })
-        vim.api.nvim_create_autocmd(
-            { "CursorMoved", "InsertEnter", "BufLeave" },
-            {
-                group = under_cursor_highlights_group,
-                desc = "Clear highlight references",
-                buffer = bufnr,
-                callback = vim.lsp.buf.clear_references,
-            }
-        )
+        vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
+            group = under_cursor_highlights_group,
+            desc = "Clear highlight references",
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+        })
     end
 
-    if client.supports_method("textDocument/codeAction") then
-        nmap("<leader>lca", vim.lsp.buf.code_action, "Display Code Actions")
-    end
-
-    if client.supports_method("textDocument/prepareHierarchy") then
-        nmap("<leader>lch", vim.lsp.buf.incoming_calls, "Show Call Hierarchy")
-    end
-
-    if client.supports_method("textDocument/codeLens") then
-        local codelens_group =
-            vim.api.nvim_create_augroup("linhns/codelens", { clear = false })
+    if client:supports_method("textDocument/codeLens") then
+        local codelens_group = vim.api.nvim_create_augroup("linhns/codelens", { clear = false })
         vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
             group = codelens_group,
             desc = "Refresh codelens",
@@ -178,13 +133,8 @@ local function on_attach(client, bufnr)
         nmap("<leader>lcl", vim.lsp.codelens.run, "Run code lens")
     end
 
-    if client.supports_method("textDocument/completion") then
-        vim.lsp.completion.enable(
-            true,
-            client.id,
-            bufnr,
-            { autotrigger = true }
-        )
+    if client:supports_method("textDocument/completion") then
+        vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 
         imap("<CR>", function()
             return pumvisible() and "<C-y>" or require("mini.pairs").cr()
@@ -194,18 +144,18 @@ local function on_attach(client, bufnr)
             return pumvisible() and "<C-e>" or "/"
         end, "Dismiss Completion Menu", { expr = true })
 
+        imap("<C-Space>", function()
+            vim.lsp.completion.get()
+        end, "Trigger completion")
+
         imap("<C-n>", function()
             if pumvisible() then
                 feedkeys("<C-n>")
             else
-                if next(vim.lsp.get_clients({ bufnr = 0 })) then
-                    vim.lsp.completion.trigger()
+                if vim.bo.omnifunc == "" then
+                    feedkeys("<C-x><C-n>")
                 else
-                    if vim.bo.omnifunc == "" then
-                        feedkeys("<C-x><C-n>")
-                    else
-                        feedkeys("<C-x><C-o>")
-                    end
+                    feedkeys("<C-x><C-o>")
                 end
             end
         end, "Trigger/select next completion")
@@ -235,8 +185,6 @@ local function on_attach(client, bufnr)
         lmap({ "s" }, "<BS>", "<C-o>s")
     end
 
-    nmap("<leader>lrs", cmd("LspRestart"), "Restart LSP")
-
     extra_setup(client, bufnr)
 end
 
@@ -265,10 +213,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup(
-        "lsp_attach_disable_ruff_hover",
-        { clear = true }
-    ),
+    group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client == nil then

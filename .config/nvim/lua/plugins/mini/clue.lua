@@ -63,3 +63,6 @@ miniclue.setup({
         },
     },
 })
+
+miniclue.set_mapping_desc("n", "grn", "Rename Symbol")
+miniclue.set_mapping_desc("n", "gra", "Show Code Actions")

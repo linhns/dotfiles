@@ -60,7 +60,6 @@ now(load("plugins.mini.sessions"))
 now(load("mini.starter", { setup = {} }))
 
 later(load("mini.pairs", { setup = {} }))
-later(load("lsp"))
 
 later(load("mini.statusline", { setup = {} }))
 later(load("mini.tabline", { setup = {} }))
@@ -69,7 +68,6 @@ later(load("mini.move", { setup = {} }))
 later(load("mini.jump", { setup = {} }))
 later(load("mini.splitjoin", { setup = {} }))
 later(load("mini.surround", { setup = {} }))
-later(load("mini.operators", { setup = {} }))
 later(load("mini.git", { setup = {} }))
 later(load("mini.bufremove", { setup = {} }))
 later(load("mini.extra", { setup = {} }))
@@ -80,9 +78,12 @@ later(load("plugins.mini.bracketed"))
 later(load("plugins.mini.clue"))
 later(load("plugins.mini.indentscope"))
 later(load("plugins.mini.notify"))
+later(load("plugins.mini.operators"))
 later(load("plugins.mini.diff"))
 later(load("plugins.mini.files"))
 later(load("plugins.mini.pick"))
+
+later(load("lsp"))
 
 later(function()
     add({

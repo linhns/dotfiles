@@ -15,6 +15,7 @@ end
 M.map = map
 M.lmap = lmap
 
+--- @param cmd string
 M.cmd = function(cmd)
     return "<Cmd>" .. cmd .. "<CR>"
 end

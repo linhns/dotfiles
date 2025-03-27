@@ -10,11 +10,10 @@ local win_config = function()
     }
 end
 
-local minipick = require("mini.pick")
 require("mini.pick").setup({
     window = {
         config = win_config,
     },
 })
 
-vim.ui.select = minipick.ui_select
+vim.ui.select = MiniPick.ui_select
