@@ -14,8 +14,22 @@ lint.linters_by_ft = {
 }
 
 local linters = require("lint").linters
-linters.sqlfluff.stdin = true
+linters["sqlfluff"].stdin = true
 
+local venv_env_vars = { "VIRTUAL_ENV", "CONDA_PREFIX" }
+local venv = vim.iter(venv_env_vars):find(function(s)
+    return s ~= ""
+end)
+
+if venv then
+    linters["mypy"].cmd = "python3 -m mypy"
+end
+linters["mypy"].args = vim.list_extend(linters["mypy"].args, {
+    "--python-executable",
+    vim.fn.exepath("python3"),
+})
+
+-- Autocommand configuration
 local lint_augroup = vim.api.nvim_create_augroup("linhns/lint", { clear = true })
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -25,6 +39,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     end,
 })
 
+-- Keymap configuration
 local utils = require("utils")
 local keymapper = utils.map
 local nmap = function(...)
