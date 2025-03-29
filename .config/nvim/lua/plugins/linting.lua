@@ -22,8 +22,10 @@ local venv = vim.iter(venv_env_vars):find(function(s)
 end)
 
 if venv then
-    linters["mypy"].cmd = "python3 -m mypy"
+    linters["mypy"].cmd = "python3"
+    linters["mypy"].args = vim.list_extend({ "-m", "mypy" }, linters["mypy"].args)
 end
+
 linters["mypy"].args = vim.list_extend(linters["mypy"].args, {
     "--python-executable",
     vim.fn.exepath("python3"),
