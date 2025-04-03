@@ -76,6 +76,12 @@ lspconfig["lua_ls"].setup({
     },
 })
 
+lspconfig["ruff"].setup({
+    on_attach = function(client)
+        client.server_capabilities.hoverProvider = false
+    end,
+})
+
 lspconfig["pylsp"].setup({
     settings = {
         pylsp = {
@@ -91,12 +97,6 @@ lspconfig["pylsp"].setup({
             },
         },
     },
-})
-
-lspconfig["ruff"].setup({
-    on_attach = function(client)
-        client.server_capabilities.hoverProvider = false
-    end,
 })
 
 lspconfig["templ"].setup({})
