@@ -28,5 +28,8 @@ require("mason-tool-installer").setup({
         "lua-language-server",
         "yamlfmt",
         "cpplint",
+        "shfmt",
+        "shellcheck",
+        "bash-language-server",
     },
 })

@@ -99,6 +99,8 @@ lspconfig["pylsp"].setup({
     },
 })
 
+lspconfig["bashls"].setup({})
+
 lspconfig["templ"].setup({})
 lspconfig["ts_ls"].setup({})
 lspconfig["html"].setup({

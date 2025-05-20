@@ -1,81 +1,37 @@
-# If you come from bash you might have to change your $PATH.
+#!/bin/zsh
+#
+# .zshrc - Zsh file loaded on interactive shell sessions.
 
-source $HOME/.zsh/pathmod.zsh
-# Export Go-related variables
-path_append "/usr/local/go/bin"
-if command -v go &> /dev/null; then
-    path_append "$(go env GOPATH)/bin"
+export PATH="$PATH:$HOME/.local/bin"
+
+# Lazy-load (autoload) Zsh function files from a directory.
+ZFUNCDIR=${ZDOTDIR:-$HOME}/.zfunctions
+fpath=($ZFUNCDIR $fpath)
+autoload -Uz $ZFUNCDIR/*(:t)
+
+# Set any zstyles you might use for configuration.
+[[ ! -f ${ZDOTDIR:-$HOME}/.zstyles ]] || source ${ZDOTDIR:-$HOME}/.zstyles
+
+# Clone antidote if necessary.
+if [[ ! -d ${ZDOTDIR:-$HOME}/.antidote ]]; then
+  git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-$HOME}/.antidote
 fi
 
-path_append "$HOME/.local/bin"
+# Create an amazing Zsh config using antidote plugins.
+source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
+antidote load
 
-export PATH
+# Source anything in .zshrc.d.
+for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
+  # Ignore tilde files.
+  if [[ $_rc:t != '~'* ]]; then
+    source "$_rc"
+  fi
+done
+unset _rc
 
-# Load Antigen
-[[ ! -d "$HOME/.antigen" ]] && git clone https://github.com/zsh-users/antigen.git "$HOME/.antigen"
-source "$HOME/.antigen/antigen.zsh"
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
-
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle docker
-antigen bundle command-not-found
-antigen bundle rust
-antigen bundle golang
-antigen bundle heroku
-antigen bundle taskwarrior
-antigen bundle npm
-antigen bundle cabal
-antigen bundle dircycle
-antigen bundle copyfile
-antigen bundle copybuffer
-antigen bundle copypath
-
-# Extra completions
-antigen bundle zsh-users/zsh-completions
-
-# Enable fish-like autosuggestions
-antigen bundle zsh-users/zsh-autosuggestions
-
-# Z for frecency-based navigation
-antigen bundle agkozak/zsh-z
-
-# timewarrior
-antigen bundle svenXY/timewarrior
-
-# Load the theme.
-# antigen theme robbyrussell
-
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Tell Antigen that you're done.
-antigen apply
-
-source ~/.zsh/options.zsh
-
-source ~/.zsh/styles.zsh
-
-zmodload zsh/complist
-
-source ~/.zsh/keybindings.zsh
-
-source ~/.zsh/fzf.zsh
-
-source ~/.zsh/external.zsh
-
-source ~/.zsh/aliases.zsh
-
-# External plugins (initialized after)
-source ~/.zsh/plugins_after.zsh
-
-source ~/.zsh/env.zsh
-
-# zsh custom functions
-fpath=( ${ZDOTDIR:-~}/.zsh/functions ${ZDOTDIR:-~}/.zsh/completions ${fpath[@]} )
-autoload -Uz $fpath[1]/*(.:t)
-
-# Load starship
+# Set up starship prompt
 eval "$(starship init zsh)"

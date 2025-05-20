@@ -26,9 +26,6 @@ require("conform").setup({
     },
     -- Customize formatters
     formatters = {
-        shfmt = {
-            prepend_args = { "-i", "2" },
-        },
         sqlfluff = {
             args = { "format", "--dialect=ansi", "-" },
             cwd = require("conform.util").root_file({ ".sqlfluff" }),

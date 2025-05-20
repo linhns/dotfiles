@@ -1,7 +1,11 @@
+# rg settings
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+# Use bat as pager for man
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
+
 # fzf settings
-# export FZF_BASE="$(which fzf)"
-# export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files -g "!.git/"'
-# export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_DEFAULT_OPTS="
     --height 50%
     --layout reverse-list
@@ -25,3 +29,4 @@ export FZF_CTRL_R_OPTS="
     --preview 'echo {}' --preview-window down:3:hidden:wrap
     --bind '?:toggle-preview'
 "
+
