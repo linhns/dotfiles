@@ -7,6 +7,9 @@ add_newline = false
 # Enable right prompt
 # right_format = """$time"""
 
+# Increase command timeout for slow machines
+command_timeout = 750
+
 [character] # The name of the module we are configuring is "character"
 # success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
@@ -59,16 +62,6 @@ format = '🕙[\[ $time \]](13) '
 time_format = "%T"
 utc_time_offset = "+8"
 
-[shell]
-powershell_indicator = "pwsh"
-fish_indicator = "fish"
-bash_indicator = "bash"
-disabled = false
-style = "#abc4ff"
-
 [username]
-style_user = "#d18e00 bold"
-style_root = "white bold"
-format = "[$user]($style) "
-disabled = false
+style_user = "yellow"
 show_always = true

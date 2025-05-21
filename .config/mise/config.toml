@@ -1,9 +1,0 @@
-[tools]
-bat = "latest"
-fzf = "latest"
-go = "1.24"
-jq = "latest"
-node = "lts"
-rg = "latest"
-usage = "latest"
-
