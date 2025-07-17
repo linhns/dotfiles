@@ -3,9 +3,7 @@ local utils = require("utils")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-lspconfig["gopls"].setup({
-    capabilities = capabilities,
-    cmd = { "gopls" },
+vim.lsp.config("gopls", {
     filetypes = { "go", "gomod", "gowork", "gotmpl", "gohtml" },
     settings = {
         gopls = {
@@ -22,8 +20,9 @@ lspconfig["gopls"].setup({
         },
     },
 })
+vim.lsp.enable("gopls")
 
-lspconfig["clangd"].setup({
+vim.lsp.config("clangd", {
     capabilities = vim.tbl_deep_extend("error", capabilities, {
         offsetEncoding = { "utf-16" },
     }),
@@ -40,8 +39,9 @@ lspconfig["clangd"].setup({
         utils.nmap(utils.lmap, "<leader>lsh", utils.cmd("ClangdSwitchSourceHeader"), "Switch Header/Source")
     end,
 })
+vim.lsp.enable("clangd")
 
-lspconfig["lua_ls"].setup({
+vim.lsp.config("lua_ls", {
     on_init = function(client)
         local path = client.workspace_folders[1].name
         if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -76,45 +76,57 @@ lspconfig["lua_ls"].setup({
     },
 })
 
-lspconfig["ruff"].setup({
+vim.lsp.enable("lua_ls")
+
+vim.lsp.config("ruff", {
     on_attach = function(client)
         client.server_capabilities.hoverProvider = false
     end,
 })
+vim.lsp.enable("ruff")
 
-lspconfig["pylsp"].setup({
+vim.lsp.config("basedpyright", {
     settings = {
-        pylsp = {
-            plugins = {
-                pyflakes = { enabled = false },
-                pycodestyle = { enabled = false },
-                autopep8 = { enabled = false },
-                yapf = { enabled = false },
-                mccabe = { enabled = false },
-                pylsp_mypy = { enabled = false },
-                pylsp_black = { enabled = false },
-                pylsp_isort = { enabled = false },
+        basedpyright = {
+            disableOrganizeImports = true,
+            analysis = {
+                ignore = { "*" },
             },
         },
     },
 })
+vim.lsp.enable("basedpyright")
 
-lspconfig["bashls"].setup({})
+vim.lsp.enable("bashls")
 
-lspconfig["templ"].setup({})
-lspconfig["ts_ls"].setup({})
-lspconfig["html"].setup({
+vim.lsp.enable("templ")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("cssls")
+
+vim.lsp.config("html", {
     filetypes = { "html", "templ" },
 })
-lspconfig["cssls"].setup({})
-lspconfig["jsonls"].setup({
+vim.lsp.enable("html")
+
+vim.lsp.config("jsonls", {
     settings = {
         json = {
             validate = { enable = true },
+            schemas = require("schemastore").json.schemas(),
         },
     },
-    on_new_config = function(config)
-        config.settings.json.schemas = config.settings.json.schemas or {}
-        vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
-    end,
 })
+vim.lsp.enable("jsonls")
+
+vim.lsp.config("yamlls", {
+    settings = {
+        yaml = {
+            schemas = require("schemastore").yaml.schemas(),
+            schemaStore = {
+                enable = false,
+                url = "",
+            },
+        },
+    },
+})
+vim.lsp.enable("yamlls")
