@@ -53,18 +53,14 @@ local feedkeys = utils.feedkeys
 ---@param client vim.lsp.Client
 ---@param bufnr integer
 local function on_attach(client, bufnr)
-    nmap("grr", cmd("Pick lsp scope='references'"), "Go to References")
-    nmap("gD", cmd("Pick lsp scope='declaration'"), "Go to Declaration")
-    nmap("gd", cmd("Pick lsp scope='definition'"), "Go to Definition")
-    nmap("gri", cmd("Pick lsp scope='implementation'"), "Go to Implementations")
-    nmap("grt", cmd("Pick lsp scope='type_definition'"), "Go to Type Definition")
-    nmap("gO", cmd("Pick lsp scope='document_symbol'"), "Document Symbol")
-    nmap("gW", cmd("Pick lsp scope='workspace_symbol'"), "Workspace Symbol")
+    nmap("gd", cmd("lua require('snacks').picker.lsp_definitions()"), "Go to Definition")
+    nmap("gD", cmd("lua require('snacks').picker.lsp_declarations()"), "Go to Declaration")
+    nmap("grr", cmd("lua require('snacks').picker.lsp_references()"), "Go to References")
+    nmap("gI", cmd("lua require('snacks').picker.lsp_implementations()"), "Go to Implementation")
+    nmap("gy", cmd("lua require('snacks').picker.lsp_type_definitions()"), "Go to Type Definition")
+    nmap("gO", cmd("lua require('snacks').picker.lsp_symbols()"), "Document Symbol")
+    nmap("gW", cmd("lua require('snacks').picker.lsp_workspace_symbols()"), "Workspace Symbol")
     imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-
-    if client:supports_method("textDocument/prepareHierarchy") then
-        nmap("<leader>grh", vim.lsp.buf.incoming_calls, "Show Call Hierarchy")
-    end
 
     if client:supports_method("textDocument/inlayHint") then
         local inlay_hint_group = vim.api.nvim_create_augroup("linhns/inlayhints", { clear = false })
@@ -121,7 +117,12 @@ local function on_attach(client, bufnr)
     end
 
     if client:supports_method("textDocument/completion") then
-        vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+        vim.lsp.completion.enable(true, client.id, bufnr, {
+            autotrigger = true,
+            convert = function(item)
+                return { abbr = item.label:gsub("%b()", "") }
+            end,
+        })
 
         imap("<CR>", function()
             return pumvisible() and "<C-y>" or require("mini.pairs").cr()
@@ -131,9 +132,7 @@ local function on_attach(client, bufnr)
             return pumvisible() and "<C-e>" or "/"
         end, "Dismiss Completion Menu", { expr = true })
 
-        imap("<C-Space>", function()
-            vim.lsp.completion.get()
-        end, "Trigger completion")
+        imap("<C-Space>", vim.lsp.completion.get, "Trigger completion")
 
         imap("<C-n>", function()
             if pumvisible() then

@@ -108,6 +108,8 @@ vim.lsp.config("html", {
 })
 vim.lsp.enable("html")
 
+vim.lsp.enable("svelte")
+
 vim.lsp.config("jsonls", {
     settings = {
         json = {

@@ -46,6 +46,7 @@ end
 now(load("settings"))
 now(load("keymaps"))
 now(load("autocmds"))
+now(load("filetypes"))
 
 add({ name = "mini.nvim" })
 now(load("catppuccin/nvim", {
@@ -81,7 +82,6 @@ later(load("plugins.mini.notify"))
 later(load("plugins.mini.operators"))
 later(load("plugins.mini.diff"))
 later(load("plugins.mini.files"))
-later(load("plugins.mini.pick"))
 
 later(load("lsp"))
 
@@ -91,7 +91,7 @@ later(function()
     })
 end)
 
-later(load("stevearc/dressing.nvim", { init = "plugins.dressing" }))
+later(load("folke/snacks.nvim", { init = "plugins.qol" }))
 later(load("stevearc/conform.nvim", { init = "plugins.formatting" }))
 later(load("mfussenegger/nvim-lint", { init = "plugins.linting" }))
 later(add("b0o/schemastore.nvim"))
