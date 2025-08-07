@@ -1,3 +1,5 @@
+# truecolor support
+export COLORTERM=truecolor
 # rg settings
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
