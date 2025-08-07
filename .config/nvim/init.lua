@@ -83,7 +83,11 @@ later(load("plugins.mini.operators"))
 later(load("plugins.mini.diff"))
 later(load("plugins.mini.files"))
 
-later(load("lsp"))
+later(load("plugins.mini.completion"))
+
+later(load("plugins.mini.snippets"))
+
+later(load("plugins.mini.keymap"))
 
 later(function()
     add({
@@ -137,9 +141,11 @@ later(load("WhoIsSethDaniel/mason-tool-installer.nvim", {
     },
 }))
 
-later(load("neovim/nvim-lspconfig", {
-    init = "plugins.lspconfig",
-}))
+later(function()
+    add("neovim/nvim-lspconfig")
+end)
+
+later(load("lsp"))
 
 later(load("mfussenegger/nvim-dap", {
     init = "plugins.dap",

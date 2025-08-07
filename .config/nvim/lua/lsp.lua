@@ -38,17 +38,33 @@ vim.diagnostic.handlers.virtual_text = {
     hide = hide_handler,
 }
 
+if vim.fn.has("nvim-0.11") == 1 then
+    vim.lsp.config("*", { capabilities = MiniCompletion.get_lsp_capabilities() })
+end
+
+vim.lsp.enable({
+    "gopls",
+    "clangd",
+    "lua_ls",
+    "ruff",
+    "basedpyright",
+    "bashls",
+    "templ",
+    "ts_ls",
+    "cssls",
+    "html",
+    "svelte",
+    "jsonls",
+    "yamlls",
+    "dockerls",
+})
+
 local utils = require("utils")
 local lmap = utils.lmap
 local nmap = function(...)
     utils.nmap(lmap, ...)
 end
-local imap = function(...)
-    utils.imap(lmap, ...)
-end
 local cmd = utils.cmd
-local pumvisible = utils.pumvisible
-local feedkeys = utils.feedkeys
 
 ---@param client vim.lsp.Client
 ---@param bufnr integer
@@ -60,7 +76,6 @@ local function on_attach(client, bufnr)
     nmap("gy", cmd("lua require('snacks').picker.lsp_type_definitions()"), "Go to Type Definition")
     nmap("gO", cmd("lua require('snacks').picker.lsp_symbols()"), "Document Symbol")
     nmap("gW", cmd("lua require('snacks').picker.lsp_workspace_symbols()"), "Workspace Symbol")
-    imap("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
     if client:supports_method("textDocument/inlayHint") then
         local inlay_hint_group = vim.api.nvim_create_augroup("linhns/inlayhints", { clear = false })
@@ -115,61 +130,6 @@ local function on_attach(client, bufnr)
         })
         nmap("<leader>lcl", vim.lsp.codelens.run, "Run code lens")
     end
-
-    if client:supports_method("textDocument/completion") then
-        vim.lsp.completion.enable(true, client.id, bufnr, {
-            autotrigger = true,
-            convert = function(item)
-                return { abbr = item.label:gsub("%b()", "") }
-            end,
-        })
-
-        imap("<CR>", function()
-            return pumvisible() and "<C-y>" or require("mini.pairs").cr()
-        end, "Accept Completion", { expr = true })
-
-        imap("/", function()
-            return pumvisible() and "<C-e>" or "/"
-        end, "Dismiss Completion Menu", { expr = true })
-
-        imap("<C-Space>", vim.lsp.completion.get, "Trigger completion")
-
-        imap("<C-n>", function()
-            if pumvisible() then
-                feedkeys("<C-n>")
-            else
-                if vim.bo.omnifunc == "" then
-                    feedkeys("<C-x><C-n>")
-                else
-                    feedkeys("<C-x><C-o>")
-                end
-            end
-        end, "Trigger/select next completion")
-
-        imap("<C-u>", "<C-x><C-n>", "Buffer completions")
-
-        lmap({ "i", "s" }, "<Tab>", function()
-            if pumvisible() then
-                feedkeys("<C-n>")
-            elseif vim.snippet.active({ direction = 1 }) then
-                vim.snippet.jump(1)
-            else
-                feedkeys("<Tab>")
-            end
-        end, "Navigate next snippet tabstop/completion")
-
-        lmap({ "i", "s" }, "<S-Tab>", function()
-            if pumvisible() then
-                feedkeys("<C-p>")
-            elseif vim.snippet.active({ direction = -1 }) then
-                vim.snippet.jump(-1)
-            else
-                feedkeys("<S-Tab>")
-            end
-        end, "Navigate previous snippet tabstop/completion")
-
-        lmap({ "s" }, "<BS>", "<C-o>s")
-    end
 end
 
 -- Update mappings when registering dynamic capabilities.
@@ -187,6 +147,7 @@ end
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
+        vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
         local bufnr = args.buf
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if not client then
