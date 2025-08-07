@@ -1,5 +1,15 @@
+require("nvim-treesitter.parsers").get_parser_configs().caddyfile = {
+    install_info = {
+        url = "https://github.com/caddyserver/tree-sitter-caddyfile",
+        files = { "src/parser.c", "src/scanner.c" },
+        branch = "master",
+    },
+    filetype = "caddyfile",
+}
+
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
+        "caddyfile",
         "go",
         "gomod",
         "gowork",
