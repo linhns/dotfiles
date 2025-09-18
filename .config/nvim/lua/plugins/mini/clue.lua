@@ -30,6 +30,12 @@ miniclue.setup({
         -- `z` key
         { mode = "n", keys = "z" },
         { mode = "x", keys = "z" },
+
+        -- mini.bracketed
+        { mode = "n", keys = "[" },
+        { mode = "n", keys = "]" },
+        { mode = "x", keys = "[" },
+        { mode = "x", keys = "]" },
     },
 
     clues = {
