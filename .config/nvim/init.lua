@@ -111,10 +111,6 @@ later(load("nvim-treesitter/nvim-treesitter", {
 later(function()
     add("nvim-treesitter/nvim-treesitter-textobjects")
 end)
-later(load("nvim-treesitter/nvim-treesitter-context", {
-    init = "treesitter-context",
-    setup = {},
-}))
 
 later(load("sindrets/diffview.nvim", {
     init = "plugins.diffview",
