@@ -57,6 +57,7 @@ vim.lsp.enable({
     "jsonls",
     "yamlls",
     "dockerls",
+    "somesass_ls",
 })
 
 local utils = require("utils")

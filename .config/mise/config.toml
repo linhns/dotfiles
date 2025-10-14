@@ -8,7 +8,9 @@ lazydocker = "latest"
 lazygit = "latest"
 node = "lts"
 rg = "latest"
+ruby = "3.4"
 usage = "latest"
+watchexec = "latest"
 zoxide = "latest"
 
 [settings]
