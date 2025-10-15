@@ -4,6 +4,19 @@
 
 export PATH="$PATH:$HOME/.local/bin"
 
+ZCOMPDIR=${ZDOTDIR:-$HOME}/.zcompletions
+mkdir -p $ZCOMPDIR
+fpath=($ZCOMPDIR $fpath)
+
+for _rc in ${ZDOTDIR:-$HOME}/.zplugins/*.zsh(N); do
+  # Ignore tilde files.
+  if [[ $_rc:t != '~'* ]]; then
+    source "$_rc"
+  fi
+done
+unset _rc
+
+
 # Lazy-load (autoload) Zsh function files from a directory.
 ZFUNCDIR=${ZDOTDIR:-$HOME}/.zfunctions
 fpath=($ZFUNCDIR $fpath)
@@ -33,9 +46,11 @@ unset _rc
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
-# Setup uv shell completion
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
+# Setup mise
+if (( $+commands[mise] )); then
+  eval "$(mise activate zsh)"
+  eval "$(mise hook-env -s zsh)"
+fi
 
 # Setup zoxide
 eval "$(zoxide init zsh)"

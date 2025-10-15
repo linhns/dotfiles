@@ -12,6 +12,8 @@ zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
+zstyle ':antidote:bundle' use-friendly-names on
+
 zstyle ':zephyr:plugin:directory:alias' skip yes
 zstyle ':zephyr:plugin:editor' prepend-sudo yes
 zstyle ':zephyr:plugin:editor' glob-alias no

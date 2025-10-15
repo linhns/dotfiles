@@ -15,14 +15,6 @@ mattmc3/zephyr path:plugins/zfunctions
 mattmc3/zephyr path:plugins/homebrew conditional:is-macos
 mattmc3/zephyr path:plugins/macos conditional:is-macos
 
-# OMZ
-ohmyzsh/ohmyzsh path:plugins/copybuffer
-ohmyzsh/ohmyzsh path:plugins/copyfile
-ohmyzsh/ohmyzsh path:plugins/copypath
-
-ohmyzsh/ohmyzsh path:plugins/mise
-ohmyzsh/ohmyzsh path:plugins/gh
-
 # Load compstyle/completion last
 mattmc3/zephyr path:plugins/compstyle
 mattmc3/zephyr path:plugins/completion
