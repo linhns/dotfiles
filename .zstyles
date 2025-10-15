@@ -1,13 +1,22 @@
-zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu select
-zstyle ':completion:*:descriptions' format ' %F{green}--- Completing %d ---%f '
-zstyle ':completion:*:*:*:*:corrections' format ' %F{yellow}--- %d (errors: %e) ---%f '
-zstyle ':completion:*:messages' format ' %F{purple}--- %d ---%f '
-zstyle ':completion:*:warnings' format ' %F{red}--- No matches found ---%f '
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*:approximate:*' max-errors 2 numeric
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' squeeze-slashes true
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=auto $realpath'
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+zstyle ':fzf-tab:complete:*:options' fzf-preview
+zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+zstyle ':zephyr:plugin:directory:alias' skip yes
+zstyle ':zephyr:plugin:editor' prepend-sudo yes
+zstyle ':zephyr:plugin:editor' glob-alias no
+zstyle ':zephyr:plugin:editor' magic-enter no
+zstyle ':zephyr:plugin:editor' pound-toggle yes
+zstyle ':zephyr:plugin:editor' symmetric-ctrl-z no
+
+zstyle ':zephyr:plugin:prompt' theme starship hydro

@@ -1,24 +1,34 @@
-getantidote/use-omz
-ohmyzsh/ohmyzsh path:lib
+# Specify completions we want before the completion module is loaded
+zsh-users/zsh-completions kind:fpath path:src
+
+mattmc3/zephyr path:plugins/color
+mattmc3/zephyr path:plugins/directory
+mattmc3/zephyr path:plugins/editor
+mattmc3/zephyr path:plugins/environment
+mattmc3/zephyr path:plugins/helper
+mattmc3/zephyr path:plugins/history
+mattmc3/zephyr path:plugins/prompt
+mattmc3/zephyr path:plugins/utility
+mattmc3/zephyr path:plugins/zfunctions
+
+# MacOS specific
+mattmc3/zephyr path:plugins/homebrew conditional:is-macos
+mattmc3/zephyr path:plugins/macos conditional:is-macos
+
+# OMZ
 ohmyzsh/ohmyzsh path:plugins/copybuffer
 ohmyzsh/ohmyzsh path:plugins/copyfile
 ohmyzsh/ohmyzsh path:plugins/copypath
-ohmyzsh/ohmyzsh path:plugins/dircycle
 
-ohmyzsh/ohmyzsh path:plugins/git
-ohmyzsh/ohmyzsh path:plugins/gh
-ohmyzsh/ohmyzsh path:plugins/docker
-ohmyzsh/ohmyzsh path:plugins/golang
-ohmyzsh/ohmyzsh path:plugins/python
-ohmyzsh/ohmyzsh path:plugins/uv
-ohmyzsh/ohmyzsh path:plugins/rust
 ohmyzsh/ohmyzsh path:plugins/mise
+ohmyzsh/ohmyzsh path:plugins/gh
 
-ohmyzsh/ohmyzsh path:plugins/taskwarrior
+# Load compstyle/completion last
+mattmc3/zephyr path:plugins/compstyle
+mattmc3/zephyr path:plugins/completion
 
-ohmyzsh/ohmyzsh path:plugins/brew conditional:is-macos
-ohmyzsh/ohmyzsh path:plugins/macos conditional:is-macos
+Aloxaf/fzf-tab
 
-zsh-users/zsh-completions path:src kind:fpath
-zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions
+

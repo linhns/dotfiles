@@ -33,8 +33,9 @@ unset _rc
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
+# Setup uv shell completion
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
+
 # Setup zoxide
 eval "$(zoxide init zsh)"
-
-# Set up starship prompt
-eval "$(starship init zsh)"

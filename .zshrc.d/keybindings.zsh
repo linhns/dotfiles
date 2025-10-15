@@ -1,12 +1,10 @@
-zmodload zsh/complist
-compinit
-_comp_options+=(globdots)
-
 # Use vim style navigation keys in menu completion
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
+if [[ -n ${keymaps[menuselect]} ]]; then
+    bindkey -M menuselect 'h' vi-backward-char
+    bindkey -M menuselect 'k' vi-up-line-or-history
+    bindkey -M menuselect 'l' vi-forward-char
+    bindkey -M menuselect 'j' vi-down-line-or-history
+fi
 
 # Initialize editing command line
 autoload -U edit-command-line && zle -N edit-command-line
