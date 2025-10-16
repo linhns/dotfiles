@@ -44,12 +44,14 @@ done
 unset _rc
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+if (( $+commands[mise] )); then
+    eval "$(mise activate zsh)"
+    eval "$(mise hook-env -s zsh)"
+fi
 
 # Setup mise
-if (( $+commands[mise] )); then
-  eval "$(mise activate zsh)"
-  eval "$(mise hook-env -s zsh)"
+if (( $+commands[fzf] )); then
+  source <(fzf --zsh)
 fi
 
 # Setup zoxide
