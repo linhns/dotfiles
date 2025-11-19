@@ -23,4 +23,4 @@ zstyle ':zephyr:plugin:editor' magic-enter no
 zstyle ':zephyr:plugin:editor' pound-toggle yes
 zstyle ':zephyr:plugin:editor' symmetric-ctrl-z no
 
-zstyle ':zephyr:plugin:prompt' theme starship hydro
+zstyle ':zephyr:plugin:prompt' theme starship zephyr
