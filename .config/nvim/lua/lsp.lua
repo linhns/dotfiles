@@ -53,7 +53,6 @@ vim.lsp.enable({
     "ts_ls",
     "cssls",
     "html",
-    "svelte",
     "jsonls",
     "yamlls",
     "dockerls",

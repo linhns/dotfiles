@@ -1,24 +1,39 @@
 require("mason-tool-installer").setup({
     ensure_installed = {
+        -- LSP Servers
         "gopls",
-        "delve",
-        "golangci-lint",
-        "gomodifytags",
-        "goimports",
-        "impl",
-        "gotests",
         "cmake-language-server",
-        "cmakelint",
-        "python-lsp-server",
-        "ruff",
-        "markdownlint",
-        "stylua",
         "lua-language-server",
-        "yamlfmt",
-        "cpplint",
-        "shfmt",
-        "shellcheck",
         "bash-language-server",
+        "typescript-language-server",
+        "dockerfile-language-server",
+        "some-sass-language-server",
+        "yaml-language-server",
+        "protols",
+        "basedpyright",
+
+        -- Debuggers
+        "delve",
+
+        -- Linters
+        "golangci-lint",
+        "ruff",
+        "cmakelint",
+        "markdownlint",
+        "shellcheck",
+        "cpplint",
+        "sqlfluff",
+
+        -- Formatters
+        "goimports",
+        "stylua",
+        "yamlfmt",
+        "shfmt",
+
+        -- Tools
+        "impl",
+        "gomodifytags",
+        "gotests",
     },
     run_on_start = true,
 })
