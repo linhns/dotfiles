@@ -10,7 +10,6 @@ require("mason-tool-installer").setup({
         "some-sass-language-server",
         "yaml-language-server",
         "protols",
-        "basedpyright",
 
         -- Debuggers
         "delve",
@@ -23,6 +22,8 @@ require("mason-tool-installer").setup({
         "shellcheck",
         "cpplint",
         "sqlfluff",
+        "actionlint",
+        "eslint_d",
 
         -- Formatters
         "goimports",

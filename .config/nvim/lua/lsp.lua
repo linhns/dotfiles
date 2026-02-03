@@ -47,7 +47,7 @@ vim.lsp.enable({
     "clangd",
     "lua_ls",
     "ruff",
-    "basedpyright",
+    "ty",
     "bashls",
     "templ",
     "ts_ls",
@@ -58,6 +58,7 @@ vim.lsp.enable({
     "dockerls",
     "somesass_ls",
     "protols",
+    "tailwindcss",
 })
 
 local utils = require("utils")

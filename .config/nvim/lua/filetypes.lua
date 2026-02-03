@@ -10,5 +10,6 @@ vim.filetype.add({
     },
     pattern = {
         ["^Caddyfile%."] = { "caddyfile", { priority = -math.huge } },
+        [".*/%.github/workflows/.*%.ya?ml"] = "yaml.ghaction",
     },
 })
