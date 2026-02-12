@@ -43,16 +43,18 @@ for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
 done
 unset _rc
 
-# Set up fzf key bindings and fuzzy completion
+# Setup mise
 if (( $+commands[mise] )); then
     eval "$(mise activate zsh)"
     eval "$(mise hook-env -s zsh)"
 fi
 
-# Setup mise
+# Set up fzf key bindings and fuzzy completion
 if (( $+commands[fzf] )); then
   source <(fzf --zsh)
 fi
 
 # Setup zoxide
 eval "$(zoxide init zsh)"
+
+# if [ -f '/home/linhns/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/linhns/google-cloud-sdk/completion.zsh.inc'; fi
