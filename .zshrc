@@ -56,5 +56,3 @@ fi
 
 # Setup zoxide
 eval "$(zoxide init zsh)"
-
-# if [ -f '/home/linhns/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/linhns/google-cloud-sdk/completion.zsh.inc'; fi
