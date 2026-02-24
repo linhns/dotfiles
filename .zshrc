@@ -2,10 +2,13 @@
 #
 # .zshrc - Zsh file loaded on interactive shell sessions.
 
+# Ensure path arrays are unique
+typeset -gU path fpath
+
 export PATH="$PATH:$HOME/.local/bin"
 
 ZCOMPDIR=${ZDOTDIR:-$HOME}/.zcompletions
-mkdir -p $ZCOMPDIR
+[[ -d $ZCOMPDIR ]] || mkdir -p $ZCOMPDIR
 fpath=($ZCOMPDIR $fpath)
 
 for _rc in ${ZDOTDIR:-$HOME}/.zplugins/*.zsh(N); do
