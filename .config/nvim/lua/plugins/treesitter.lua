@@ -1,71 +1,43 @@
-require("nvim-treesitter.parsers").get_parser_configs().caddyfile = {
-    install_info = {
-        url = "https://github.com/caddyserver/tree-sitter-caddyfile",
-        files = { "src/parser.c", "src/scanner.c" },
-        branch = "master",
-    },
-    filetype = "caddyfile",
+local utils = require('utils')
+
+local gr = utils.augroup('linhns/treesitter', {})
+
+local languages = {
+    'go',
+    'gomod',
+    'gowork',
+    'gosum',
+    'python',
+    'lua',
+    'c',
+    'cpp',
+    'vim',
+    'vimdoc',
+    'markdown',
+    'markdown_inline',
+    'html',
+    'javascript',
+    'typescript',
+    'tsx',
+    'css',
+    'templ',
 }
 
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        "caddyfile",
-        "go",
-        "gomod",
-        "gowork",
-        "gosum",
-        "python",
-        "lua",
-        "c",
-        "cpp",
-        "vim",
-        "vimdoc",
-        "markdown",
-        "markdown_inline",
-        "html",
-        "javascript",
-        "typescript",
-        "tsx",
-        "css",
-        "templ",
-    },
-    highlight = {
-        enable = true,
-        disable = function(_, buf)
-            if not vim.bo[buf].modifiable then
-                return false
-            end
-            local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-            return ok and stats and stats.size > 100 * 1024
-        end,
-    },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-        },
-    },
-})
+require('nvim-treesitter').install(languages)
 
-vim.treesitter.language.register("html", "gohtml")
+local filetypes = vim.iter(languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = {
-        "go",
-        "lua",
-        "cpp",
-        "html",
-        "javascript",
-        "typescript",
-        "gohtml",
-    },
-    group = vim.api.nvim_create_augroup("linhns/treesitter", { clear = true }),
-    desc = "Set up treesitter",
-    callback = function()
-        vim.wo.foldmethod = "expr"
-        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.list_extend(filetypes, { 'gohtml' })
+
+utils.autocmd('FileType', {
+    group = gr,
+    pattern = filetypes,
+    callback = function(event)
+        vim.treesitter.start(event.buf)
+        vim.wo[0][0].foldmethod = 'expr'
+        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     end,
+    desc = 'Enable treesitter',
 })
+
+vim.treesitter.language.register('html', 'gohtml')

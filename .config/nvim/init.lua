@@ -1,187 +1,176 @@
 _G.Config = {}
 
--- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
-local path_package = vim.fn.stdpath("data") .. "/site/"
-local mini_path = path_package .. "pack/deps/start/mini.nvim"
-if not vim.loop.fs_stat(mini_path) then
-    vim.cmd('echo "Installing `mini.nvim`" | redraw')
-    local clone_cmd = {
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/nvim-mini/mini.nvim",
-        mini_path,
-    }
-    vim.fn.system(clone_cmd)
-    vim.cmd("packadd mini.nvim | helptags ALL")
-    vim.cmd('echo "Installed `mini.nvim`" | redraw')
-end
+vim.pack.add({
+    'https://github.com/nvim-mini/mini.nvim',
+})
 
--- Set up 'mini.deps' (customize to your liking)
-require("mini.deps").setup({ path = { package = path_package } })
+local utils = require('utils')
 
--- Use 'mini.deps'. `now()` and `later()` are helpers for a safe two-stage
--- startup and are optional.
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-local cmd = function(cmd)
-    return function()
-        vim.cmd(cmd)
-    end
-end
-local load = function(spec, opts)
-    return function()
-        opts = opts or {}
-        local slash = string.find(spec, "/[^/]*$") or 0
-        local name = opts.init or string.sub(spec, slash + 1)
-        if slash ~= 0 then
-            add(vim.tbl_deep_extend("force", { source = spec }, opts.add or {}))
-        end
-        require(name)
-        if opts.setup then
-            require(name).setup(opts.setup)
-        end
-    end
-end
+require('settings')
+require('keymaps')
+require('autocmds')
+require('filetypes')
+require('diagnostics')
 
-now(load("settings"))
-now(load("keymaps"))
-now(load("autocmds"))
-now(load("filetypes"))
+local now, now_if_args, later = utils.now, utils.now_if_args, utils.later
+local on_packchanged = utils.on_packchanged
 
-add({ name = "mini.nvim" })
-now(load("catppuccin/nvim", {
-    add = { name = "catppuccin" },
-    init = "plugins.catppuccin",
-}))
-now(cmd("colorscheme catppuccin-mocha"))
+now(function()
+    vim.pack.add({
+        'https://github.com/catppuccin/nvim',
+    })
 
-now(load("plugins.mini.basics"))
-now(load("plugins.mini.icons"))
-now(load("plugins.mini.sessions"))
-now(load("mini.starter", { setup = {} }))
-
-later(load("mini.pairs", { setup = {} }))
-
-later(load("mini.statusline", { setup = {} }))
-later(load("mini.tabline", { setup = {} }))
-later(load("mini.trailspace", { setup = {} }))
-later(load("mini.move", { setup = {} }))
-later(load("mini.jump", { setup = {} }))
-later(load("mini.splitjoin", { setup = {} }))
-later(load("mini.surround", { setup = {} }))
-later(load("mini.git", { setup = {} }))
-later(load("mini.bufremove", { setup = {} }))
-later(load("mini.extra", { setup = {} }))
-later(load("mini.visits", { setup = {} }))
-
-later(load("plugins.mini.ai"))
-later(load("plugins.mini.bracketed"))
-later(load("plugins.mini.clue"))
-later(load("plugins.mini.indentscope"))
-later(load("plugins.mini.notify"))
-later(load("plugins.mini.operators"))
-later(load("plugins.mini.diff"))
-later(load("plugins.mini.files"))
-
-later(load("plugins.mini.completion"))
-
-later(load("plugins.mini.snippets"))
-
-later(load("plugins.mini.keymap"))
-
-later(function()
-    add({
-        source = "Bekaboo/dropbar.nvim",
+    require('catppuccin').setup({
+        no_underline = true,
     })
 end)
 
-later(load("folke/snacks.nvim", { init = "plugins.qol" }))
-later(load("stevearc/conform.nvim", { init = "plugins.formatting" }))
-later(load("mfussenegger/nvim-lint", { init = "plugins.linting" }))
-later(add("b0o/schemastore.nvim"))
+now(function() vim.cmd('colorscheme catppuccin-mocha') end)
 
-later(load("nvim-treesitter/nvim-treesitter", {
-    init = "plugins.treesitter",
-    add = {
-        hooks = {
-            post_checkout = cmd("TSUpdate"),
-        },
-    },
-}))
-later(function()
-    add("nvim-treesitter/nvim-treesitter-textobjects")
-end)
+now(function() require('plugins.mini.basics') end)
+now(function() require('plugins.mini.icons') end)
+now(function() require('plugins.mini.sessions') end)
+now(function() require('mini.starter').setup() end)
+now(function() require('mini.statusline').setup() end)
+now(function() require('mini.tabline').setup() end)
 
-later(load("sindrets/diffview.nvim", {
-    init = "plugins.diffview",
-}))
+now_if_args(function() require('plugins.mini.completion') end)
 
-later(load("windwp/nvim-ts-autotag", {
-    init = "plugins.autotag",
-}))
+later(function() require('mini.extra').setup() end)
+later(function() require('mini.align').setup() end)
+later(function() require('mini.bufremove').setup() end)
+later(function() require('mini.comment').setup() end)
+later(function() require('mini.git').setup() end)
+later(function() require('mini.jump').setup() end)
+later(function() require('mini.move').setup() end)
+later(function() require('mini.pairs').setup() end)
+later(function() require('mini.splitjoin').setup() end)
+later(function() require('mini.surround').setup() end)
+later(function() require('mini.trailspace').setup() end)
+later(function() require('mini.visits').setup() end)
 
-later(load("zbirenbaum/copilot.lua", {
-    init = "plugins.copilot",
-}))
-
-later(load("williamboman/mason.nvim", {
-    init = "plugins.mason",
-}))
-
-later(load("WhoIsSethDaniel/mason-tool-installer.nvim", {
-    init = "plugins.mason-tool-installer",
-    add = {
-        depends = {
-            "williamboman/mason.nvim",
-        },
-    },
-}))
+later(function() require('plugins.mini.ai') end)
+later(function() require('plugins.mini.bracketed') end)
+later(function() require('plugins.mini.clue') end)
+later(function() require('plugins.mini.diff') end)
+later(function() require('plugins.mini.files') end)
+later(function() require('plugins.mini.keymap') end)
+later(function() require('plugins.mini.indentscope') end)
+later(function() require('plugins.mini.notify') end)
+later(function() require('plugins.mini.operators') end)
+later(function() require('plugins.mini.snippets') end)
 
 later(function()
-    add("neovim/nvim-lspconfig")
+    vim.pack.add({
+        'https://github.com/folke/snacks.nvim',
+    })
+    require('plugins.qol')
 end)
 
-later(load("lsp"))
+later(function()
+    vim.pack.add({
+        'https://github.com/stevearc/conform.nvim',
+    })
+    require('plugins.formatting')
+end)
 
-later(load("mfussenegger/nvim-dap", {
-    init = "plugins.dap",
-    add = {
-        depends = {
-            "leoluz/nvim-dap-go",
-            "mfussenegger/nvim-dap-python",
-        },
-    },
-}))
+later(function()
+    vim.pack.add({
+        'https://github.com/mfussenegger/nvim-lint',
+    })
+    require('plugins.linting')
+end)
 
-later(load("rcarriga/nvim-dap-ui", {
-    init = "plugins.dap-ui",
-    add = {
-        depends = {
-            "nvim-neotest/nvim-nio",
-            "mfussenegger/nvim-dap",
-        },
-    },
-}))
+later(function()
+    vim.pack.add({
+        'https://github.com/b0o/schemastore.nvim',
+    })
+end)
 
-later(load("nvim-neotest/neotest", {
-    init = "plugins.testing",
-    add = {
-        depends = {
-            "nvim-neotest/nvim-nio",
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "fredrikaverpil/neotest-golang",
-            "marilari88/neotest-vitest",
-        },
-    },
-}))
+now_if_args(function() require('lsp') end)
 
-later(load("olexsmir/gopher.nvim", {
-    init = "plugins.gopher",
-    add = {
-        depends = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-    },
-}))
+later(function()
+    vim.pack.add({
+        'https://github.com/Bekaboo/dropbar.nvim',
+    })
+end)
+
+later(function()
+    vim.pack.add({
+        'https://github.com/zbirenbaum/copilot.lua',
+    })
+
+    require('plugins.copilot')
+end)
+
+later(function()
+    vim.pack.add({
+        'https://github.com/mason-org/mason.nvim',
+        'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
+    })
+
+    require('plugins.mason')
+    require('plugins.mason-tool-installer')
+end)
+
+later(function()
+    vim.pack.add({
+        'https://github.com/neovim/nvim-lspconfig',
+    })
+end)
+
+now_if_args(function()
+    on_packchanged('nvim-treesitter', { 'update' }, function() vim.cmd('TSUpdate') end, ':TSUpdate')
+
+    vim.pack.add({
+        'https://github.com/nvim-treesitter/nvim-treesitter',
+        'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
+    })
+
+    require('plugins.treesitter')
+end)
+
+later(function()
+    vim.pack.add({
+        'https://github.com/nvim-treesitter/nvim-treesitter',
+        'https://github.com/windwp/nvim-ts-autotag',
+    })
+
+    require('plugins.autotag')
+end)
+
+later(function()
+    vim.pack.add({
+        'https://github.com/nvim-neotest/nvim-nio',
+        'https://github.com/leoluz/nvim-dap-go',
+        'https://github.com/mfussenegger/nvim-dap-python',
+        'https://github.com/mfussenegger/nvim-dap',
+        'https://github.com/rcarriga/nvim-dap-ui',
+    })
+
+    require('plugins.debugger')
+    require('plugins.dap-ui')
+end)
+
+later(function()
+    vim.pack.add({
+        'https://github.com/nvim-neotest/nvim-nio',
+        'https://github.com/nvim-lua/plenary.nvim',
+        'https://github.com/nvim-treesitter/nvim-treesitter',
+        'https://github.com/fredrikaverpil/neotest-golang',
+        'https://github.com/marilari88/neotest-vitest',
+        'https://github.com/nvim-neotest/neotest',
+    })
+
+    require('plugins.testing')
+end)
+
+later(function()
+    vim.pack.add({
+        'https://github.com/nvim-lua/plenary.nvim',
+        'https://github.com/nvim-treesitter/nvim-treesitter',
+        'https://github.com/olexsmir/gopher.nvim',
+    })
+
+    require('plugins.gopher')
+end)
