@@ -51,7 +51,7 @@ local function on_attach(client, bufnr)
         })
     end
 
-    if client:supports_method('textDocument/codeLens') then vim.lsp.codelens.enable(true, { bufnr = bufnr }) end
+    if client:supports_method('textDocument/codeLens') then vim.lsp.codelens.enable(false, { bufnr = bufnr }) end
 end
 
 -- Update mappings when registering dynamic capabilities.

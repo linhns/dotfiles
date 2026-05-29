@@ -87,6 +87,15 @@ later(function()
     })
 end)
 
+now_if_args(function()
+    vim.pack.add({ {
+        src = 'https://github.com/oribarilan/lensline.nvim',
+        version = 'v2.1.0',
+    } })
+
+    require('plugins.lensline')
+end)
+
 now_if_args(function() require('lsp') end)
 
 later(function()

@@ -1,9 +1,9 @@
-local mininotify = require("mini.notify")
+local notify = require('mini.notify')
 
-mininotify.setup({
-    window = {
-        max_width_share = 0.4,
+notify.setup({
+    lsp_progress = {
+        enable = false,
     },
 })
 
-vim.notify = mininotify.make_notify()
+vim.notify = notify.make_notify()
