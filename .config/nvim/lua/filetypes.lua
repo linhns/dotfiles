@@ -1,15 +1,15 @@
 vim.filetype.add({
     extension = {
-        caddyfile = "caddyfile",
-        Caddyfile = "caddyfile",
-        zstyles = "zsh",
+        caddyfile = 'caddyfile',
+        Caddyfile = 'caddyfile',
+        zstyles = 'zsh',
     },
     filename = {
-        caddyfile = "caddyfile",
-        Caddyfile = "caddyfile",
+        caddyfile = 'caddyfile',
+        Caddyfile = 'caddyfile',
     },
     pattern = {
-        ["^Caddyfile%."] = { "caddyfile", { priority = -math.huge } },
-        [".*/%.github/workflows/.*%.ya?ml"] = "yaml.ghaction",
+        ['^Caddyfile%.'] = { 'caddyfile', { priority = -math.huge } },
+        ['.*/%.github/workflows/.*%.ya?ml'] = 'yaml.ghaction',
     },
 })
